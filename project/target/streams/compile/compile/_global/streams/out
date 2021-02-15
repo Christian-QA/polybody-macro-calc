@@ -1,0 +1,10 @@
+[error] /Users/christianredfern/Documents/Projects/HMRC/Code/Personal/polybody-macro-calc/project/AppDependencies.scala:8:23: not found: type TestDependencies
+[error]     def apply() = new TestDependencies {
+[error]                       ^
+[error] /Users/christianredfern/Documents/Projects/HMRC/Code/Personal/polybody-macro-calc/project/AppDependencies.scala:10:60: not found: value scalaTestPlusVersion
+[error]         "org.scalatestplus.play" %% "scalatestplus-play" % scalaTestPlusVersion % scope
+[error]                                                            ^
+[error] /Users/christianredfern/Documents/Projects/HMRC/Code/Personal/polybody-macro-calc/project/AppDependencies.scala:10:83: not found: value scope
+[error]         "org.scalatestplus.play" %% "scalatestplus-play" % scalaTestPlusVersion % scope
+[error]                                                                                   ^
+[error] three errors found
