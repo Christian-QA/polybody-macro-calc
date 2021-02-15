@@ -1,0 +1,17 @@
+*.class
+*.log
+*.log
+*.iml
+*.ipr
+*.iws
+.idea
+.DS_Store
+.bsp
+bin/
+project/
+target/
+build/
+.classpath
+.project
+.settings
+.worksheet
