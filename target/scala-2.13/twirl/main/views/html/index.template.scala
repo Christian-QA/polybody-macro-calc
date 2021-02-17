@@ -95,61 +95,155 @@ Seq[Any](format.raw/*1.1*/("""<!--"""),_display_(/*1.6*/()),format.raw/*1.8*/(""
 <!--""")))}),format.raw/*70.6*/("""-->
 <!--""")))}),format.raw/*71.6*/("""-->
 
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
 
-    <!-- Latest compiled and minified CSS -->
+
+
+
+
+
+<!--<html lang="en">-->
+<!--  <head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Title</title>-->
+<!--    &lt;!&ndash; Latest compiled and minified CSS &ndash;&gt;-->
+<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"-->
+<!--          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">-->
+<!--  </head>-->
+
+<!--  <body>-->
+
+<!--      <style>-->
+<!--      </style>-->
+
+<!--      <div class="center-block" style="width:400px;">-->
+<!--        <div class="row" style="height: 200px">-->
+<!--          <div class="col justify-content-end my-row">-->
+<!--            <header>-->
+<!--              <h1 class="text-center text-primary">THIS IS A HEADER</h1>-->
+<!--            </header>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="row">-->
+<!--          <div class="col">-->
+<!--            <h2 class="text-center text-danger">THIS IS A QUESTION</h2>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="row">-->
+<!--          <label class="col-md-4 control-label" for="input"></label>-->
+<!--          <div class="col align-self-center">-->
+<!--            <input type="text" id="input"  name="submitButton">-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="row">-->
+<!--          <div class="col">-->
+<!--            <footer class="text-center text-success">-->
+<!--              <h3>THIS IS A FOOTER</h3>-->
+<!--            </footer>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+
+
+<!--  <form>-->
+<!--    <fieldset disabled>-->
+<!--      <legend>Disabled fieldset example</legend>-->
+<!--      <div class="mb-3">-->
+<!--        <label for="disabledTextInput" class="form-label">Disabled input</label>-->
+<!--        <input type="text" id="disabledTextInput" class="form-control" placeholder="Disabled input">-->
+<!--      </div>-->
+<!--      <div class="mb-3">-->
+<!--        <label for="disabledSelect" class="form-label">Disabled select menu</label>-->
+<!--        <select id="disabledSelect" class="form-select">-->
+<!--          <option>Disabled select</option>-->
+<!--        </select>-->
+<!--      </div>-->
+<!--      <div class="mb-3">-->
+<!--        <div class="form-check">-->
+<!--          <input class="form-check-input" type="checkbox" id="disabledFieldsetCheck" disabled>-->
+<!--          <label class="form-check-label" for="disabledFieldsetCheck">-->
+<!--            Can't check this-->
+<!--          </label>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <button type="submit" class="btn btn-primary">Submit</button>-->
+<!--    </fieldset>-->
+<!--  </form>-->
+
+<!--  &lt;!&ndash; Latest compiled and minified JavaScript &ndash;&gt;-->
+<!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"-->
+<!--            integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>-->
+<!--  </body>-->
+<!--</html>-->
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.80.0">
+    <title>Signin Template · Bootstrap v5.0</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sign-in/">
+
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
           integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 
-  </head>
+    <style>
+      .bd-placeholder-img """),format.raw/*175.27*/("""{"""),format.raw/*175.28*/("""
+        """),format.raw/*176.9*/("""font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      """),format.raw/*181.7*/("""}"""),format.raw/*181.8*/("""
 
-  <body>
+"""),format.raw/*183.1*/("""<!--      input[type=text] """),format.raw/*183.28*/("""{"""),format.raw/*183.29*/("""-->
+<!--        width: 50%;-->
+<!--        display: flex;-->
+<!--        align-items: center;-->
+<!--        justify-content: center;-->
+<!--      """),format.raw/*188.11*/("""}"""),format.raw/*188.12*/("""-->
 
-<!--    <header>-->
-<!--      <div class="page-header">-->
-<!--        <h1 class="text-primary">THIS IS A HEADER</h1>-->
-<!--      </div>-->
-<!--    </header>-->
-<!--    <h1>THIS IS A QUESTION</h1>-->
-<!--    <input type="text">-->
-<!--    <footter>-->
-<!--      THIS IS A FOOTER-->
-<!--    </footter>-->
 
-      <div class="container my-container">
-        <div class="row" style="height: 200px">
-          <div class="col justify-content-end my-row">
-            <header>
-              <h1 class="text-center">THIS IS A HEADER</h1>
-            </header>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <h2 class="text-center">THIS IS A QUESTION</h2>
-          </div>
-        </div>
-        <div class="row border border-dark d-flex justify-content-center">
-          <div class="col">
-            <input type="text">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <footer class="text-center">
-              THIS IS A FOOTER
-            </footer>
-          </div>
-        </div>
-      </div>
+    </style>
 
-  <!-- Latest compiled and minified JavaScript -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
-            integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
-  </body>
+    <!-- Custom styles for this template -->
+<!--    <link href="signin.css" rel="stylesheet">-->
+</head>
+
+    <body class="text-center">
+
+        <main class="form-signin">
+            <form>
+                <img class="mb-4" alt="" width="72" height="57">
+                <h1 class="h3 mb-3 fw-normal">Question?</h1>
+                <label for="inputEmail" class="visually-hidden">Answer:</label>
+                <input type="text" id="inputEmail" class="form-control" placeholder="Type answer here" required autofocus>
+<!--                <label for="inputPassword" class="visually-hidden">Password</label>-->
+<!--                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>-->
+                <div class="checkbox mb-3">
+<!--                    <label>-->
+<!--                        <input type="checkbox" value="remember-me"> Remember me-->
+<!--                    </label>-->
+                </div>
+                <br>
+                <button class="w-100 btn btn-lg btn-primary" type="submit">Submit</button>
+<!--                <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>-->
+            </form>
+        </main>
+
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+               integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
+    </body>
 </html>
 
 
@@ -161,67 +255,6 @@ Seq[Any](format.raw/*1.1*/("""<!--"""),_display_(/*1.6*/()),format.raw/*1.8*/(""
 
 
 
-
-
-
-
-
-
-
-
-
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-
-<!--<head>-->
-<!--  <meta charset="UTF-8">-->
-<!--  <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
-<!--  <meta http-equiv="X-UA-Compatible" content="ie=edge">-->
-<!--  <title>Bootstrap 4 Introduction</title>-->
-<!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"-->
-<!--        crossorigin="anonymous">-->
-<!--  <style>-->
-<!--        body """),format.raw/*159.18*/("""{"""),format.raw/*159.19*/("""-->
-<!--            margin: 30px;-->
-<!--        """),format.raw/*161.13*/("""}"""),format.raw/*161.14*/("""-->
-
-<!--        .my-container """),format.raw/*163.27*/("""{"""),format.raw/*163.28*/("""-->
-<!--            border: 1px solid green;-->
-<!--        """),format.raw/*165.13*/("""}"""),format.raw/*165.14*/("""-->
-
-<!--        .my-row """),format.raw/*167.21*/("""{"""),format.raw/*167.22*/("""-->
-<!--            border: 3px solid red;-->
-<!--            height: 300px;-->
-<!--        """),format.raw/*170.13*/("""}"""),format.raw/*170.14*/("""-->
-
-<!--        .my-col """),format.raw/*172.21*/("""{"""),format.raw/*172.22*/("""-->
-<!--            border: 3px dotted blue;-->
-<!--        """),format.raw/*174.13*/("""}"""),format.raw/*174.14*/("""-->
-<!--    </style>-->
-<!--</head>-->
-
-<!--<body>-->
-<!--<div class="container my-container">-->
-<!--  <div class="row my-row">-->
-<!--    <div class="col-md-4 col-sm-6 my-col">-->
-<!--      Row 1 Col 1-->
-<!--    </div>-->
-<!--    <div class="col-md-8 col-sm-6 my-col">-->
-<!--      Row 1 Col 2-->
-<!--    </div>-->
-<!--  </div>-->
-<!--  <div class="row justify-content-between align-items-stretch my-row">-->
-<!--    <div class="col-4 my-col order-md-12">-->
-<!--      Row 2 Col 1-->
-<!--    </div>-->
-<!--    <div class="col-4 offset-md-2 my-col align-self-start order-md-2">-->
-<!--      Row 2 Col 2-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-<!--</body>-->
-
-<!--</html>-->
 """))
       }
     }
@@ -238,11 +271,11 @@ Seq[Any](format.raw/*1.1*/("""<!--"""),_display_(/*1.6*/()),format.raw/*1.8*/(""
 
               /*
                   -- GENERATED --
-                  DATE: 2021-02-16T15:43:14.790448
+                  DATE: 2021-02-17T11:30:41.840331
                   SOURCE: /Users/Luke/polybody-macro-calc/app/views/index.scala.html
-                  HASH: cf377f10a905e76dc560851e926532fa8f11259b
-                  MATRIX: 811->0|841->5|862->7|897->17|920->32|959->34|993->43|1040->82|1090->95|2695->1672|2724->1679|2857->1785|2886->1792|3025->1904|3053->1911|3196->2027|3224->2034|3345->2127|3374->2134|5199->3932|5214->3938|5258->3961|5389->4065|5425->4080|5518->4143|5557->4152|7918->6484|7948->6485|8026->6534|8056->6535|8116->6566|8146->6567|8235->6627|8265->6628|8319->6653|8349->6654|8470->6746|8500->6747|8554->6772|8584->6773|8673->6833|8703->6834
-                  LINES: 26->1|26->1|26->1|28->3|28->3|28->3|29->4|29->4|29->4|55->30|55->30|56->31|56->31|57->32|57->32|58->33|58->33|58->33|58->33|88->63|88->63|88->63|91->66|91->66|95->70|96->71|184->159|184->159|186->161|186->161|188->163|188->163|190->165|190->165|192->167|192->167|195->170|195->170|197->172|197->172|199->174|199->174
+                  HASH: 88c1ee4660e7fe6d109e7a07bda09f939d3bc4dc
+                  MATRIX: 811->0|841->5|862->7|897->17|920->32|959->34|993->43|1040->82|1090->95|2695->1672|2724->1679|2857->1785|2886->1792|3025->1904|3053->1911|3196->2027|3224->2034|3345->2127|3374->2134|5199->3932|5214->3938|5258->3961|5389->4065|5425->4080|5518->4143|5557->4152|9475->8041|9505->8042|9542->8051|9720->8201|9749->8202|9779->8204|9835->8231|9865->8232|10041->8379|10071->8380
+                  LINES: 26->1|26->1|26->1|28->3|28->3|28->3|29->4|29->4|29->4|55->30|55->30|56->31|56->31|57->32|57->32|58->33|58->33|58->33|58->33|88->63|88->63|88->63|91->66|91->66|95->70|96->71|200->175|200->175|201->176|206->181|206->181|208->183|208->183|208->183|213->188|213->188
                   -- GENERATED --
               */
           

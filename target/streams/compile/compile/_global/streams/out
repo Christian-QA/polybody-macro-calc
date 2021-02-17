@@ -1,0 +1,4 @@
+[0m[[0m[31merror[0m] [0m[0m/Users/Luke/polybody-macro-calc/app/views/index.scala.html:181:8: not found: value media[0m
+[0m[[0m[31merror[0m] [0m[0m      @media (min-width: 768px) {[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m
