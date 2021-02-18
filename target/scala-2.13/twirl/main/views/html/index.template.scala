@@ -97,86 +97,6 @@ Seq[Any](format.raw/*1.1*/("""<!--"""),_display_(/*1.6*/()),format.raw/*1.8*/(""
 
 
 
-
-
-
-
-<!--<html lang="en">-->
-<!--  <head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Title</title>-->
-<!--    &lt;!&ndash; Latest compiled and minified CSS &ndash;&gt;-->
-<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"-->
-<!--          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">-->
-<!--  </head>-->
-
-<!--  <body>-->
-
-<!--      <style>-->
-<!--      </style>-->
-
-<!--      <div class="center-block" style="width:400px;">-->
-<!--        <div class="row" style="height: 200px">-->
-<!--          <div class="col justify-content-end my-row">-->
-<!--            <header>-->
-<!--              <h1 class="text-center text-primary">THIS IS A HEADER</h1>-->
-<!--            </header>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="row">-->
-<!--          <div class="col">-->
-<!--            <h2 class="text-center text-danger">THIS IS A QUESTION</h2>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="row">-->
-<!--          <label class="col-md-4 control-label" for="input"></label>-->
-<!--          <div class="col align-self-center">-->
-<!--            <input type="text" id="input"  name="submitButton">-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="row">-->
-<!--          <div class="col">-->
-<!--            <footer class="text-center text-success">-->
-<!--              <h3>THIS IS A FOOTER</h3>-->
-<!--            </footer>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-
-
-<!--  <form>-->
-<!--    <fieldset disabled>-->
-<!--      <legend>Disabled fieldset example</legend>-->
-<!--      <div class="mb-3">-->
-<!--        <label for="disabledTextInput" class="form-label">Disabled input</label>-->
-<!--        <input type="text" id="disabledTextInput" class="form-control" placeholder="Disabled input">-->
-<!--      </div>-->
-<!--      <div class="mb-3">-->
-<!--        <label for="disabledSelect" class="form-label">Disabled select menu</label>-->
-<!--        <select id="disabledSelect" class="form-select">-->
-<!--          <option>Disabled select</option>-->
-<!--        </select>-->
-<!--      </div>-->
-<!--      <div class="mb-3">-->
-<!--        <div class="form-check">-->
-<!--          <input class="form-check-input" type="checkbox" id="disabledFieldsetCheck" disabled>-->
-<!--          <label class="form-check-label" for="disabledFieldsetCheck">-->
-<!--            Can't check this-->
-<!--          </label>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <button type="submit" class="btn btn-primary">Submit</button>-->
-<!--    </fieldset>-->
-<!--  </form>-->
-
-<!--  &lt;!&ndash; Latest compiled and minified JavaScript &ndash;&gt;-->
-<!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"-->
-<!--            integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>-->
-<!--  </body>-->
-<!--</html>-->
-
-
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -197,36 +117,39 @@ Seq[Any](format.raw/*1.1*/("""<!--"""),_display_(/*1.6*/()),format.raw/*1.8*/(""
           integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 
     <style>
-      .bd-placeholder-img """),format.raw/*175.27*/("""{"""),format.raw/*175.28*/("""
-        """),format.raw/*176.9*/("""font-size: 1.125rem;
+
+    .container """),format.raw/*96.16*/("""{"""),format.raw/*96.17*/("""
+        """),format.raw/*97.9*/("""display: flex;
+        justify-content: center;
+    """),format.raw/*99.5*/("""}"""),format.raw/*99.6*/("""
+
+      """),format.raw/*101.7*/(""".bd-placeholder-img """),format.raw/*101.27*/("""{"""),format.raw/*101.28*/("""
+        """),format.raw/*102.9*/("""font-size: 1.125rem;
         text-anchor: middle;
         -webkit-user-select: none;
         -moz-user-select: none;
         user-select: none;
-      """),format.raw/*181.7*/("""}"""),format.raw/*181.8*/("""
+      """),format.raw/*107.7*/("""}"""),format.raw/*107.8*/("""
 
-"""),format.raw/*183.1*/("""<!--      input[type=text] """),format.raw/*183.28*/("""{"""),format.raw/*183.29*/("""-->
-<!--        width: 50%;-->
-<!--        display: flex;-->
-<!--        align-items: center;-->
-<!--        justify-content: center;-->
-<!--      """),format.raw/*188.11*/("""}"""),format.raw/*188.12*/("""-->
+      """),format.raw/*109.7*/("""input[type=text] """),format.raw/*109.24*/("""{"""),format.raw/*109.25*/("""
+        """),format.raw/*110.9*/("""width: 50%;
+      """),format.raw/*111.7*/("""}"""),format.raw/*111.8*/("""
 
 
-    </style>
+    """),format.raw/*114.5*/("""</style>
 
     <!-- Custom styles for this template -->
 <!--    <link href="signin.css" rel="stylesheet">-->
 </head>
 
-    <body class="text-center">
+    <body class="text-center container">
 
         <main class="form-signin">
             <form>
                 <img class="mb-4" alt="" width="72" height="57">
                 <h1 class="h3 mb-3 fw-normal">Question?</h1>
                 <label for="inputEmail" class="visually-hidden">Answer:</label>
-                <input type="text" id="inputEmail" class="form-control" placeholder="Type answer here" required autofocus>
+                <input type="text" id="inputEmail" class="form-control align-items-end" placeholder="Type answer here" required autofocus>
 <!--                <label for="inputPassword" class="visually-hidden">Password</label>-->
 <!--                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>-->
                 <div class="checkbox mb-3">
@@ -271,11 +194,11 @@ Seq[Any](format.raw/*1.1*/("""<!--"""),_display_(/*1.6*/()),format.raw/*1.8*/(""
 
               /*
                   -- GENERATED --
-                  DATE: 2021-02-17T11:30:41.840331
+                  DATE: 2021-02-18T11:37:00.285287
                   SOURCE: /Users/Luke/polybody-macro-calc/app/views/index.scala.html
-                  HASH: 88c1ee4660e7fe6d109e7a07bda09f939d3bc4dc
-                  MATRIX: 811->0|841->5|862->7|897->17|920->32|959->34|993->43|1040->82|1090->95|2695->1672|2724->1679|2857->1785|2886->1792|3025->1904|3053->1911|3196->2027|3224->2034|3345->2127|3374->2134|5199->3932|5214->3938|5258->3961|5389->4065|5425->4080|5518->4143|5557->4152|9475->8041|9505->8042|9542->8051|9720->8201|9749->8202|9779->8204|9835->8231|9865->8232|10041->8379|10071->8380
-                  LINES: 26->1|26->1|26->1|28->3|28->3|28->3|29->4|29->4|29->4|55->30|55->30|56->31|56->31|57->32|57->32|58->33|58->33|58->33|58->33|88->63|88->63|88->63|91->66|91->66|95->70|96->71|200->175|200->175|201->176|206->181|206->181|208->183|208->183|208->183|213->188|213->188
+                  HASH: 6ef7a138a595333adef1f0c314198aa2168ec26f
+                  MATRIX: 811->0|841->5|862->7|897->17|920->32|959->34|993->43|1040->82|1090->95|2695->1672|2724->1679|2857->1785|2886->1792|3025->1904|3053->1911|3196->2027|3224->2034|3345->2127|3374->2134|5199->3932|5214->3938|5258->3961|5389->4065|5425->4080|5518->4143|5557->4152|6413->4980|6442->4981|6478->4990|6557->5042|6585->5043|6621->5051|6670->5071|6700->5072|6737->5081|6915->5231|6944->5232|6980->5240|7026->5257|7056->5258|7093->5267|7139->5285|7168->5286|7203->5293
+                  LINES: 26->1|26->1|26->1|28->3|28->3|28->3|29->4|29->4|29->4|55->30|55->30|56->31|56->31|57->32|57->32|58->33|58->33|58->33|58->33|88->63|88->63|88->63|91->66|91->66|95->70|96->71|121->96|121->96|122->97|124->99|124->99|126->101|126->101|126->101|127->102|132->107|132->107|134->109|134->109|134->109|135->110|136->111|136->111|139->114
                   -- GENERATED --
               */
           
