@@ -1,5 +1,0 @@
-[warn] scala-library-2.13.1-sources.jar no longer exists at /Users/carolinestraesburg/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.13.1/scala-library-2.13.1-sources.jar
-[debug] "not up to date. inChanged = false, force = false
-[debug] Updating ProjectRef(uri("file:/Users/Luke/polybody-macro-calc/"), "root")...
-[debug] Done updating ProjectRef(uri("file:/Users/Luke/polybody-macro-calc/"), "root")
-[warn] There may be incompatibilities among your library dependencies; run 'evicted' to see detailed eviction warnings.

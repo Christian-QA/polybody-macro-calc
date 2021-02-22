@@ -54,7 +54,7 @@ Seq[Any](_display_(/*2.2*/defining(play.core.PlayVersion.current)/*2.41*/ { vers
 
               /*
                   -- GENERATED --
-                  DATE: 2021-02-12T15:47:27.180523
+                  DATE: 2021-02-22T19:53:27.473706
                   SOURCE: /Users/Luke/polybody-macro-calc/app/views/commonSidebar.scala.html
                   HASH: a94bfa13f2a133115db82bdfe99a573d785eaa89
                   MATRIX: 730->1|826->5|873->44|923->57|950->58|1024->106|1038->112|1079->133|1148->176|1162->182|1205->205|1279->253|1293->259|1337->283|1489->408|1517->415
