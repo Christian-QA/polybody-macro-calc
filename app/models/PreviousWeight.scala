@@ -1,6 +1,5 @@
 package models
 
-
 import java.time.format.DateTimeParseException
 
 import org.joda.time.DateTime
@@ -25,6 +24,5 @@ object PreviousWeight {
   }
 
   implicit val formats = Json.format[PreviousWeight]
-
 
 }
