@@ -1,0 +1,4 @@
+[error] C:\Users\felix\source\repos\polybody-macro-calc\app\views\template.scala.html:57:18: not found: value elseIf
+[error]                 @elseIf(formType == "radio"){
+[error]                  ^
+[error] one error found

@@ -1,1 +1,1 @@
-[0m[[0m[0mdebug[0m] [0m[0mUsing parent loader for play common classloader: jdk.internal.loader.ClassLoaders$PlatformClassLoader@78641d23[0m
+[debug] Using parent loader for play common classloader: sun.misc.Launcher$ExtClassLoader@4988d8b8

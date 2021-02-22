@@ -15,15 +15,16 @@ import play.api.templates.PlayMagic._
 import play.api.mvc._
 import play.api.data._
 
-object template extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template0[play.twirl.api.HtmlFormat.Appendable] {
+object template extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template2[String,String,play.twirl.api.HtmlFormat.Appendable] {
 
   /**/
-  def apply/*1.2*/():play.twirl.api.HtmlFormat.Appendable = {
+  def apply/*1.2*/(title: String, formType: String):play.twirl.api.HtmlFormat.Appendable = {
     _display_ {
       {
 
 
-Seq[Any](_display_(/*2.2*/defining(play.core.PlayVersion.current)/*2.41*/ { version =>_display_(Seq[Any](format.raw/*2.54*/("""
+Seq[Any](format.raw/*1.35*/("""
+"""),_display_(/*2.2*/defining(play.core.PlayVersion.current)/*2.41*/ { version =>_display_(Seq[Any](format.raw/*2.54*/("""
 """),format.raw/*3.1*/("""<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -71,12 +72,18 @@ Seq[Any](_display_(/*2.2*/defining(play.core.PlayVersion.current)/*2.41*/ { vers
 <main class="form-signin">
     <form>
         <img class="mb-4" alt="" width="72" height="57">
-        <h1 class="h3 mb-3 fw-normal">Question?</h1>
+        <h1 class="h3 mb-3 fw-normal">"""),_display_(/*50.40*/Html(title)),format.raw/*50.51*/("""</h1>
         <label for="answer" class="visually-hidden">Answer:</label>
         <div class="row">
             <div class="col-md-12">
-                <input type="text" id="answer" class="form-control" placeholder="Type answer here" required autofocus>
-            </div>
+                """),_display_(/*54.18*/if(formType == "text")/*54.40*/{_display_(Seq[Any](format.raw/*54.41*/("""
+                    """),format.raw/*55.21*/("""<input type="text" id="answer" class="form-control" placeholder="Type answer here" required autofocus>
+                """)))}),format.raw/*56.18*/("""
+                """),_display_(/*57.18*/if(formType == "radio")/*57.41*/{_display_(Seq[Any](format.raw/*57.42*/("""
+                    """),format.raw/*58.21*/("""<input type="radio" id="radio1" class="form-control">
+                    <input type="radio" id="radio2" class="form-control">
+                """)))}),format.raw/*60.18*/("""
+            """),format.raw/*61.13*/("""</div>
         </div>
         <br>
         <button class="w-100 btn btn-lg btn-primary" type="submit">Submit</button>
@@ -87,12 +94,12 @@ Seq[Any](_display_(/*2.2*/defining(play.core.PlayVersion.current)/*2.41*/ { vers
         integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous">
 </script>
 </body>
-""")))}),format.raw/*66.2*/("""
+""")))}),format.raw/*72.2*/("""
 
 
 
 
-"""),format.raw/*71.1*/("""<!--&lt;!&ndash; Optional theme &ndash;&gt;-->
+"""),format.raw/*77.1*/("""<!--&lt;!&ndash; Optional theme &ndash;&gt;-->
 <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" -->
 <!--      integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">-->
 
@@ -101,9 +108,9 @@ Seq[Any](_display_(/*2.2*/defining(play.core.PlayVersion.current)/*2.41*/ { vers
     }
   }
 
-  def render(): play.twirl.api.HtmlFormat.Appendable = apply()
+  def render(title:String,formType:String): play.twirl.api.HtmlFormat.Appendable = apply(title,formType)
 
-  def f:(() => play.twirl.api.HtmlFormat.Appendable) = () => apply()
+  def f:((String,String) => play.twirl.api.HtmlFormat.Appendable) = (title,formType) => apply(title,formType)
 
   def ref: this.type = this
 
@@ -112,11 +119,11 @@ Seq[Any](_display_(/*2.2*/defining(play.core.PlayVersion.current)/*2.41*/ { vers
 
               /*
                   -- GENERATED --
-                  DATE: 2021-02-22T19:53:27.262067
-                  SOURCE: /Users/Luke/polybody-macro-calc/app/views/template.scala.html
-                  HASH: f007ee3fb8fec1f4a71e50252a775749bc75a5bb
-                  MATRIX: 725->1|821->5|868->44|918->57|945->58|1761->846|1790->847|1826->856|1905->908|1933->909|1968->917|2016->937|2045->938|2081->947|2258->1097|2286->1098|2321->1106|2366->1123|2395->1124|2431->1133|2476->1151|2504->1152|2538->1159|3495->2086|3527->2091
-                  LINES: 21->1|26->2|26->2|26->2|27->3|46->22|46->22|47->23|49->25|49->25|51->27|51->27|51->27|52->28|57->33|57->33|59->35|59->35|59->35|60->36|61->37|61->37|64->40|90->66|95->71
+                  DATE: 2021-02-22T21:38:59.848
+                  SOURCE: C:/Users/felix/source/repos/polybody-macro-calc/app/views/template.scala.html
+                  HASH: fbbbc284c56205ee87e6ba7b88408b5df5fb23a7
+                  MATRIX: 739->1|867->34|895->37|942->76|992->89|1020->91|1855->898|1884->899|1921->909|2002->963|2030->964|2067->974|2115->994|2144->995|2181->1005|2363->1160|2391->1161|2428->1171|2473->1188|2502->1189|2539->1199|2585->1218|2613->1219|2650->1229|2979->1531|3011->1542|3195->1699|3226->1721|3265->1722|3315->1744|3467->1865|3513->1884|3545->1907|3584->1908|3634->1930|3812->2077|3854->2091|4255->2462|4292->2472
+                  LINES: 21->1|26->1|27->2|27->2|27->2|28->3|47->22|47->22|48->23|50->25|50->25|52->27|52->27|52->27|53->28|58->33|58->33|60->35|60->35|60->35|61->36|62->37|62->37|65->40|75->50|75->50|79->54|79->54|79->54|80->55|81->56|82->57|82->57|82->57|83->58|85->60|86->61|97->72|102->77
                   -- GENERATED --
               */
           

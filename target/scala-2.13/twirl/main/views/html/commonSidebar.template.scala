@@ -23,7 +23,8 @@ object commonSidebar extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.
       {
 
 
-Seq[Any](_display_(/*2.2*/defining(play.core.PlayVersion.current)/*2.41*/ { version =>_display_(Seq[Any](format.raw/*2.54*/("""
+Seq[Any](format.raw/*1.4*/("""
+"""),_display_(/*2.2*/defining(play.core.PlayVersion.current)/*2.41*/ { version =>_display_(Seq[Any](format.raw/*2.54*/("""
 """),format.raw/*3.1*/("""<h3>Table of Contents</h3>
 <ul>
   <li><a href=""""),_display_(/*5.17*/routes/*5.23*/.HomeController.index),format.raw/*5.44*/("""#Introduction">Welcome</a>
@@ -54,11 +55,11 @@ Seq[Any](_display_(/*2.2*/defining(play.core.PlayVersion.current)/*2.41*/ { vers
 
               /*
                   -- GENERATED --
-                  DATE: 2021-02-22T19:53:27.473706
-                  SOURCE: /Users/Luke/polybody-macro-calc/app/views/commonSidebar.scala.html
-                  HASH: a94bfa13f2a133115db82bdfe99a573d785eaa89
-                  MATRIX: 730->1|826->5|873->44|923->57|950->58|1024->106|1038->112|1079->133|1148->176|1162->182|1205->205|1279->253|1293->259|1337->283|1489->408|1517->415
-                  LINES: 21->1|26->2|26->2|26->2|27->3|29->5|29->5|29->5|30->6|30->6|30->6|31->7|31->7|31->7|35->11|35->11
+                  DATE: 2021-02-22T20:39:25.989
+                  SOURCE: C:/Users/felix/source/repos/polybody-macro-calc/app/views/commonSidebar.scala.html
+                  HASH: 1885f2d2fc536bc352678797f7f16958879d90c1
+                  MATRIX: 730->1|826->3|854->6|901->45|951->58|979->60|1055->110|1069->116|1110->137|1180->181|1194->187|1237->210|1312->259|1326->265|1370->289|1526->418|1554->425
+                  LINES: 21->1|26->1|27->2|27->2|27->2|28->3|30->5|30->5|30->5|31->6|31->6|31->6|32->7|32->7|32->7|36->11|36->11
                   -- GENERATED --
               */
           

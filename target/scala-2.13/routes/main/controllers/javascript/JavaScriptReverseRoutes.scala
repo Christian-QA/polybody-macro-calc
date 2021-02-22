@@ -1,6 +1,6 @@
 // @GENERATOR:play-routes-compiler
-// @SOURCE:/Users/Luke/polybody-macro-calc/conf/routes
-// @DATE:Mon Feb 22 19:53:25 GMT 2021
+// @SOURCE:C:/Users/felix/source/repos/polybody-macro-calc/conf/routes
+// @DATE:Mon Feb 22 20:43:45 GMT 2021
 
 import play.api.routing.JavaScriptReverseRoute
 
@@ -17,6 +17,16 @@ package controllers.javascript {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
+  
+    // @LINE:10
+    def gender: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.HomeController.gender",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "gender"})
+        }
+      """
+    )
   
     // @LINE:7
     def index: JavaScriptReverseRoute = JavaScriptReverseRoute(
@@ -50,7 +60,7 @@ package controllers.javascript {
   
   }
 
-  // @LINE:13
+  // @LINE:14
   class ReverseAssets(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -58,7 +68,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:13
+    // @LINE:14
     def versioned: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Assets.versioned",
       """
