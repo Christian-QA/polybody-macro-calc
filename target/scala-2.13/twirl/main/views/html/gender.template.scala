@@ -23,12 +23,11 @@ object gender extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.Htm
       {
 
 
-Seq[Any](format.raw/*1.4*/("""
-
+Seq[Any](format.raw/*2.1*/("""
 """),_display_(/*3.2*/main("Welcome")/*3.17*/ {_display_(Seq[Any](format.raw/*3.19*/("""
 """),_display_(/*4.2*/defining(play.core.PlayVersion.current)/*4.41*/ { version =>_display_(Seq[Any](format.raw/*4.54*/("""
 
-"""),_display_(/*6.2*/template("What is your sex?", "radio")),format.raw/*6.40*/("""
+"""),_display_(/*6.2*/template("What is your sex?", "radio", param1=Some("male"), param2=Some("female"))),format.raw/*6.84*/("""
 
 
 
@@ -50,11 +49,11 @@ Seq[Any](format.raw/*1.4*/("""
 
               /*
                   -- GENERATED --
-                  DATE: 2021-02-22T21:28:13.040
-                  SOURCE: C:/Users/felix/source/repos/polybody-macro-calc/app/views/gender.scala.html
-                  HASH: b1207f881ab6edd4115f9845fb3674507a2d33a8
-                  MATRIX: 723->1|819->3|849->8|872->23|911->25|939->28|986->67|1036->80|1066->85|1124->123|1163->132|1196->135
-                  LINES: 21->1|26->1|28->3|28->3|28->3|29->4|29->4|29->4|31->6|31->6|35->10|36->11
+                  DATE: 2021-02-22T21:52:02.911
+                  SOURCE: /Users/christianredfern/Documents/Projects/HMRC/Code/Personal/polybody-macro-calc/app/views/gender.scala.html
+                  HASH: 1a253a42fcc05e912f9fa11498be19addc8e8d89
+                  MATRIX: 723->1|819->4|846->6|869->21|908->23|935->25|982->64|1032->77|1060->80|1162->162|1197->167|1229->169
+                  LINES: 21->1|26->2|27->3|27->3|27->3|28->4|28->4|28->4|30->6|30->6|34->10|35->11
                   -- GENERATED --
               */
           

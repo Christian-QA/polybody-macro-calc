@@ -1,5 +1,5 @@
-[debug] Copy resource mappings: 
-[debug] 	(C:\Users\felix\source\repos\polybody-macro-calc\conf\application.conf,C:\Users\felix\source\repos\polybody-macro-calc\target\scala-2.13\classes\application.conf)
-[debug] 	(C:\Users\felix\source\repos\polybody-macro-calc\conf\logback.xml,C:\Users\felix\source\repos\polybody-macro-calc\target\scala-2.13\classes\logback.xml)
-[debug] 	(C:\Users\felix\source\repos\polybody-macro-calc\conf\messages,C:\Users\felix\source\repos\polybody-macro-calc\target\scala-2.13\classes\messages)
-[debug] 	(C:\Users\felix\source\repos\polybody-macro-calc\conf\routes,C:\Users\felix\source\repos\polybody-macro-calc\target\scala-2.13\classes\routes)
+[0m[[0m[0mdebug[0m] [0m[0mCopy resource mappings: [0m
+[0m[[0m[0mdebug[0m] [0m[0m	(/Users/christianredfern/Documents/Projects/HMRC/Code/Personal/polybody-macro-calc/conf/logback.xml,/Users/christianredfern/Documents/Projects/HMRC/Code/Personal/polybody-macro-calc/target/scala-2.13/classes/logback.xml)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	(/Users/christianredfern/Documents/Projects/HMRC/Code/Personal/polybody-macro-calc/conf/messages,/Users/christianredfern/Documents/Projects/HMRC/Code/Personal/polybody-macro-calc/target/scala-2.13/classes/messages)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	(/Users/christianredfern/Documents/Projects/HMRC/Code/Personal/polybody-macro-calc/conf/application.conf,/Users/christianredfern/Documents/Projects/HMRC/Code/Personal/polybody-macro-calc/target/scala-2.13/classes/application.conf)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	(/Users/christianredfern/Documents/Projects/HMRC/Code/Personal/polybody-macro-calc/conf/routes,/Users/christianredfern/Documents/Projects/HMRC/Code/Personal/polybody-macro-calc/target/scala-2.13/classes/routes)[0m

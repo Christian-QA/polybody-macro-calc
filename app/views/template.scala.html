@@ -1,4 +1,4 @@
-@(title: String, formType: String)
+@(title: String, formType: String, param1: Option[String], param2: Option[String])
 @defining(play.core.PlayVersion.current) { version =>
 <head>
     <meta charset="utf-8">
@@ -51,12 +51,19 @@
         <label for="answer" class="visually-hidden">Answer:</label>
         <div class="row">
             <div class="col-md-12">
-                @if(formType == "text"){
-                    <input type="text" id="answer" class="form-control" placeholder="Type answer here" required autofocus>
-                }
-                @if(formType == "radio"){
-                    <input type="radio" id="radio1" class="form-control">
-                    <input type="radio" id="radio2" class="form-control">
+                @formType match {
+                    case "text" => {
+                        <input type="text" id="answer" class="form-control" placeholder="Type answer here" required autofocus>
+                    }
+                    case "radio" => {
+                <label for="@Html(param1)">@Html(param1)</label>
+                        <input type="radio" id="@Html(param1)" class="form-control" value="@Html(param1)">
+                <label for="@Html(param2)">@Html(param2)</label>
+                        <input type="radio" id="@Html(param2)" class="form-control" value="@Html(param2)">
+                    }
+                    case _ => {
+                        <h1>No formtype help pls pls pls I beg you pls</h1>
+                    }
                 }
             </div>
         </div>

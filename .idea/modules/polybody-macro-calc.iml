@@ -8,6 +8,7 @@
       <sourceFolder url="file://$MODULE_DIR$/../../app" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../conf" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/../../public" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../test" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../target/scala-2.13/routes/main" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../target/scala-2.13/twirl/main" isTestSource="false" generated="true" />
       <excludeFolder url="file://$MODULE_DIR$/../../target" />

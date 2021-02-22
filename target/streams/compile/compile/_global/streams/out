@@ -1,4 +1,6 @@
-[error] C:\Users\felix\source\repos\polybody-macro-calc\app\views\template.scala.html:57:18: not found: value elseIf
-[error]                 @elseIf(formType == "radio"){
-[error]                  ^
-[error] one error found
+[0m[[0m[31merror[0m] [0m[0m/Users/christianredfern/Documents/Projects/HMRC/Code/Personal/polybody-macro-calc/app/views/gender.scala.html:6:69: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : String("female")[0m
+[0m[[0m[31merror[0m] [0m[0m required: Option[String][0m
+[0m[[0m[31merror[0m] [0m[0m@template("What is your sex?", "radio", param1=Some("male"), param2="female")[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                    ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m

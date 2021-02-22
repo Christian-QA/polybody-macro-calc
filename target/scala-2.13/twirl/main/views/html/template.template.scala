@@ -15,16 +15,15 @@ import play.api.templates.PlayMagic._
 import play.api.mvc._
 import play.api.data._
 
-object template extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template2[String,String,play.twirl.api.HtmlFormat.Appendable] {
+object template extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template4[String,String,Option[String],Option[String],play.twirl.api.HtmlFormat.Appendable] {
 
   /**/
-  def apply/*1.2*/(title: String, formType: String):play.twirl.api.HtmlFormat.Appendable = {
+  def apply/*1.2*/(title: String, formType: String, param1: Option[String], param2: Option[String]):play.twirl.api.HtmlFormat.Appendable = {
     _display_ {
       {
 
 
-Seq[Any](format.raw/*1.35*/("""
-"""),_display_(/*2.2*/defining(play.core.PlayVersion.current)/*2.41*/ { version =>_display_(Seq[Any](format.raw/*2.54*/("""
+Seq[Any](_display_(/*2.2*/defining(play.core.PlayVersion.current)/*2.41*/ { version =>_display_(Seq[Any](format.raw/*2.54*/("""
 """),format.raw/*3.1*/("""<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -76,14 +75,17 @@ Seq[Any](format.raw/*1.35*/("""
         <label for="answer" class="visually-hidden">Answer:</label>
         <div class="row">
             <div class="col-md-12">
-                """),_display_(/*54.18*/if(formType == "text")/*54.40*/{_display_(Seq[Any](format.raw/*54.41*/("""
-                    """),format.raw/*55.21*/("""<input type="text" id="answer" class="form-control" placeholder="Type answer here" required autofocus>
-                """)))}),format.raw/*56.18*/("""
-                """),_display_(/*57.18*/if(formType == "radio")/*57.41*/{_display_(Seq[Any](format.raw/*57.42*/("""
-                    """),format.raw/*58.21*/("""<input type="radio" id="radio1" class="form-control">
-                    <input type="radio" id="radio2" class="form-control">
-                """)))}),format.raw/*60.18*/("""
-            """),format.raw/*61.13*/("""</div>
+                """),_display_(/*54.18*/formType/*54.26*/ match/*54.32*/ {/*55.21*/case "text" =>/*55.35*/ {_display_(Seq[Any](format.raw/*55.37*/("""
+                        """),format.raw/*56.25*/("""<input type="text" id="answer" class="form-control" placeholder="Type answer here" required autofocus>
+                    """)))}/*58.21*/case "radio" =>/*58.36*/ {_display_(Seq[Any](format.raw/*58.38*/("""
+                """),format.raw/*59.17*/("""<label for=""""),_display_(/*59.30*/Html(param1)),format.raw/*59.42*/("""">"""),_display_(/*59.45*/Html(param1)),format.raw/*59.57*/("""</label>
+                        <input type="radio" id=""""),_display_(/*60.50*/Html(param1)),format.raw/*60.62*/("""" class="form-control" value=""""),_display_(/*60.93*/Html(param1)),format.raw/*60.105*/("""">
+                <label for=""""),_display_(/*61.30*/Html(param2)),format.raw/*61.42*/("""">"""),_display_(/*61.45*/Html(param2)),format.raw/*61.57*/("""</label>
+                        <input type="radio" id=""""),_display_(/*62.50*/Html(param2)),format.raw/*62.62*/("""" class="form-control" value=""""),_display_(/*62.93*/Html(param2)),format.raw/*62.105*/("""">
+                    """)))}/*64.21*/case _ =>/*64.30*/ {_display_(Seq[Any](format.raw/*64.32*/("""
+                        """),format.raw/*65.25*/("""<h1>No formtype help pls pls pls I beg you pls</h1>
+                    """)))}}),format.raw/*67.18*/("""
+            """),format.raw/*68.13*/("""</div>
         </div>
         <br>
         <button class="w-100 btn btn-lg btn-primary" type="submit">Submit</button>
@@ -94,12 +96,12 @@ Seq[Any](format.raw/*1.35*/("""
         integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous">
 </script>
 </body>
-""")))}),format.raw/*72.2*/("""
+""")))}),format.raw/*79.2*/("""
 
 
 
 
-"""),format.raw/*77.1*/("""<!--&lt;!&ndash; Optional theme &ndash;&gt;-->
+"""),format.raw/*84.1*/("""<!--&lt;!&ndash; Optional theme &ndash;&gt;-->
 <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" -->
 <!--      integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">-->
 
@@ -108,9 +110,9 @@ Seq[Any](format.raw/*1.35*/("""
     }
   }
 
-  def render(title:String,formType:String): play.twirl.api.HtmlFormat.Appendable = apply(title,formType)
+  def render(title:String,formType:String,param1:Option[String],param2:Option[String]): play.twirl.api.HtmlFormat.Appendable = apply(title,formType,param1,param2)
 
-  def f:((String,String) => play.twirl.api.HtmlFormat.Appendable) = (title,formType) => apply(title,formType)
+  def f:((String,String,Option[String],Option[String]) => play.twirl.api.HtmlFormat.Appendable) = (title,formType,param1,param2) => apply(title,formType,param1,param2)
 
   def ref: this.type = this
 
@@ -119,11 +121,11 @@ Seq[Any](format.raw/*1.35*/("""
 
               /*
                   -- GENERATED --
-                  DATE: 2021-02-22T21:38:59.848
-                  SOURCE: C:/Users/felix/source/repos/polybody-macro-calc/app/views/template.scala.html
-                  HASH: fbbbc284c56205ee87e6ba7b88408b5df5fb23a7
-                  MATRIX: 739->1|867->34|895->37|942->76|992->89|1020->91|1855->898|1884->899|1921->909|2002->963|2030->964|2067->974|2115->994|2144->995|2181->1005|2363->1160|2391->1161|2428->1171|2473->1188|2502->1189|2539->1199|2585->1218|2613->1219|2650->1229|2979->1531|3011->1542|3195->1699|3226->1721|3265->1722|3315->1744|3467->1865|3513->1884|3545->1907|3584->1908|3634->1930|3812->2077|3854->2091|4255->2462|4292->2472
-                  LINES: 21->1|26->1|27->2|27->2|27->2|28->3|47->22|47->22|48->23|50->25|50->25|52->27|52->27|52->27|53->28|58->33|58->33|60->35|60->35|60->35|61->36|62->37|62->37|65->40|75->50|75->50|79->54|79->54|79->54|80->55|81->56|82->57|82->57|82->57|83->58|85->60|86->61|97->72|102->77
+                  DATE: 2021-02-22T21:54:27.282
+                  SOURCE: /Users/christianredfern/Documents/Projects/HMRC/Code/Personal/polybody-macro-calc/app/views/template.scala.html
+                  HASH: 6fd8ef714c532211b83314259c7bb4ef09c80eea
+                  MATRIX: 769->1|944->84|991->123|1041->136|1068->137|1884->925|1913->926|1949->935|2028->987|2056->988|2091->996|2139->1016|2168->1017|2204->1026|2381->1176|2409->1177|2444->1185|2489->1202|2518->1203|2554->1212|2599->1230|2627->1231|2661->1238|2980->1530|3012->1541|3192->1694|3209->1702|3224->1708|3235->1731|3258->1745|3298->1747|3351->1772|3494->1917|3518->1932|3558->1934|3603->1951|3643->1964|3676->1976|3706->1979|3739->1991|3824->2049|3857->2061|3915->2092|3949->2104|4008->2136|4041->2148|4071->2151|4104->2163|4189->2221|4222->2233|4280->2264|4314->2276|4357->2321|4375->2330|4415->2332|4468->2357|4573->2448|4614->2461|5004->2821|5036->2826
+                  LINES: 21->1|26->2|26->2|26->2|27->3|46->22|46->22|47->23|49->25|49->25|51->27|51->27|51->27|52->28|57->33|57->33|59->35|59->35|59->35|60->36|61->37|61->37|64->40|74->50|74->50|78->54|78->54|78->54|78->55|78->55|78->55|79->56|80->58|80->58|80->58|81->59|81->59|81->59|81->59|81->59|82->60|82->60|82->60|82->60|83->61|83->61|83->61|83->61|84->62|84->62|84->62|84->62|85->64|85->64|85->64|86->65|87->67|88->68|99->79|104->84
                   -- GENERATED --
               */
           
