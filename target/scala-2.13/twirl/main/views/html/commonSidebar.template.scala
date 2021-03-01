@@ -55,7 +55,7 @@ Seq[Any](format.raw/*1.4*/("""
 
               /*
                   -- GENERATED --
-                  DATE: 2021-03-01T19:49:07.796
+                  DATE: 2021-03-01T20:29:04.026
                   SOURCE: C:/Users/felix/source/repos/polybody-macro-calc/app/views/commonSidebar.scala.html
                   HASH: 1885f2d2fc536bc352678797f7f16958879d90c1
                   MATRIX: 730->1|826->3|854->6|901->45|951->58|979->60|1055->110|1069->116|1110->137|1180->181|1194->187|1237->210|1312->259|1326->265|1370->289|1526->418|1554->425

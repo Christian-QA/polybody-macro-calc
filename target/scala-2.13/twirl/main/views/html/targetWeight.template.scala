@@ -15,7 +15,7 @@ import play.api.templates.PlayMagic._
 import play.api.mvc._
 import play.api.data._
 
-object age extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template0[play.twirl.api.HtmlFormat.Appendable] {
+object targetWeight extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template0[play.twirl.api.HtmlFormat.Appendable] {
 
   /**/
   def apply/*1.2*/():play.twirl.api.HtmlFormat.Appendable = {
@@ -25,14 +25,15 @@ object age extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFo
 
 Seq[Any](format.raw/*1.4*/("""
 
-"""),_display_(/*3.2*/main("Age - Polybody")/*3.24*/ {_display_(Seq[Any](format.raw/*3.26*/("""
+"""),_display_(/*3.2*/main("Target weight - Polybody")/*3.34*/ {_display_(Seq[Any](format.raw/*3.36*/("""
 """),_display_(/*4.2*/defining(play.core.PlayVersion.current)/*4.41*/ { version =>_display_(Seq[Any](format.raw/*4.54*/("""
 
-"""),_display_(/*6.2*/template("What is your age?", "text", param3=Some(5))),format.raw/*6.55*/("""
+"""),_display_(/*6.2*/template("What is your target weight?", "text", param3=Some(500))),format.raw/*6.67*/("""
 
-""")))}),format.raw/*8.2*/("""
-""")))}),format.raw/*9.2*/("""
-"""))
+
+
+""")))}),format.raw/*10.2*/("""
+""")))}))
       }
     }
   }
@@ -48,11 +49,11 @@ Seq[Any](format.raw/*1.4*/("""
 
               /*
                   -- GENERATED --
-                  DATE: 2021-03-01T20:29:04.011
-                  SOURCE: C:/Users/felix/source/repos/polybody-macro-calc/app/views/age.scala.html
-                  HASH: 3ef1e2f81c3b2f117b252d1bb2b0bcd5bb717288
-                  MATRIX: 720->1|816->3|846->8|876->30|915->32|943->35|990->74|1040->87|1070->92|1143->145|1177->150|1209->153
-                  LINES: 21->1|26->1|28->3|28->3|28->3|29->4|29->4|29->4|31->6|31->6|33->8|34->9
+                  DATE: 2021-03-01T20:29:04.109
+                  SOURCE: C:/Users/felix/source/repos/polybody-macro-calc/app/views/target_weight.scala.html
+                  HASH: 2ae19204dcd9eeb9df0cfbdc611ca278b6518adc
+                  MATRIX: 729->1|825->3|855->8|895->40|934->42|962->45|1009->84|1059->97|1089->102|1174->167|1213->176
+                  LINES: 21->1|26->1|28->3|28->3|28->3|29->4|29->4|29->4|31->6|31->6|35->10
                   -- GENERATED --
               */
           

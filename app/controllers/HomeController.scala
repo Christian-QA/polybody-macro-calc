@@ -41,4 +41,12 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
   def height() = Action { implicit request: Request[AnyContent] =>
     Ok(views.html.height())
   }
+
+  def currentWeight() = Action { implicit request: Request[AnyContent] =>
+    Ok(views.html.current_weight())
+  }
+
+  def targetWeight() = Action { implicit request: Request[AnyContent] =>
+    Ok(views.html.target_weight())
+  }
 }

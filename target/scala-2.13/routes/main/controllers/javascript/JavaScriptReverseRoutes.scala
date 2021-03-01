@@ -1,6 +1,6 @@
 // @GENERATOR:play-routes-compiler
 // @SOURCE:C:/Users/felix/source/repos/polybody-macro-calc/conf/routes
-// @DATE:Mon Mar 01 20:07:26 GMT 2021
+// @DATE:Mon Mar 01 20:29:03 GMT 2021
 
 import play.api.routing.JavaScriptReverseRoute
 
@@ -48,6 +48,26 @@ package controllers.javascript {
       """
     )
   
+    // @LINE:14
+    def targetWeight: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.HomeController.targetWeight",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "targetWeight"})
+        }
+      """
+    )
+  
+    // @LINE:13
+    def weight: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.HomeController.weight",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "weight"})
+        }
+      """
+    )
+  
     // @LINE:8
     def explore: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.HomeController.explore",
@@ -80,7 +100,7 @@ package controllers.javascript {
   
   }
 
-  // @LINE:16
+  // @LINE:18
   class ReverseAssets(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -88,7 +108,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:16
+    // @LINE:18
     def versioned: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Assets.versioned",
       """

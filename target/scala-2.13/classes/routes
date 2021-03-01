@@ -10,6 +10,8 @@ GET     /tutorial                           controllers.HomeController.tutorial
 GET     /gender                             controllers.HomeController.gender
 GET     /age                                controllers.HomeController.age
 GET     /height                             controllers.HomeController.height
+GET     /weight                             controllers.HomeController.weight
+GET     /targetWeight                       controllers.HomeController.targetWeight
 
 
 # Map static resources from the /public folder to the /assets URL path
