@@ -10,9 +10,8 @@ GET     /tutorial                           controllers.HomeController.tutorial
 GET     /gender                             controllers.HomeController.gender
 GET     /age                                controllers.HomeController.age
 GET     /height                             controllers.HomeController.height
-GET     /weight                             controllers.HomeController.weight
-GET     /targetWeight                       controllers.HomeController.targetWeight
-
+GET     /current_weight                     controllers.HomeController.currentWeight
+GET     /target_weight                      controllers.HomeController.targetWeight
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+GET     /assets/*file                       controllers.Assets.versioned(path="/public", file: Asset)

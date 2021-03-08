@@ -1,6 +1,6 @@
 // @GENERATOR:play-routes-compiler
 // @SOURCE:C:/Users/felix/source/repos/polybody-macro-calc/conf/routes
-// @DATE:Mon Mar 01 20:29:03 GMT 2021
+// @DATE:Mon Mar 08 19:56:46 GMT 2021
 
 import play.api.mvc.Call
 
@@ -38,13 +38,7 @@ package controllers {
     // @LINE:14
     def targetWeight(): Call = {
       
-      Call("GET", _prefix + { _defaultPrefix } + "targetWeight")
-    }
-  
-    // @LINE:13
-    def weight(): Call = {
-      
-      Call("GET", _prefix + { _defaultPrefix } + "weight")
+      Call("GET", _prefix + { _defaultPrefix } + "target_weight")
     }
   
     // @LINE:8
@@ -59,6 +53,12 @@ package controllers {
       Call("GET", _prefix + { _defaultPrefix } + "gender")
     }
   
+    // @LINE:13
+    def currentWeight(): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "current_weight")
+    }
+  
     // @LINE:7
     def index(): Call = {
       
@@ -67,14 +67,14 @@ package controllers {
   
   }
 
-  // @LINE:18
+  // @LINE:17
   class ReverseAssets(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
   
-    // @LINE:18
+    // @LINE:17
     def versioned(file:Asset): Call = {
       implicit lazy val _rrc = new play.core.routing.ReverseRouteContext(Map(("path", "/public"))); _rrc
       Call("GET", _prefix + { _defaultPrefix } + "assets/" + implicitly[play.api.mvc.PathBindable[Asset]].unbind("file", file))

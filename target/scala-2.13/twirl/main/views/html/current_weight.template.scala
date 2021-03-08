@@ -15,7 +15,7 @@ import play.api.templates.PlayMagic._
 import play.api.mvc._
 import play.api.data._
 
-object weight extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template0[play.twirl.api.HtmlFormat.Appendable] {
+object current_weight extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template0[play.twirl.api.HtmlFormat.Appendable] {
 
   /**/
   def apply/*1.2*/():play.twirl.api.HtmlFormat.Appendable = {
@@ -25,7 +25,7 @@ object weight extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.Htm
 
 Seq[Any](format.raw/*1.4*/("""
 
-"""),_display_(/*3.2*/main("Weight - Polybody")/*3.27*/ {_display_(Seq[Any](format.raw/*3.29*/("""
+"""),_display_(/*3.2*/main("Current weight - Polybody")/*3.35*/ {_display_(Seq[Any](format.raw/*3.37*/("""
 """),_display_(/*4.2*/defining(play.core.PlayVersion.current)/*4.41*/ { version =>_display_(Seq[Any](format.raw/*4.54*/("""
 
 """),_display_(/*6.2*/template("What is your current weight?", "text", param3=Some(99))),format.raw/*6.67*/("""
@@ -49,10 +49,10 @@ Seq[Any](format.raw/*1.4*/("""
 
               /*
                   -- GENERATED --
-                  DATE: 2021-03-01T20:29:04.144
+                  DATE: 2021-03-08T19:56:46.495
                   SOURCE: C:/Users/felix/source/repos/polybody-macro-calc/app/views/current_weight.scala.html
-                  HASH: d5144c8f9d85b4e141dd62f4d7e0d343e42b69f1
-                  MATRIX: 723->1|819->3|849->8|882->33|921->35|949->38|996->77|1046->90|1076->95|1161->160|1200->169
+                  HASH: 9230e41616ec578ebd6cccdfe0e1bc91f112b68c
+                  MATRIX: 731->1|827->3|857->8|898->41|937->43|965->46|1012->85|1062->98|1092->103|1177->168|1216->177
                   LINES: 21->1|26->1|28->3|28->3|28->3|29->4|29->4|29->4|31->6|31->6|35->10
                   -- GENERATED --
               */

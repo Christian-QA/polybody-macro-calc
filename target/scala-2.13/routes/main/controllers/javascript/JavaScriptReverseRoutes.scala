@@ -1,6 +1,6 @@
 // @GENERATOR:play-routes-compiler
 // @SOURCE:C:/Users/felix/source/repos/polybody-macro-calc/conf/routes
-// @DATE:Mon Mar 01 20:29:03 GMT 2021
+// @DATE:Mon Mar 08 19:56:46 GMT 2021
 
 import play.api.routing.JavaScriptReverseRoute
 
@@ -53,17 +53,7 @@ package controllers.javascript {
       "controllers.HomeController.targetWeight",
       """
         function() {
-          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "targetWeight"})
-        }
-      """
-    )
-  
-    // @LINE:13
-    def weight: JavaScriptReverseRoute = JavaScriptReverseRoute(
-      "controllers.HomeController.weight",
-      """
-        function() {
-          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "weight"})
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "target_weight"})
         }
       """
     )
@@ -88,6 +78,16 @@ package controllers.javascript {
       """
     )
   
+    // @LINE:13
+    def currentWeight: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.HomeController.currentWeight",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "current_weight"})
+        }
+      """
+    )
+  
     // @LINE:7
     def index: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.HomeController.index",
@@ -100,7 +100,7 @@ package controllers.javascript {
   
   }
 
-  // @LINE:18
+  // @LINE:17
   class ReverseAssets(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -108,7 +108,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:18
+    // @LINE:17
     def versioned: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Assets.versioned",
       """

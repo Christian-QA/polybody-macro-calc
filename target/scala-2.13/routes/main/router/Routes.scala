@@ -1,6 +1,6 @@
 // @GENERATOR:play-routes-compiler
 // @SOURCE:C:/Users/felix/source/repos/polybody-macro-calc/conf/routes
-// @DATE:Mon Mar 01 20:29:03 GMT 2021
+// @DATE:Mon Mar 08 19:56:46 GMT 2021
 
 package router
 
@@ -15,7 +15,7 @@ class Routes(
   override val errorHandler: play.api.http.HttpErrorHandler, 
   // @LINE:7
   HomeController_1: controllers.HomeController,
-  // @LINE:18
+  // @LINE:17
   Assets_0: controllers.Assets,
   val prefix: String
 ) extends GeneratedRouter {
@@ -24,7 +24,7 @@ class Routes(
    def this(errorHandler: play.api.http.HttpErrorHandler,
     // @LINE:7
     HomeController_1: controllers.HomeController,
-    // @LINE:18
+    // @LINE:17
     Assets_0: controllers.Assets
   ) = this(errorHandler, HomeController_1, Assets_0, "/")
 
@@ -45,8 +45,8 @@ class Routes(
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """gender""", """controllers.HomeController.gender"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """age""", """controllers.HomeController.age"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """height""", """controllers.HomeController.height"""),
-    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """weight""", """controllers.HomeController.weight"""),
-    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """targetWeight""", """controllers.HomeController.targetWeight"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """current_weight""", """controllers.HomeController.currentWeight"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """target_weight""", """controllers.HomeController.targetWeight"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """assets/""" + "$" + """file<.+>""", """controllers.Assets.versioned(path:String = "/public", file:Asset)"""),
     Nil
   ).foldLeft(List.empty[(String,String,String)]) { (s,e) => e.asInstanceOf[Any] match {
@@ -164,18 +164,18 @@ class Routes(
   )
 
   // @LINE:13
-  private[this] lazy val controllers_HomeController_weight6_route = Route("GET",
-    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("weight")))
+  private[this] lazy val controllers_HomeController_currentWeight6_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("current_weight")))
   )
-  private[this] lazy val controllers_HomeController_weight6_invoker = createInvoker(
-    HomeController_1.weight,
+  private[this] lazy val controllers_HomeController_currentWeight6_invoker = createInvoker(
+    HomeController_1.currentWeight,
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.HomeController",
-      "weight",
+      "currentWeight",
       Nil,
       "GET",
-      this.prefix + """weight""",
+      this.prefix + """current_weight""",
       """""",
       Seq()
     )
@@ -183,7 +183,7 @@ class Routes(
 
   // @LINE:14
   private[this] lazy val controllers_HomeController_targetWeight7_route = Route("GET",
-    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("targetWeight")))
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("target_weight")))
   )
   private[this] lazy val controllers_HomeController_targetWeight7_invoker = createInvoker(
     HomeController_1.targetWeight,
@@ -193,13 +193,13 @@ class Routes(
       "targetWeight",
       Nil,
       "GET",
-      this.prefix + """targetWeight""",
+      this.prefix + """target_weight""",
       """""",
       Seq()
     )
   )
 
-  // @LINE:18
+  // @LINE:17
   private[this] lazy val controllers_Assets_versioned8_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("assets/"), DynamicPart("file", """.+""",false)))
   )
@@ -257,9 +257,9 @@ class Routes(
       }
   
     // @LINE:13
-    case controllers_HomeController_weight6_route(params@_) =>
+    case controllers_HomeController_currentWeight6_route(params@_) =>
       call { 
-        controllers_HomeController_weight6_invoker.call(HomeController_1.weight)
+        controllers_HomeController_currentWeight6_invoker.call(HomeController_1.currentWeight)
       }
   
     // @LINE:14
@@ -268,7 +268,7 @@ class Routes(
         controllers_HomeController_targetWeight7_invoker.call(HomeController_1.targetWeight)
       }
   
-    // @LINE:18
+    // @LINE:17
     case controllers_Assets_versioned8_route(params@_) =>
       call(Param[String]("path", Right("/public")), params.fromPath[Asset]("file", None)) { (path, file) =>
         controllers_Assets_versioned8_invoker.call(Assets_0.versioned(path, file))
