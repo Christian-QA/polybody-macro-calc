@@ -4,7 +4,7 @@
 *.iml
 *.ipr
 *.iws
-.idea
+.idea/
 .DS_Store
 .bsp
 bin/
