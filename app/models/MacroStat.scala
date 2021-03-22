@@ -1,7 +1,6 @@
 package models
 
 import java.time.format.DateTimeParseException
-
 import org.joda.time.DateTime
 import play.api.libs.json
 import play.api.libs.json._
@@ -23,7 +22,7 @@ case class MacroStat(
 
 object MacroStat {
 
-  implicit val dateTimeFormat = new Format[DateTime] {
+  implicit val dateTimeFormat: Format[DateTime] = new Format[DateTime] {
     override def writes(o: DateTime): JsValue = json.JsString(o.toString())
 
     override def reads(json: JsValue): JsResult[DateTime] = json match {
@@ -33,9 +32,10 @@ object MacroStat {
         } catch {
           case _: DateTimeParseException => JsError("That's not a date")
         }
+      case _ => JsError("That's not a date")
     }
   }
 
-  implicit val formats = Json.format[MacroStat]
+  implicit val formats: OFormat[MacroStat] = Json.format[MacroStat]
 
 }
