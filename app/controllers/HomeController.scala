@@ -29,4 +29,24 @@ class HomeController @Inject()(cc: ControllerComponents, messagesControllerCompo
   def tutorial() = Action { implicit request: Request[AnyContent] =>
     Ok(views.html.tutorial())
   }
+  
+  def gender() = Action { implicit request: Request[AnyContent] =>
+    Ok(views.html.gender())
+  }
+
+  def age() = Action { implicit request: Request[AnyContent] =>
+    Ok(views.html.age())
+  }
+
+  def height() = Action { implicit request: Request[AnyContent] =>
+    Ok(views.html.height())
+  }
+
+  def currentWeight() = Action { implicit request: Request[AnyContent] =>
+    Ok(views.html.current_weight())
+  }
+
+  def targetWeight() = Action { implicit request: Request[AnyContent] =>
+    Ok(views.html.target_weight())
+  }
 }

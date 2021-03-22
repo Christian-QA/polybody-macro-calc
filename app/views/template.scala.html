@@ -1,0 +1,97 @@
+@(title: String, formType: String, param1: Option[String] = None, param2: Option[String] = None, param3: Option[Int] = None)
+@defining(play.core.PlayVersion.current) { version =>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.80.0">
+    <title>Signin Template · Bootstrap v5.0</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sign-in/">
+
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <style>
+
+
+
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      input[type=text] {
+        width: 50%;
+      }
+
+
+    </style>
+
+    <!-- Custom styles for this template -->
+    <!--    <link href="signin.css" rel="stylesheet">-->
+</head>
+<body class="text-center container">
+
+<main class="form-signin">
+    <form>
+        <img class="mb-4" alt="" width="72" height="57">
+        <h1 class="h3 mb-3 fw-normal">@Html(title)</h1>
+        <label for="answer" class="visually-hidden">Answer:</label>
+        <div class="row">
+            <div class="col-md-12 align-content-center">
+                @formType match {
+                    case "text" => {
+                        <input type="text" id="answer" placeholder="Type answer here" required autofocus>
+                    }
+                    case "radio" => {
+                <fieldset>
+                    <label for="@Html(param1)">@Html(param1)</label>
+                        <input type="radio" id="@Html(param1)" class="form-control" value="@Html(param1)">
+                    <label for="@Html(param2)">@Html(param2)</label>
+                        <input type="radio" id="@Html(param2)" class="form-control" value="@Html(param2)">
+                </fieldset>
+                        }
+                    case _ => {
+                        <h1>No formtype help pls pls pls I beg you pls</h1>
+                    }
+                }
+            </div>
+        </div>
+        <br>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Submit</button>
+    </form>
+</main>
+
+<footer>
+    <p>
+        <a href="https://www.w3schools.com/">| Age |</a>
+        <a href="https://www.w3schools.com/">| Current Weight |</a>
+        <a href="https://www.w3schools.com/">| Gender |</a>
+        <a href="https://www.w3schools.com/">| Height |</a>
+        <a href="https://www.w3schools.com/">| Target Weight |</a>
+    </p>
+</footer>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+        integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous">
+</script>
+</body>
+
+}
+
+
+
+
+<!--&lt;!&ndash; Optional theme &ndash;&gt;-->
+<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" -->
+<!--      integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">-->
+
