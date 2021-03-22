@@ -4,12 +4,14 @@
 *.iml
 *.ipr
 *.iws
-.idea
+.idea/
 .DS_Store
 .bsp
 bin/
 project/
 target/
+project/target/
+project/project/target/
 build/
 .classpath
 .project

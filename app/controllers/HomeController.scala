@@ -9,7 +9,7 @@ import play.api.mvc._
  * application's home page.
  */
 @Singleton
-class HomeController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
+class HomeController @Inject()(cc: ControllerComponents, messagesControllerComponents: MessagesControllerComponents) extends AbstractController(cc) {
 
   /**
    * Create an Action to render an HTML page.
@@ -21,13 +21,32 @@ class HomeController @Inject()(cc: ControllerComponents) extends AbstractControl
   def index() = Action { implicit request: Request[AnyContent] =>
     Ok(views.html.index())
   }
-  
+
   def explore() = Action { implicit request: Request[AnyContent] =>
     Ok(views.html.explore())
   }
-  
+
   def tutorial() = Action { implicit request: Request[AnyContent] =>
     Ok(views.html.tutorial())
   }
   
+  def gender() = Action { implicit request: Request[AnyContent] =>
+    Ok(views.html.gender())
+  }
+
+  def age() = Action { implicit request: Request[AnyContent] =>
+    Ok(views.html.age())
+  }
+
+  def height() = Action { implicit request: Request[AnyContent] =>
+    Ok(views.html.height())
+  }
+
+  def currentWeight() = Action { implicit request: Request[AnyContent] =>
+    Ok(views.html.current_weight())
+  }
+
+  def targetWeight() = Action { implicit request: Request[AnyContent] =>
+    Ok(views.html.target_weight())
+  }
 }

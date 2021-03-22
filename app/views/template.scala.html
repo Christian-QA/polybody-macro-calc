@@ -1,4 +1,4 @@
-@()
+@(title: String, formType: String, param1: Option[String] = None, param2: Option[String] = None, param3: Option[Int] = None)
 @defining(play.core.PlayVersion.current) { version =>
 <head>
     <meta charset="utf-8">
@@ -19,10 +19,7 @@
 
     <style>
 
-    .container {
-        display: flex;
-        justify-content: center;
-    }
+
 
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -47,11 +44,26 @@
 <main class="form-signin">
     <form>
         <img class="mb-4" alt="" width="72" height="57">
-        <h1 class="h3 mb-3 fw-normal">Question?</h1>
+        <h1 class="h3 mb-3 fw-normal">@Html(title)</h1>
         <label for="answer" class="visually-hidden">Answer:</label>
         <div class="row">
-            <div class="col-md-12">
-                <input type="text" id="answer" class="form-control" placeholder="Type answer here" required autofocus>
+            <div class="col-md-12 align-content-center">
+                @formType match {
+                    case "text" => {
+                        <input type="text" id="answer" placeholder="Type answer here" required autofocus>
+                    }
+                    case "radio" => {
+                <fieldset>
+                    <label for="@Html(param1)">@Html(param1)</label>
+                        <input type="radio" id="@Html(param1)" class="form-control" value="@Html(param1)">
+                    <label for="@Html(param2)">@Html(param2)</label>
+                        <input type="radio" id="@Html(param2)" class="form-control" value="@Html(param2)">
+                </fieldset>
+                        }
+                    case _ => {
+                        <h1>No formtype help pls pls pls I beg you pls</h1>
+                    }
+                }
             </div>
         </div>
         <br>
@@ -59,10 +71,21 @@
     </form>
 </main>
 
+<footer>
+    <p>
+        <a href="https://www.w3schools.com/">| Age |</a>
+        <a href="https://www.w3schools.com/">| Current Weight |</a>
+        <a href="https://www.w3schools.com/">| Gender |</a>
+        <a href="https://www.w3schools.com/">| Height |</a>
+        <a href="https://www.w3schools.com/">| Target Weight |</a>
+    </p>
+</footer>
+
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
         integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous">
 </script>
 </body>
+
 }
 
 
