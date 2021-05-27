@@ -17,3 +17,6 @@ build/
 .project
 .settings
 .worksheet
+sbt-dist/
+sbt
+sbt.bat
