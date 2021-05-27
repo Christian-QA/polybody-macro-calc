@@ -1,21 +1,22 @@
 package models
 
 import java.time.format.DateTimeParseException
-import org.joda.time.DateTime
 import play.api.libs.json
 import play.api.libs.json.{Format, JsError, JsResult, JsString, JsSuccess, JsValue, Json, OFormat}
 
-case class PreviousWeight(dateTime: DateTime, weight: Double)
+import java.time.LocalDate
+
+case class PreviousWeight(dateTime: LocalDate, weight: Double)
 
 object PreviousWeight {
 
-  implicit val dateTimeFormat: Format[DateTime] = new Format[DateTime] {
-    override def writes(o: DateTime): JsValue = json.JsString(o.toString())
+  implicit val dateTimeFormat: Format[LocalDate] = new Format[LocalDate] {
+    override def writes(o: LocalDate): JsValue = json.JsString(o.toString())
 
-    override def reads(json: JsValue): JsResult[DateTime] = json match {
+    override def reads(json: JsValue): JsResult[LocalDate] = json match {
       case JsString(s) =>
         try {
-          JsSuccess(DateTime.parse(s))
+          JsSuccess(LocalDate.parse(s))
         } catch {
           case _: DateTimeParseException => JsError("That's not a date")
         }
@@ -24,5 +25,4 @@ object PreviousWeight {
   }
 
   implicit val formats: OFormat[PreviousWeight] = Json.format[PreviousWeight]
-
 }
