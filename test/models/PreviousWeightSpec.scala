@@ -1,14 +1,11 @@
 package models
 
-import org.scalatest.Matchers.convertToAnyShouldWrapper
-import org.scalatestplus.mockito.MockitoSugar
-import org.scalatestplus.play.PlaySpec
-import org.scalatestplus.play.guice.GuiceOneAppPerSuite
 import play.api.libs.json.{JsResultException, Json}
+import utils.BaseSpec
 
 import java.time.LocalDate
 
-class PreviousWeightSpec extends PlaySpec with GuiceOneAppPerSuite with MockitoSugar {
+class PreviousWeightSpec extends BaseSpec {
 
   val previousWeight = new PreviousWeight(LocalDate.of(2020, 3, 24), 150.5)
 
@@ -23,7 +20,7 @@ class PreviousWeightSpec extends PlaySpec with GuiceOneAppPerSuite with MockitoS
 
       val result = json.as[PreviousWeight]
 
-      result shouldBe previousWeight
+      result mustBe previousWeight
 
     }
 
@@ -38,8 +35,7 @@ class PreviousWeightSpec extends PlaySpec with GuiceOneAppPerSuite with MockitoS
         invalidJson.as[PreviousWeight]
       }
 
-      ex.getMessage shouldBe "JsResultException(errors:List((/dateTime,List(JsonValidationError(List(That's not a date),List()))), (/weight,List(JsonValidationError(List(error.expected.jsnumber),List())))))"
-
+      ex.getMessage mustBe "JsResultException(errors:List((/dateTime,List(JsonValidationError(List(That's not a date),List()))), (/weight,List(JsonValidationError(List(error.expected.jsnumber),List())))))"
     }
 
     "deserialise invalid key" in {
@@ -53,22 +49,19 @@ class PreviousWeightSpec extends PlaySpec with GuiceOneAppPerSuite with MockitoS
         invalidJson.as[PreviousWeight]
       }
 
-      ex.getMessage shouldBe "JsResultException(errors:List((/dateTime,List(JsonValidationError(List(error.path.missing),List()))), (/weight,List(JsonValidationError(List(error.path.missing),List())))))"
-
+      ex.getMessage mustBe "JsResultException(errors:List((/dateTime,List(JsonValidationError(List(error.path.missing),List()))), (/weight,List(JsonValidationError(List(error.path.missing),List())))))"
     }
 
     "serialise to json" in {
 
-      Json.toJson(previousWeight) shouldBe json
-
+      Json.toJson(previousWeight) mustBe json
     }
 
     "serialise/deserialise to the same value" in {
 
       val result = Json.toJson(previousWeight).as[PreviousWeight]
 
-      result shouldBe previousWeight
-
+      result mustBe previousWeight
     }
   }
 }
