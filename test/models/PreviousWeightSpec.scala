@@ -7,7 +7,7 @@ import java.time.LocalDate
 
 class PreviousWeightSpec extends BaseSpec {
 
-  val previousWeight = new PreviousWeight(LocalDate.of(2020, 3, 24), 150.5)
+  val previousWeight: PreviousWeight = new PreviousWeight(LocalDate.of(2020, 3, 24), 150.5)
 
   "PreviousWeight" must {
 

@@ -7,7 +7,7 @@ import java.time.LocalDate
 
 class MacroStatSpec extends BaseSpec {
 
-  val macroStat = new MacroStat(
+  val macroStat: MacroStat = new MacroStat(
     LocalDate.of(2020, 3, 24),
     "Very Active",
     160,
