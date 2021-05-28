@@ -5,9 +5,11 @@ import org.joda.time.DateTime
 import play.api.libs.json
 import play.api.libs.json._
 
+import java.time.LocalDate
+
 
 case class MacroStat(
-                      dateTime: DateTime,
+                      dateTime: LocalDate,
                       activityLevel: String,
                       setGoal: Double,
                       proteinPreference: Option[Int],

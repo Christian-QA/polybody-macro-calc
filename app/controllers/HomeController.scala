@@ -25,10 +25,6 @@ class HomeController @Inject()(cc: ControllerComponents, messagesControllerCompo
   def explore() = Action { implicit request: Request[AnyContent] =>
     Ok(views.html.explore())
   }
-
-  def tutorial() = Action { implicit request: Request[AnyContent] =>
-    Ok(views.html.tutorial())
-  }
   
   def gender() = Action { implicit request: Request[AnyContent] =>
     Ok(views.html.gender())
