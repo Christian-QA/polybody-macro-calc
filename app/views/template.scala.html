@@ -1,7 +1,8 @@
-@(title: String, formType: String, param1: Option[String] = None, param2: Option[String] = None, param3: Option[Int] = None)
+@(title: String)(content: Html)
+
+
 @defining(play.core.PlayVersion.current) { version =>
 
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -41,33 +42,7 @@
 <body class="text-center container">
 
 <main class="form-signin">
-    <form>
-        <img class="mb-4" alt="" width="72" height="57">
-        <h1 class="h3 mb-3 fw-normal">@Html(title)</h1>
-        <label for="answer" class="visually-hidden">Answer:</label>
-        <div class="row">
-            <div class="col-md-12 align-content-center">
-                @formType match {
-                    case "text" => {
-                        <input type="text" id="answer" placeholder="Type answer here" required autofocus>
-                    }
-                    case "radio" => {
-                <fieldset>
-                    <label for="@Html(param1)">@Html(param1)</label>
-                        <input type="radio" id="@Html(param1)" class="form-control" value="@Html(param1)">
-                    <label for="@Html(param2)">@Html(param2)</label>
-                        <input type="radio" id="@Html(param2)" class="form-control" value="@Html(param2)">
-                </fieldset>
-                        }
-                    case _ => {
-                        <h1>No formtype help pls pls pls I beg you pls</h1>
-                    }
-                }
-            </div>
-        </div>
-        <br>
-        <button class="w-100 btn btn-lg btn-primary" type="submit">Submit</button>
-    </form>
+    @content
 </main>
 
 <footer>
