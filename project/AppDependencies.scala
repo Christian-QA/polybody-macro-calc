@@ -23,8 +23,7 @@ object AppDependencies {
         "org.mockito"            %  "mockito-core"       % "2.28.2" % scope,
         "com.typesafe.play"      %% "play-test"          % current % scope,
         "org.scalacheck"         %% "scalacheck"         % "1.14.3" % scope,
-        "org.scalatestplus"      %% "mockito-3-4"        % "3.2.3.0",
-        "uk.gov.uk"              %% "hmrctest"           % "3.9.0-play27" % scope
+        "org.scalatestplus"      %% "mockito-3-4"        % "3.2.3.0"
       )
     }.test
   }
