@@ -5,12 +5,12 @@
 
 # An example controller showing a sample home page
 GET     /                                   controllers.HomeController.index()
-GET     /explore                            controllers.HomeController.explore()
-GET     /gender                             controllers.HomeController.gender()
-GET     /age                                controllers.HomeController.age()
-GET     /height                             controllers.HomeController.height()
-GET     /current_weight                     controllers.HomeController.currentWeight()
-GET     /target_weight                      controllers.HomeController.targetWeight()
+
+GET     /gender                             controllers.register.RegisterController.gender()
+GET     /age                                controllers.register.RegisterController.age()
+GET     /height                             controllers.register.RegisterController.height()
+GET     /current_weight                     controllers.register.RegisterController.currentWeight()
+GET     /target_weight                      controllers.register.RegisterController.targetWeight()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file                       controllers.Assets.versioned(path="/public", file: Asset)
