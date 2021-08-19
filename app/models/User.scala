@@ -3,16 +3,16 @@ package models
 import play.api.libs.json.{Json, OFormat}
 
 case class User(
-                 forename: String,
-                 surname: String,
+                 _id: String,
+                 username: String,
                  email: String,
                  password: String,
                  age: Int,
                  gender: String,
                  height: Double,
-                 previousWeight: List[PreviousWeight],
-                 targetWeight: Double,
-                 macroStat: List[MacroStat]
+                 previousWeight: Option[List[PreviousWeight]],
+                 targetWeight: Option[Double],
+                 macroStat: Option[List[MacroStat]]
                )
 
 object User {

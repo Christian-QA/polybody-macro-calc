@@ -5,8 +5,13 @@ import play.core.PlayVersion.current
 object AppDependencies {
 
   val compile = Seq(
-    "org.typelevel"       %% "cats-core"        % "2.0.0",
-    "com.typesafe.play"   %% "play-json-joda"   % "2.9.2"
+    "org.typelevel"       %% "cats-core"            % "2.0.0",
+    "com.typesafe.play"   %% "play-json-joda"       % "2.9.2",
+    "com.typesafe.akka"   %% "akka-stream"          % "2.5.26",
+    "com.typesafe.akka"   %% "akka-http"            % "10.1.11",
+    "com.typesafe.akka"   %% "akka-http-spray-json" % "10.1.11",
+    "org.scalaj" %% "scalaj-http" % "2.4.2",
+    "com.lihaoyi" %% "requests" % "0.6.5"
   )
 
   trait TestDependencies {
