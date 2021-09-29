@@ -29,25 +29,23 @@ class UserSpec  extends BaseSpec {
   )
 
   val user: User = new User(
-    "testForename",
-    "testSurname",
+    "testId",
+    "testUsername",
     "testEmail@email.com",
-    "testPassword",
     25,
     "male",
     175.5,
-    previousWeightList,
-    165,
-    List(macroStat)
+    Some(previousWeightList),
+    Some(165),
+    Some(List(macroStat))
   )
 
   "User" must {
 
     val json = Json.obj(
-      "forename" -> "testForename",
-      "surname" -> "testSurname",
+      "_id" -> "testId",
+      "username" -> "testUsername",
       "email" -> "testEmail@email.com",
-      "password" -> "testPassword",
       "age" -> 25,
       "gender" -> "male",
       "height" -> 175.5,
@@ -89,10 +87,8 @@ class UserSpec  extends BaseSpec {
     "deserialise invalid values" in {
 
       val invalidJson = Json.obj(
-        "forename" -> 0,
-        "surname" -> 0,
+        "username" -> 0,
         "email" -> 0,
-        "password" -> 0,
         "age" -> "25",
         "gender" -> 0,
         "height" -> "175.5",
@@ -105,16 +101,14 @@ class UserSpec  extends BaseSpec {
         invalidJson.as[User]
       }
 
-      ex.getMessage mustBe "JsResultException(errors:List((/surname,List(JsonValidationError(List(error.expected.jsstring),List()))), (/height,List(JsonValidationError(List(error.expected.jsnumber),List()))), (/password,List(JsonValidationError(List(error.expected.jsstring),List()))), (/gender,List(JsonValidationError(List(error.expected.jsstring),List()))), (/forename,List(JsonValidationError(List(error.expected.jsstring),List()))), (/targetWeight,List(JsonValidationError(List(error.expected.jsnumber),List()))), (/age,List(JsonValidationError(List(error.expected.jsnumber),List()))), (/email,List(JsonValidationError(List(error.expected.jsstring),List())))))"
+      ex.getMessage mustBe "JsResultException(errors:List((/height,List(JsonValidationError(List(error.expected.jsnumber),List()))), (/username,List(JsonValidationError(List(error.expected.jsstring),List()))), (/_id,List(JsonValidationError(List(error.path.missing),List()))), (/targetWeight,List(JsonValidationError(List(error.expected.jsnumber),List()))), (/gender,List(JsonValidationError(List(error.expected.jsstring),List()))), (/age,List(JsonValidationError(List(error.expected.jsnumber),List()))), (/email,List(JsonValidationError(List(error.expected.jsstring),List())))))"
     }
 
     "deserialise invalid key" in {
 
       val invalidJson = Json.obj(
-        "invalidKey" -> "testForename",
-        "invalidKey" -> "testSurname",
+        "invalidKey" -> "testUsername",
         "invalidKey" -> "testEmail@email.com",
-        "invalidKey" -> "testPassword",
         "invalidKey" -> 25,
         "invalidKey" -> "male",
         "invalidKey" -> 175.5,
@@ -127,7 +121,7 @@ class UserSpec  extends BaseSpec {
         invalidJson.as[User]
       }
 
-      ex.getMessage mustBe "JsResultException(errors:List((/surname,List(JsonValidationError(List(error.path.missing),List()))), (/height,List(JsonValidationError(List(error.path.missing),List()))), (/macroStat,List(JsonValidationError(List(error.path.missing),List()))), (/previousWeight,List(JsonValidationError(List(error.path.missing),List()))), (/password,List(JsonValidationError(List(error.path.missing),List()))), (/gender,List(JsonValidationError(List(error.path.missing),List()))), (/forename,List(JsonValidationError(List(error.path.missing),List()))), (/targetWeight,List(JsonValidationError(List(error.path.missing),List()))), (/age,List(JsonValidationError(List(error.path.missing),List()))), (/email,List(JsonValidationError(List(error.path.missing),List())))))"
+      ex.getMessage mustBe "JsResultException(errors:List((/height,List(JsonValidationError(List(error.path.missing),List()))), (/username,List(JsonValidationError(List(error.path.missing),List()))), (/_id,List(JsonValidationError(List(error.path.missing),List()))), (/gender,List(JsonValidationError(List(error.path.missing),List()))), (/age,List(JsonValidationError(List(error.path.missing),List()))), (/email,List(JsonValidationError(List(error.path.missing),List())))))"
     }
 
     "serialise to json" in {
