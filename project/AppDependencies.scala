@@ -32,5 +32,4 @@ object AppDependencies {
   }
 
   def apply(): Seq[ModuleID] = compile ++ Test()
-
 }

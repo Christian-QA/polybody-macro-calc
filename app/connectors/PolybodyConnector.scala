@@ -9,22 +9,14 @@ import scala.concurrent.{ExecutionContext, Future}
 
 class PolybodyConnector @Inject()(val applicationConfig: ApplicationConfig)(implicit ec: ExecutionContext) {
 
-
-
-
-  //  private def getUserUrl(username: String): String = {
-  //    s"${applicationConfig.baseUrl}/findSpecificUser/$username"
-  //  }
+    private def getUserUrl(username: String): String = {
+      s"${applicationConfig.baseUrl}/findSpecificUser/$username"
+    }
 
     def getUserDetails(username: String) = {
 
-      val response = requests.get(s"${applicationConfig.baseUrl}/findSpecificUser/$username")
+      val response = requests.get(getUserUrl(username))
 
       Future.successful(ujson.read(response.text()).arr)
-
-
-
-
-
-  }
+   }
 }

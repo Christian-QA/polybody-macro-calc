@@ -9,9 +9,7 @@ case class User(
                  age: Int,
                  gender: String,
                  height: Double,
-                 previousWeight: Option[List[PreviousWeight]],
                  targetWeight: Option[Double],
-                 macroStat: Option[List[MacroStat]]
                )
 
 object User {
