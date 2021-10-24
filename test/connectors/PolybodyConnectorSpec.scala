@@ -32,13 +32,13 @@ class PolybodyConnectorSpec extends BaseSpec with ScalaFutures with IntegrationP
 
         println(passUserUjson)
 
-        when(polybodyConnector.getUserDetails(passUsername)).thenReturn(Future.successful(passUserUjson))
+        when(polybodyConnector.getUserDetails(passUsername)).thenReturn(Future.successful(Right(passUserUjson)))
 
         val response = polybodyConnector.getUserDetails(passUsername)
 
         val result = Await.result(response, Duration(5, "seconds"))
 
-        result mustBe passUserUjson
+        result mustBe Right(passUserUjson)
 
       }
     }

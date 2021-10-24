@@ -3,6 +3,8 @@ package connectors
 
 import com.google.inject.Inject
 import config.ApplicationConfig
+import errors.{UserErrorHandler, UserNoContentResponse}
+import play.api.http.Status.OK
 import ujson.Value
 
 import scala.collection.mutable.ArrayBuffer
@@ -22,13 +24,12 @@ class PolybodyConnector @Inject()(val applicationConfig: ApplicationConfig)(impl
     s"${applicationConfig.baseUrl}/findAllMacroStats/$username"
   }
 
-    def getUserDetails(username: String): Future[ArrayBuffer[Value]] = {
+    def getUserDetails(username: String): Future[Either[UserErrorHandler, ArrayBuffer[Value]]] = {
 
-      val response = requests.get(getUserUrl(username))
-
-      println(ujson.read(response.text()).arr)
-
-      Future.successful(ujson.read(response.text()).arr)
+      requests.get(getUserUrl(username)) match {
+        case value if value.statusCode == OK => Future.successful(Right(ujson.read(value.text()).arr))
+        case _ => Future.successful(Left(UserNoContentResponse))
+      }
    }
 
   def getPreviousWeights(username: String): Future[ArrayBuffer[Value]] = {

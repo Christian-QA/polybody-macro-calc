@@ -10,20 +10,20 @@ import scala.concurrent.{ExecutionContext, Future}
 
 class UserService @Inject()(polybodyConnector: PolybodyConnector)(implicit ec: ExecutionContext) {
 
-  def getUserDetails(username: String) = {
+  def getUserDetails(username: String): Future[User] = {
     val data = polybodyConnector.getUserDetails(username)
 
-    data.map{
-      entry =>
-        User(
-          entry(0)("_id").str,
-          entry(0)("username").str,
-          entry(0)("email").str,
-          entry(0)("age").num.toInt,
-          entry(0)("gender").str,
-          entry(0)("height").num,
-          entry(0)("targetWeight").numOpt
-        )
+    data.map {
+      case Right(value) => User(
+        value(0)("_id").str,
+        value(0)("username").str,
+        value(0)("email").str,
+        value(0)("age").num.toInt,
+        value(0)("gender").str,
+        value(0)("height").num,
+        value(0)("targetWeight").numOpt
+      )
+      case Left(_) => User("611be0d7e17315ce09335455", "testUser", "testUser@gmail.com", 25,"male", 190d, Some(140d))
     }
   }
 }

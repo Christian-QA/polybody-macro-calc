@@ -21,7 +21,7 @@ class UserServiceSpec extends BaseSpec with ScalaFutures {
       "getUserDetails is called" must {
         "return a Future[User] containing user data if the user exists" in {
 
-          when(polybodyConnector.getUserDetails(passUsername)).thenReturn(Future.successful(passUserUjson))
+          when(polybodyConnector.getUserDetails(passUsername)).thenReturn(Future.successful(Right(passUserUjson)))
 
           val response = sut.getUserDetails(passUsername)
 
