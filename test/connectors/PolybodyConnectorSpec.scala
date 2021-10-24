@@ -1,5 +1,6 @@
 package connectors
 
+import errors.UserNoContentResponse
 import org.mockito.ArgumentMatchers.any
 import org.mockito.Mockito.{reset, when}
 import org.scalatest.concurrent.{IntegrationPatience, ScalaFutures}
@@ -30,8 +31,6 @@ class PolybodyConnectorSpec extends BaseSpec with ScalaFutures with IntegrationP
     "getUserDetails is called" must {
       "return a Future[ArrayBuffer[Value]] containing user data if the user exists" in {
 
-        println(passUserUjson)
-
         when(polybodyConnector.getUserDetails(passUsername)).thenReturn(Future.successful(Right(passUserUjson)))
 
         val response = polybodyConnector.getUserDetails(passUsername)
@@ -39,7 +38,16 @@ class PolybodyConnectorSpec extends BaseSpec with ScalaFutures with IntegrationP
         val result = Await.result(response, Duration(5, "seconds"))
 
         result mustBe Right(passUserUjson)
+      }
+      "return a UserNoContentResponse if the user doesn't exist" in {
 
+        when(polybodyConnector.getUserDetails(passUsername)).thenReturn(Future.successful(Left(UserNoContentResponse)))
+
+        val response = polybodyConnector.getUserDetails(passUsername)
+
+        val result = Await.result(response, Duration(5, "seconds"))
+
+        result mustBe Left(UserNoContentResponse)
       }
     }
   }

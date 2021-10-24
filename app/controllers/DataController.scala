@@ -7,6 +7,7 @@ import services.{PreviousWeightService, UserService}
 
 import scala.concurrent.ExecutionContext
 
+///Todo - This class is more to live test the routes than provide purpose in production. This will be deleted after the Views have been made
 class DataController @Inject()(userService: UserService, previousWeightService: PreviousWeightService, cc: ControllerComponents)(implicit val ec: ExecutionContext) extends BaseController with Logging {
   override protected def controllerComponents: ControllerComponents = cc
 
@@ -14,9 +15,9 @@ class DataController @Inject()(userService: UserService, previousWeightService: 
 
     val result = userService.getUserDetails(username)
 
-    result.map { r =>
-      println(r)
-      Ok(r.toString)
+    result.map {
+      case Some(value) => Ok(value.toString)
+      case _ => NoContent
     }
 
 

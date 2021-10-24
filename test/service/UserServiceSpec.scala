@@ -1,6 +1,7 @@
 package service
 
 import connectors.PolybodyConnector
+import errors.UserNoContentResponse
 import models.User
 import org.mockito.Mockito.when
 import org.scalatest.concurrent.ScalaFutures
@@ -19,7 +20,7 @@ class UserServiceSpec extends BaseSpec with ScalaFutures {
 
     "UserService" when {
       "getUserDetails is called" must {
-        "return a Future[User] containing user data if the user exists" in {
+        "return a Some[Future[User]] containing user data if data is retrieved from the connector" in {
 
           when(polybodyConnector.getUserDetails(passUsername)).thenReturn(Future.successful(Right(passUserUjson)))
 
@@ -27,8 +28,16 @@ class UserServiceSpec extends BaseSpec with ScalaFutures {
 
           val result = Await.result(response, Duration(5, "seconds"))
 
-          result mustBe passUser
+          result mustBe Some(passUser)
+        }
+        "return a None if no data is retrieved from the connector" in {
+          when(polybodyConnector.getUserDetails(passUsername)).thenReturn(Future.successful(Left(UserNoContentResponse)))
 
+          val response = sut.getUserDetails(passUsername)
+
+          val result = Await.result(response, Duration(5, "seconds"))
+
+          result mustBe None
         }
       }
     }
