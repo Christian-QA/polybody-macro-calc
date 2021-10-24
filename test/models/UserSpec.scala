@@ -35,9 +35,7 @@ class UserSpec  extends BaseSpec {
     25,
     "male",
     175.5,
-    Some(previousWeightList),
-    Some(165),
-    Some(List(macroStat))
+    Some(165)
   )
 
   "User" must {
@@ -49,31 +47,7 @@ class UserSpec  extends BaseSpec {
       "age" -> 25,
       "gender" -> "male",
       "height" -> 175.5,
-      "previousWeight" -> Json.arr(
-        Json.obj(
-          "dateTime" -> "2020-03-24",
-          "weight" -> 150.5
-        ),
-        Json.obj(
-          "dateTime" -> "2020-02-24",
-          "weight" -> 144.5
-        )
-      ),
-      "targetWeight" -> 165,
-      "macroStat" -> Json.arr(
-        Json.obj(
-          "dateTime" -> "2020-03-24",
-          "activityLevel" -> "Very Active",
-          "setGoal" -> 160,
-          "proteinPreference" -> 150,
-          "fatPreference" -> 50,
-          "carbPreference" -> 200,
-          "bodyFat" -> 20,
-          "maintenanceCalories" -> 2500,
-          "targetCalories" -> 2000,
-          "timeToGoal" -> 10
-        )
-      )
+      "targetWeight" -> 165
     )
 
     "deserialise valid values" in {
@@ -92,9 +66,7 @@ class UserSpec  extends BaseSpec {
         "age" -> "25",
         "gender" -> 0,
         "height" -> "175.5",
-        "previousWeight" -> Json.arr(),
         "targetWeight" -> "150.5",
-        "macroStat" -> Json.arr(),
       )
 
       val ex = intercept[JsResultException] {
@@ -112,9 +84,7 @@ class UserSpec  extends BaseSpec {
         "invalidKey" -> 25,
         "invalidKey" -> "male",
         "invalidKey" -> 175.5,
-        "invalidKey" -> Json.arr(),
         "invalidKey" -> 165,
-        "invalidKey" -> Json.arr()
       )
 
       val ex = intercept[JsResultException] {

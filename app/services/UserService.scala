@@ -8,7 +8,7 @@ import ujson.Value
 import java.time.LocalDate
 import scala.concurrent.{ExecutionContext, Future}
 
-class PolybodyService @Inject()(polybodyConnector: PolybodyConnector)(implicit ec: ExecutionContext) {
+class UserService @Inject()(polybodyConnector: PolybodyConnector)(implicit ec: ExecutionContext) {
 
   def getUserDetails(username: String) = {
     val data = polybodyConnector.getUserDetails(username)
