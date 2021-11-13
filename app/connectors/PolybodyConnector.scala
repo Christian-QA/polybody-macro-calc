@@ -3,18 +3,25 @@ package connectors
 
 import com.google.inject.Inject
 import config.ApplicationConfig
-import errors.{UserErrorHandler, UserNoContentResponse}
-import play.api.http.Status.OK
+import errors.{CustomBackendDownResponse, CustomErrorHandler, CustomNoContentResponse, CustomUpstreamResponse}
+import play.api.Logging
+import play.api.http.Status.{INTERNAL_SERVER_ERROR, NO_CONTENT, OK}
 import ujson.Value
 
 import scala.collection.mutable.ArrayBuffer
+import scala.concurrent.Future.never.recover
 import scala.concurrent.{ExecutionContext, Future}
 
-class PolybodyConnector @Inject()(val applicationConfig: ApplicationConfig)(implicit ec: ExecutionContext) {
+class PolybodyConnector @Inject()(val applicationConfig: ApplicationConfig)(implicit ec: ExecutionContext) extends Logging {
 
-    private def getUserUrl(username: String): String = {
-      s"${applicationConfig.baseUrl}/findSpecificUser/$username"
-    }
+  sealed trait DataToBeRetrieved
+  private case class UserDataToBeRetrieved(username: String) extends DataToBeRetrieved
+  private case class PreviousWeightDataToBeRetrieved(username: String) extends DataToBeRetrieved
+  private case class MacroStatDataToBeRetrieved(username: String) extends DataToBeRetrieved
+
+  private def getUserUrl(username: String): String = {
+    s"${applicationConfig.baseUrl}/findSpecificUser/$username"
+  }
 
   private def getPreviousWeightsUrl(username: String): String = {
     s"${applicationConfig.baseUrl}/findAllPreviousWeights/$username"
@@ -24,26 +31,39 @@ class PolybodyConnector @Inject()(val applicationConfig: ApplicationConfig)(impl
     s"${applicationConfig.baseUrl}/findAllMacroStats/$username"
   }
 
-    def getUserDetails(username: String): Future[Either[UserErrorHandler, ArrayBuffer[Value]]] = {
-
-      requests.get(getUserUrl(username)) match {
-        case value if value.statusCode == OK => Future.successful(Right(ujson.read(value.text()).arr))
-        case _ => Future.successful(Left(UserNoContentResponse))
+    private def errorHander(dataToBeRetrieved: DataToBeRetrieved): Future[Either[CustomErrorHandler, ArrayBuffer[Value]]] = {
+      val selector: String = dataToBeRetrieved match {
+        case UserDataToBeRetrieved(value) => getUserUrl(value)
+        case PreviousWeightDataToBeRetrieved(value) => getPreviousWeightsUrl(value)
+        case MacroStatDataToBeRetrieved(value) => getMacroStatsUrl(value)
       }
-   }
 
-  def getPreviousWeights(username: String): Future[ArrayBuffer[Value]] = {
+      requests.get(selector) match {
+        case value if value.statusCode == OK => Future.successful(Right(ujson.read(value.text()).arr))
+        case value if value.statusCode == NO_CONTENT => Future.successful(Left(CustomNoContentResponse))
+        case _ =>
+          logger.error(s"Connection to backend failed with the following error code: $CustomBackendDownResponse")
+          Future.successful(Left(CustomBackendDownResponse))
 
-    val response = requests.get(getUserUrl(username))
+      }
+    } recover {
+      case e: Exception =>
+        logger.error(s"Connection to backend failed with the following error code: $CustomUpstreamResponse")
+        Left(CustomUpstreamResponse(s"${e.getMessage} thrown with 500 status", INTERNAL_SERVER_ERROR))
+    }
 
-    Future.successful(ujson.read(response.text()).arr)
+
+
+    def getUserDetails(username: String): Future[Either[CustomErrorHandler, ArrayBuffer[Value]]] = {
+      errorHander(UserDataToBeRetrieved(username))
+    }
+
+  def getPreviousWeights(username: String): Future[Either[CustomErrorHandler, ArrayBuffer[Value]]] = {
+    errorHander(PreviousWeightDataToBeRetrieved(username))
   }
 
-  def getMacroStats(username: String): Future[ArrayBuffer[Value]] = {
-
-    val response = requests.get(getUserUrl(username))
-
-    Future.successful(ujson.read(response.text()).arr)
+  def getMacroStats(username: String): Future[Either[CustomErrorHandler, ArrayBuffer[Value]]] = {
+    errorHander(MacroStatDataToBeRetrieved(username))
   }
 
 }

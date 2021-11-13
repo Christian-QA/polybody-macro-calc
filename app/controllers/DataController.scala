@@ -1,6 +1,7 @@
 package controllers
 
 import com.google.inject.Inject
+import errors.CustomNoContentResponse
 import play.api.Logging
 import play.api.mvc.{Action, AnyContent, BaseController, ControllerComponents}
 import services.{PreviousWeightService, UserService}
@@ -16,8 +17,9 @@ class DataController @Inject()(userService: UserService, previousWeightService: 
     val result = userService.getUserDetails(username)
 
     result.map {
-      case Some(value) => Ok(value.toString)
-      case _ => NoContent
+      case Right(value) => Ok(value.toString)
+      case Left(CustomNoContentResponse) => NoContent
+      case _ => InternalServerError
     }
 
 
@@ -27,11 +29,10 @@ class DataController @Inject()(userService: UserService, previousWeightService: 
 
     val result = previousWeightService.getPreviousWeights(username)
 
-    result.map { r =>
-      println(r)
-      Ok(r.toString)
+    result.map {
+      case Right(value) => Ok(value.toString)
+      case Left(CustomNoContentResponse) => NoContent
+      case _ => InternalServerError
     }
-
-
   }
 }

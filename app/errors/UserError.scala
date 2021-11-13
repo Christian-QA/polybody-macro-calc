@@ -1,6 +1,8 @@
 package errors
 
-trait UserErrorHandler
+trait CustomErrorHandler
 
-case object UserNoContentResponse extends UserErrorHandler
-//case object UserUpstreamResponse extends UserErrorHandler
+case object CustomNoContentResponse extends CustomErrorHandler
+case class CustomUpstreamResponse(message: String, reportedAs: Int) extends CustomErrorHandler
+case object CustomBackendDownResponse extends CustomErrorHandler
+
