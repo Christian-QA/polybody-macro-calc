@@ -10,15 +10,9 @@ import models.MacroStat
 import org.mockito.Mockito.when
 import org.scalatest.concurrent.ScalaFutures
 import play.api.http.Status.INTERNAL_SERVER_ERROR
-import services.{MacroStatService, PreviousWeightService}
+import services.MacroStatService
 import utils.BaseSpec
-import utils.UserDetails.{
-  passMacroStats,
-  passMacroStatsUjson,
-  passPreviousWeightUjson,
-  passPreviousWeights,
-  passUsername
-}
+import utils.UserDetails.{passMacroStats, passMacroStatsUjson, passUsername}
 
 import scala.concurrent.duration.Duration
 import scala.concurrent.{Await, Future}

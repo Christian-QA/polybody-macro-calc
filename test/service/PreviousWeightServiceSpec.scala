@@ -10,13 +10,11 @@ import models.PreviousWeight
 import org.mockito.Mockito.when
 import org.scalatest.concurrent.ScalaFutures
 import play.api.http.Status.INTERNAL_SERVER_ERROR
-import services.{PreviousWeightService, UserService}
+import services.PreviousWeightService
 import utils.BaseSpec
 import utils.UserDetails.{
   passPreviousWeightUjson,
   passPreviousWeights,
-  passUser,
-  passUserUjson,
   passUsername
 }
 

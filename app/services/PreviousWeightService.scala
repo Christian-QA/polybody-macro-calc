@@ -31,7 +31,7 @@ class PreviousWeightService @Inject() (polybodyConnector: PolybodyConnector)(
             acc: Int
         ): List[PreviousWeight] = {
           if (acc < parsedInput.length) {
-            val weight = PreviousWeight(
+            val weight: List[PreviousWeight] = PreviousWeight(
               LocalDate.parse(parsedInput(acc)("dateTime").str),
               parsedInput(acc)("weight").num
             ) :: input
