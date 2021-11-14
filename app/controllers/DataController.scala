@@ -9,39 +9,46 @@ import services.{PreviousWeightService, UserService, MacroStatService}
 import scala.concurrent.ExecutionContext
 
 ///Todo - This class is more to live test the routes than provide purpose in production. This will be deleted after the Views have been made
-class DataController @Inject()(userService: UserService, previousWeightService: PreviousWeightService, macroStatService: MacroStatService, cc: ControllerComponents)(implicit val ec: ExecutionContext) extends BaseController with Logging {
+class DataController @Inject() (
+    userService: UserService,
+    previousWeightService: PreviousWeightService,
+    macroStatService: MacroStatService,
+    cc: ControllerComponents
+)(implicit val ec: ExecutionContext)
+    extends BaseController
+    with Logging {
   override protected def controllerComponents: ControllerComponents = cc
 
-  def getUserDetails(username: String): Action[AnyContent] = Action.async { implicit request =>
+  def getUserDetails(username: String): Action[AnyContent] =
+    Action.async { implicit request =>
+      val result = userService.getUserDetails(username)
 
-    val result = userService.getUserDetails(username)
-
-    result.map {
-      case Right(value) => Ok(value.toString)
-      case Left(CustomNoContentResponse) => NoContent
-      case _ => InternalServerError
+      result.map {
+        case Right(value)                  => Ok(value.toString)
+        case Left(CustomNoContentResponse) => NoContent
+        case _                             => InternalServerError
+      }
     }
-  }
 
-  def getPreviousWeights(username: String): Action[AnyContent] = Action.async { implicit request =>
+  def getPreviousWeights(username: String): Action[AnyContent] =
+    Action.async { implicit request =>
+      val result = previousWeightService.getPreviousWeights(username)
 
-    val result = previousWeightService.getPreviousWeights(username)
-
-    result.map {
-      case Right(value) => Ok(value.toString)
-      case Left(CustomNoContentResponse) => NoContent
-      case _ => InternalServerError
+      result.map {
+        case Right(value)                  => Ok(value.toString)
+        case Left(CustomNoContentResponse) => NoContent
+        case _                             => InternalServerError
+      }
     }
-  }
 
-  def getMacroStats(username: String): Action[AnyContent] = Action.async { implicit request =>
+  def getMacroStats(username: String): Action[AnyContent] =
+    Action.async { implicit request =>
+      val result = macroStatService.getMacroStats(username)
 
-    val result = macroStatService.getMacroStatsWeights(username)
-
-    result.map {
-      case Right(value) => Ok(value.toString)
-      case Left(CustomNoContentResponse) => NoContent
-      case _ => InternalServerError
+      result.map {
+        case Right(value)                  => Ok(value.toString)
+        case Left(CustomNoContentResponse) => NoContent
+        case _                             => InternalServerError
+      }
     }
-  }
 }
