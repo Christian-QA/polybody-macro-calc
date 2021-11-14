@@ -13,7 +13,7 @@ import scala.concurrent.{ExecutionContext, Future}
 
 class MacroStatService @Inject()(polybodyConnector: PolybodyConnector)(implicit ec: ExecutionContext) {
 
-  def getMacroStatsWeights(username: String): Future[Either[CustomErrorHandler, List[MacroStat]]] = {
+  def getMacroStats(username: String): Future[Either[CustomErrorHandler, List[MacroStat]]] = {
     val data: Future[Either[CustomErrorHandler, ArrayBuffer[Value]]] = polybodyConnector.getMacroStats(username)
 
     data.map {
