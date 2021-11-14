@@ -11,10 +11,15 @@ import scala.annotation.tailrec
 import scala.collection.mutable.ArrayBuffer
 import scala.concurrent.{ExecutionContext, Future}
 
-class MacroStatService @Inject()(polybodyConnector: PolybodyConnector)(implicit ec: ExecutionContext) {
+class MacroStatService @Inject() (polybodyConnector: PolybodyConnector)(implicit
+    ec: ExecutionContext
+) {
 
-  def getMacroStats(username: String): Future[Either[CustomErrorHandler, List[MacroStat]]] = {
-    val data: Future[Either[CustomErrorHandler, ArrayBuffer[Value]]] = polybodyConnector.getMacroStats(username)
+  def getMacroStats(
+      username: String
+  ): Future[Either[CustomErrorHandler, List[MacroStat]]] = {
+    val data: Future[Either[CustomErrorHandler, ArrayBuffer[Value]]] =
+      polybodyConnector.getMacroStats(username)
 
     data.map {
       case Right(value) =>
@@ -24,18 +29,18 @@ class MacroStatService @Inject()(polybodyConnector: PolybodyConnector)(implicit 
         def macroStatList(input: List[MacroStat], acc: Int): List[MacroStat] = {
           if (acc < parsedInput.length) {
             println(parsedInput)
-            val stats = MacroStat(
-              LocalDate.parse(parsedInput(0)("dateTime").str),
-              parsedInput(0)("activityLevel").str,
-              parsedInput(0)("setGoal").num,
-              Some(parsedInput(0)("proteinPreference").num.toInt),
-              Some(parsedInput(0)("fatPreference").num.toInt),
-              Some(parsedInput(0)("carbPreference").num.toInt),
-              Some(parsedInput(0)("bodyFat").num.toInt),
-              parsedInput(0)("equationPreference").strOpt,
-              parsedInput(0)("maintenanceCalories").num.toInt,
-              parsedInput(0)("targetCalories").num.toInt,
-              parsedInput(0)("timeToGoal").num.toInt
+            val stats: List[MacroStat] = MacroStat(
+              LocalDate.parse(parsedInput(acc)("dateTime").str),
+              parsedInput(acc)("activityLevel").str,
+              parsedInput(acc)("setGoal").num,
+              Some(parsedInput(acc)("proteinPreference").num.toInt),
+              Some(parsedInput(acc)("fatPreference").num.toInt),
+              Some(parsedInput(acc)("carbPreference").num.toInt),
+              Some(parsedInput(acc)("bodyFat").num.toInt),
+              parsedInput(acc)("equationPreference").strOpt,
+              parsedInput(acc)("maintenanceCalories").num.toInt,
+              parsedInput(acc)("targetCalories").num.toInt,
+              parsedInput(acc)("timeToGoal").num.toInt
             ) :: input
             macroStatList(stats, acc + 1)
           } else {
