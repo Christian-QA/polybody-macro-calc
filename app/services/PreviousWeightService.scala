@@ -22,7 +22,6 @@ class PreviousWeightService @Inject()(polybodyConnector: PolybodyConnector)(impl
 
         @tailrec
         def previousWeightList(input: List[PreviousWeight], acc: Int): List[PreviousWeight] = {
-
           if (acc < parsedInput.length) {
             val weight = PreviousWeight(
               LocalDate.parse(parsedInput(acc)("dateTime").str),
@@ -36,9 +35,5 @@ class PreviousWeightService @Inject()(polybodyConnector: PolybodyConnector)(impl
         Right(previousWeightList(List.empty, 0))
       case Left(value) => Left(value)
     }
-
-
-
-
   }
 }

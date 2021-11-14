@@ -31,7 +31,7 @@ class PolybodyConnector @Inject()(val applicationConfig: ApplicationConfig)(impl
     s"${applicationConfig.baseUrl}/findAllMacroStats/$username"
   }
 
-    private def errorHander(dataToBeRetrieved: DataToBeRetrieved): Future[Either[CustomErrorHandler, ArrayBuffer[Value]]] = {
+    private def errorHandler(dataToBeRetrieved: DataToBeRetrieved): Future[Either[CustomErrorHandler, ArrayBuffer[Value]]] = {
       val selector: String = dataToBeRetrieved match {
         case UserDataToBeRetrieved(value) => getUserUrl(value)
         case PreviousWeightDataToBeRetrieved(value) => getPreviousWeightsUrl(value)
@@ -55,15 +55,15 @@ class PolybodyConnector @Inject()(val applicationConfig: ApplicationConfig)(impl
 
 
     def getUserDetails(username: String): Future[Either[CustomErrorHandler, ArrayBuffer[Value]]] = {
-      errorHander(UserDataToBeRetrieved(username))
+      errorHandler(UserDataToBeRetrieved(username))
     }
 
   def getPreviousWeights(username: String): Future[Either[CustomErrorHandler, ArrayBuffer[Value]]] = {
-    errorHander(PreviousWeightDataToBeRetrieved(username))
+    errorHandler(PreviousWeightDataToBeRetrieved(username))
   }
 
   def getMacroStats(username: String): Future[Either[CustomErrorHandler, ArrayBuffer[Value]]] = {
-    errorHander(MacroStatDataToBeRetrieved(username))
+    errorHandler(MacroStatDataToBeRetrieved(username))
   }
 
 }
