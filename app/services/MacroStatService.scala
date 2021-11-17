@@ -63,11 +63,11 @@ class MacroStatService @Inject() (polybodyConnector: PolybodyConnector)(implicit
     val data: Obj = Obj(
       "activityLevel" -> macroStat.activityLevel,
       "setGoal" -> macroStat.setGoal,
-      "proteinPreference" -> macroStat.proteinPreference,
-      "fatPreference" -> macroStat.fatPreference,
-      "carbPreference" -> macroStat.carbPreference,
-      "bodyFat" -> macroStat.bodyFat,
-      "equationPreference" -> macroStat.equationPreference,
+      "proteinPreference" -> macroStat.proteinPreference.get,
+      "fatPreference" -> macroStat.fatPreference.get,
+      "carbPreference" -> macroStat.carbPreference.get,
+      "bodyFat" -> macroStat.bodyFat.get,
+      "equationPreference" -> macroStat.equationPreference.get,
       "maintenanceCalories" -> macroStat.maintenanceCalories,
       "targetCalories" -> macroStat.targetCalories,
       "timeToGoal" -> macroStat.timeToGoal
