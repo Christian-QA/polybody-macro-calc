@@ -10,7 +10,8 @@ import errors.{
 }
 import play.api.Logging
 import play.api.http.Status.{INTERNAL_SERVER_ERROR, NO_CONTENT, OK}
-import ujson.Value
+import requests.Response
+import ujson.{Value, Obj}
 
 import scala.collection.mutable.ArrayBuffer
 import scala.concurrent.{ExecutionContext, Future}
@@ -35,11 +36,19 @@ class PolybodyConnector @Inject() (val applicationConfig: ApplicationConfig)(
     s"${applicationConfig.baseUrl}/findAllPreviousWeights/$username"
   }
 
+  private def addPreviousWeightsUrl(username: String): String = {
+    s"${applicationConfig.baseUrl}/addNewWeight/$username"
+  }
+
   private def getMacroStatsUrl(username: String): String = {
     s"${applicationConfig.baseUrl}/findAllMacroStats/$username"
   }
 
-  private def errorHandler(
+  private def addMacroStatsUrl(username: String): String = {
+    s"${applicationConfig.baseUrl}/addNewMacroStat/$username"
+  }
+
+  private def getErrorHandler(
       dataToBeRetrieved: DataToBeRetrieved
   ): Future[Either[CustomErrorHandler, ArrayBuffer[Value]]] = {
     val selector: String = dataToBeRetrieved match {
@@ -77,19 +86,42 @@ class PolybodyConnector @Inject() (val applicationConfig: ApplicationConfig)(
   def getUserDetails(
       username: String
   ): Future[Either[CustomErrorHandler, ArrayBuffer[Value]]] = {
-    errorHandler(UserDataToBeRetrieved(username))
+    getErrorHandler(UserDataToBeRetrieved(username))
   }
 
   def getPreviousWeights(
       username: String
   ): Future[Either[CustomErrorHandler, ArrayBuffer[Value]]] = {
-    errorHandler(PreviousWeightDataToBeRetrieved(username))
+    getErrorHandler(PreviousWeightDataToBeRetrieved(username))
+  }
+
+  def addPreviousWeights(
+      username: String,
+      data: Obj
+  ): Response = {
+    requests.put(
+      url = addPreviousWeightsUrl(username),
+      headers = Map("Content-Type" -> "application/json"),
+      data = data.render()
+    )
   }
 
   def getMacroStats(
       username: String
   ): Future[Either[CustomErrorHandler, ArrayBuffer[Value]]] = {
-    errorHandler(MacroStatDataToBeRetrieved(username))
+    getErrorHandler(MacroStatDataToBeRetrieved(username))
   }
 
+  def addMacroStats(
+      username: String,
+      data: Obj
+  ): Response = {
+
+    println(data)
+    requests.put(
+      url = addMacroStatsUrl(username),
+      headers = Map("Content-Type" -> "application/json"),
+      data = data.render()
+    )
+  }
 }

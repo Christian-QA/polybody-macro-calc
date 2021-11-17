@@ -1,10 +1,12 @@
 package services
 
+import akka.http.scaladsl.model.HttpResponse
 import com.google.inject.Inject
 import connectors.PolybodyConnector
-import errors.CustomErrorHandler
+import errors.{CustomClientResponse, CustomErrorHandler}
 import models.PreviousWeight
-import ujson.Value
+import play.api.http.Status.{BAD_REQUEST, OK}
+import ujson.{Obj, Value}
 
 import java.time.LocalDate
 import scala.annotation.tailrec
@@ -42,6 +44,22 @@ class PreviousWeightService @Inject() (polybodyConnector: PolybodyConnector)(
         }
         Right(previousWeightList(List.empty, 0))
       case Left(value) => Left(value)
+    }
+  }
+
+  def addPreviousWeight(
+      username: String,
+      weight: Double
+  ): Future[Either[CustomErrorHandler, Int]] = {
+    val data: Obj = Obj(
+      "weight" -> weight
+    )
+    polybodyConnector.addPreviousWeights(username, data) match {
+      case response if response.statusCode == OK => Future.successful(Right(OK))
+      case _ =>
+        Future.successful(
+          Left(CustomClientResponse("Invalid data submitted", BAD_REQUEST))
+        )
     }
   }
 }

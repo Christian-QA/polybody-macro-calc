@@ -5,7 +5,7 @@ import utils.BaseSpec
 
 import java.time.LocalDate
 
-class UserSpec  extends BaseSpec {
+class UserSpec extends BaseSpec {
 
   val previousWeightList: List[PreviousWeight] = {
     List(
@@ -66,7 +66,7 @@ class UserSpec  extends BaseSpec {
         "age" -> "25",
         "gender" -> 0,
         "height" -> "175.5",
-        "targetWeight" -> "150.5",
+        "targetWeight" -> "150.5"
       )
 
       val ex = intercept[JsResultException] {
@@ -84,7 +84,7 @@ class UserSpec  extends BaseSpec {
         "invalidKey" -> 25,
         "invalidKey" -> "male",
         "invalidKey" -> 175.5,
-        "invalidKey" -> 165,
+        "invalidKey" -> 165
       )
 
       val ex = intercept[JsResultException] {

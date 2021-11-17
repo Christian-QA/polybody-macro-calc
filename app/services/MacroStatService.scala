@@ -2,9 +2,10 @@ package services
 
 import com.google.inject.Inject
 import connectors.PolybodyConnector
-import errors.CustomErrorHandler
+import errors.{CustomClientResponse, CustomErrorHandler}
 import models.MacroStat
-import ujson.Value
+import play.api.http.Status.{BAD_REQUEST, OK}
+import ujson.{Obj, Value}
 
 import java.time.LocalDate
 import scala.annotation.tailrec
@@ -26,11 +27,14 @@ class MacroStatService @Inject() (polybodyConnector: PolybodyConnector)(implicit
         val parsedInput: ArrayBuffer[Value] = value(0).arr
 
         @tailrec
-        def macroStatList(input: List[MacroStat], acc: Int): List[MacroStat] = {
+        def macroStatList(
+            input: List[MacroStat],
+            acc: Int
+        ): List[MacroStat] = {
           if (acc < parsedInput.length) {
             println(parsedInput)
             val stats: List[MacroStat] = MacroStat(
-              LocalDate.parse(parsedInput(acc)("dateTime").str),
+              Some(LocalDate.parse(parsedInput(acc)("dateTime").str)),
               parsedInput(acc)("activityLevel").str,
               parsedInput(acc)("setGoal").num,
               Some(parsedInput(acc)("proteinPreference").num.toInt),
@@ -49,6 +53,31 @@ class MacroStatService @Inject() (polybodyConnector: PolybodyConnector)(implicit
         }
         Right(macroStatList(List.empty, 0))
       case Left(value) => Left(value)
+    }
+  }
+
+  def addMacroStat(
+      username: String,
+      macroStat: MacroStat
+  ): Future[Either[CustomErrorHandler, Int]] = {
+    val data: Obj = Obj(
+      "activityLevel" -> macroStat.activityLevel,
+      "setGoal" -> macroStat.setGoal,
+      "proteinPreference" -> macroStat.proteinPreference,
+      "fatPreference" -> macroStat.fatPreference,
+      "carbPreference" -> macroStat.carbPreference,
+      "bodyFat" -> macroStat.bodyFat,
+      "equationPreference" -> macroStat.equationPreference,
+      "maintenanceCalories" -> macroStat.maintenanceCalories,
+      "targetCalories" -> macroStat.targetCalories,
+      "timeToGoal" -> macroStat.timeToGoal
+    )
+    polybodyConnector.addMacroStats(username, data) match {
+      case response if response.statusCode == OK => Future.successful(Right(OK))
+      case _ =>
+        Future.successful(
+          Left(CustomClientResponse("Invalid data submitted", BAD_REQUEST))
+        )
     }
   }
 }

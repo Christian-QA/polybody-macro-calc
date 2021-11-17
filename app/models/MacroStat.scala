@@ -7,37 +7,36 @@ import play.api.libs.json._
 
 import java.time.LocalDate
 
-
 case class MacroStat(
-                      dateTime: LocalDate,
-                      activityLevel: String,
-                      setGoal: Double,
-                      proteinPreference: Option[Int],
-                      fatPreference: Option[Int],
-                      carbPreference: Option[Int],
-                      bodyFat: Option[Double],
-                      equationPreference: Option[String],
-                      maintenanceCalories: Int,
-                      targetCalories: Int,
-                      timeToGoal: Int
-                    )
+    dateTime: Option[LocalDate],
+    activityLevel: String,
+    setGoal: Double,
+    proteinPreference: Option[Int],
+    fatPreference: Option[Int],
+    carbPreference: Option[Int],
+    bodyFat: Option[Double],
+    equationPreference: Option[String],
+    maintenanceCalories: Int,
+    targetCalories: Int,
+    timeToGoal: Int
+)
 
 object MacroStat {
 
   implicit val dateTimeFormat: Format[DateTime] = new Format[DateTime] {
     override def writes(o: DateTime): JsValue = json.JsString(o.toString())
 
-    override def reads(json: JsValue): JsResult[DateTime] = json match {
-      case JsString(s) =>
-        try {
-          JsSuccess(DateTime.parse(s))
-        } catch {
-          case _: DateTimeParseException => JsError("That's not a date")
-        }
-      case _ => JsError("That's not a date")
-    }
+    override def reads(json: JsValue): JsResult[DateTime] =
+      json match {
+        case JsString(s) =>
+          try {
+            JsSuccess(DateTime.parse(s))
+          } catch {
+            case _: DateTimeParseException => JsError("That's not a date")
+          }
+        case _ => JsError("That's not a date")
+      }
   }
 
   implicit val formats: OFormat[MacroStat] = Json.format[MacroStat]
-
 }
