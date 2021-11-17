@@ -5,8 +5,11 @@ import play.core.PlayVersion.current
 object AppDependencies {
 
   val compile = Seq(
-    "org.typelevel"       %% "cats-core"        % "2.0.0",
-    "com.typesafe.play"   %% "play-json-joda"   % "2.9.2"
+    "org.typelevel"       %% "cats-core"            % "2.0.0",
+    "com.typesafe.play"   %% "play-json-joda"       % "2.9.2",
+    "com.lihaoyi"         %% "requests"             % "0.6.9",
+    "com.lihaoyi"         %% "upickle"              % "1.4.1"
+
   )
 
   trait TestDependencies {
@@ -23,12 +26,10 @@ object AppDependencies {
         "org.mockito"            %  "mockito-core"       % "2.28.2" % scope,
         "com.typesafe.play"      %% "play-test"          % current % scope,
         "org.scalacheck"         %% "scalacheck"         % "1.14.3" % scope,
-        "org.scalatestplus"      %% "mockito-3-4"        % "3.2.3.0",
-        "uk.gov.uk"              %% "hmrctest"           % "3.9.0-play27" % scope
+        "org.scalatestplus"      %% "mockito-3-4"        % "3.2.3.0"
       )
     }.test
   }
 
   def apply(): Seq[ModuleID] = compile ++ Test()
-
 }
