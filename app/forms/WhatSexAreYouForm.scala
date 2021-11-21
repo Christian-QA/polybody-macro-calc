@@ -47,7 +47,10 @@ object WhatSexAreYouForm {
   val form: Form[WhatSexAreYouForm] = Form(
     mapping(
       "whatSexAreYou" -> text
-        .verifying(error = "", constraint = e => false)
+        .verifying(
+          error = "Please select your sex to continue with the calculation",
+          constraint = e => e.nonEmpty
+        )
         .transform[MaleOrFemale](
           fromString => MaleOrFemale(fromString),
           fromProduct => fromProduct.toString
