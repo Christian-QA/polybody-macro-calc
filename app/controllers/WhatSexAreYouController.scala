@@ -6,7 +6,7 @@ import play.api.mvc._
 
 import scala.concurrent.Future
 
-class SexController @Inject() (cc: ControllerComponents)
+class WhatSexAreYouController @Inject() (cc: ControllerComponents)
     extends AbstractController(cc) {
 
   def whatSexAreYouPageLoad(): Action[AnyContent] =

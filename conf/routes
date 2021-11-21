@@ -2,7 +2,7 @@
 # This file defines all application routes (Higher priority routes first)
 
 GET     /                                   controllers.HomeController.index()
-GET     /what-sex-are-you                   controllers.SexController.whatSexAreYouPageLoad()
+GET     /what-sex-are-you                   controllers.WhatSexAreYouController.whatSexAreYouPageLoad()
 
 GET     /explore                            controllers.HomeController.explore()
 
