@@ -44,17 +44,18 @@ object WhatSexAreYouForm {
     Json.format[WhatSexAreYouForm]
   }
 
-  val form: Form[WhatSexAreYouForm] = Form(
-    mapping(
-      "whatSexAreYou" -> text
-        .verifying(
-          error = "Please select your sex to continue with the calculation",
-          constraint = e => e.nonEmpty
-        )
-        .transform[MaleOrFemale](
-          fromString => MaleOrFemale(fromString),
-          fromProduct => fromProduct.toString
-        )
-    )(WhatSexAreYouForm.apply)(WhatSexAreYouForm.unapply)
-  )
+  def form(errorMessageKey: Option[String] = None): Form[WhatSexAreYouForm] =
+    Form(
+      mapping(
+        "whatSexAreYou" -> text
+          .verifying(
+            error = "Please select your sex to continue with the calculation",
+            constraint = e => e.nonEmpty
+          )
+          .transform[MaleOrFemale](
+            fromString => MaleOrFemale(fromString),
+            fromProduct => fromProduct.toString
+          )
+      )(WhatSexAreYouForm.apply)(WhatSexAreYouForm.unapply)
+    )
 }

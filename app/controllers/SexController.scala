@@ -1,16 +1,8 @@
 package controllers
 
-import views.errorViews.BadRequestViews
 import com.google.inject.Inject
 import forms.WhatSexAreYouForm
-import play.api.mvc.{
-  AbstractController,
-  Action,
-  AnyContent,
-  ControllerComponents,
-  MessagesControllerComponents,
-  Request
-}
+import play.api.mvc._
 
 import scala.concurrent.Future
 
@@ -22,13 +14,15 @@ class SexController @Inject() (cc: ControllerComponents)
       Ok(views.html.gender())
     }
 
-  def whatSexAreYouOnSubmit: Action[AnyContent] =
+  def whatSexAreYouOnSubmit(): Action[AnyContent] =
     Action.async { implicit request: Request[AnyContent] =>
-      WhatSexAreYouForm.form.bindFromRequest.fold(
-        formWithErrors =>
-          Future.successful(Redirect(routes.HomeController.index())),
-        whatSexAreYouForm =>
-          Future.successful(Redirect(routes.HomeController.index()))
-      )
+      WhatSexAreYouForm
+        .form()
+        .bindFromRequest()
+        .fold(
+          formWithErrors =>
+            Future.successful(Redirect(routes.HomeController.index())),
+          _ => Future.successful(Redirect(routes.HomeController.index()))
+        )
     }
 }

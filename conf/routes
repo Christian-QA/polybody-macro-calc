@@ -4,6 +4,7 @@
 GET     /                                   controllers.HomeController.index()
 GET     /what-sex-are-you                   controllers.SexController.whatSexAreYouPageLoad()
 
+GET     /explore                            controllers.HomeController.explore()
 
 #TODO - Review if needed
 GET     /getUserDetails/:username           controllers.DataController.getUserDetails(username: String)
