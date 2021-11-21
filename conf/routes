@@ -5,12 +5,8 @@
 
 # An example controller showing a sample home page
 GET     /                                   controllers.HomeController.index()
-GET     /explore                            controllers.HomeController.explore()
-GET     /gender                             controllers.HomeController.gender()
-GET     /age                                controllers.HomeController.age()
-GET     /height                             controllers.HomeController.height()
-GET     /current_weight                     controllers.HomeController.currentWeight()
-GET     /target_weight                      controllers.HomeController.targetWeight()
+GET     /what-sex-are-you                                controllers.SexController.whatSexAreYouPageLoad()
+
 
 #TODO - Review if needed
 GET     /getUserDetails/:username           controllers.DataController.getUserDetails(username: String)
