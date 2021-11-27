@@ -1,6 +1,8 @@
 package controllers
 
 import com.google.inject.Inject
+import forms.WhatSexAreYouForm
+import play.api.i18n.I18nSupport
 import play.api.mvc._
 
 /**
@@ -11,7 +13,8 @@ import play.api.mvc._
 class HomeController @Inject() (
     cc: ControllerComponents,
     messagesControllerComponents: MessagesControllerComponents
-) extends AbstractController(cc) {
+) extends AbstractController(cc)
+    with I18nSupport {
 
   /**
     * Create an Action to render an HTML page.
@@ -32,7 +35,7 @@ class HomeController @Inject() (
 
   def gender() =
     Action { implicit request: Request[AnyContent] =>
-      Ok(views.html.gender())
+      Ok(views.html.gender(WhatSexAreYouForm.form()))
     }
 
   def age() =

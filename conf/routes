@@ -3,6 +3,9 @@
 
 GET     /                                   controllers.HomeController.index()
 GET     /what-sex-are-you                   controllers.WhatSexAreYouController.whatSexAreYouPageLoad()
+POST    /what-sex-are-you                   controllers.WhatSexAreYouController.whatSexAreYouOnSubmit()
+GET     /how-old-are-you                    controllers.HowOldAreYouController.howOldAreYouPageLoad(data: List[helpers.MaleOrFemale])
+POST    /how-old-are-you                    controllers.HowOldAreYouController.howOldAreYouOnSubmit()
 
 GET     /explore                            controllers.HomeController.explore()
 

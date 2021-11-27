@@ -17,8 +17,8 @@ class CacheService @Inject() (applicationConfig: ApplicationConfig)(implicit
       .map(_.n)
   }
 
-  def readCache(id: String) = {
-    applicationConfig.cache.flatMap(_.find(document("id" -> id)).cursor())
-  }
+//  def readCache(id: String) = {
+//    applicationConfig.cache.flatMap(_.find(document("id" -> id)).cursor())
+//  }
 
 }

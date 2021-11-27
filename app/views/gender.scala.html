@@ -1,8 +1,20 @@
-@()
+@import forms.WhatSexAreYouForm
+
+@import helpers.Male
+@import helpers.MaleOrFemale
+@(form: Form[WhatSexAreYouForm])(implicit messages: Messages)
 
 @template("Gender") {
-@defining(play.core.PlayVersion.current) { version =>
+    @defining(play.core.PlayVersion.current) { version =>
+        <div>
+            @helper.form(action = controllers.routes.WhatSexAreYouController.whatSexAreYouOnSubmit()) {
 
+                @helper.inputRadioGroup(field = form("whatSexAreYou"), options = Seq("male"->"Male","female"->"Female"), args = Symbol("_label") -> MaleOrFemale)
 
-}
+                <button value="male">Male</button>
+                <button value="female">Female</button>
+                <button value="other">Other</button>
+            }
+        </div>
+    }
 }
