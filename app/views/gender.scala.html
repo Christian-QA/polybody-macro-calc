@@ -10,10 +10,6 @@
             @helper.form(action = controllers.routes.WhatSexAreYouController.whatSexAreYouOnSubmit()) {
 
                 @helper.inputRadioGroup(field = form("whatSexAreYou"), options = Seq("male"->"Male","female"->"Female"), args = Symbol("_label") -> MaleOrFemale)
-
-                <button value="male">Male</button>
-                <button value="female">Female</button>
-                <button value="other">Other</button>
             }
         </div>
     }
