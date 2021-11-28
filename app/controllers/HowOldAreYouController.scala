@@ -21,9 +21,9 @@ class HowOldAreYouController @Inject() (
 ) extends AbstractController(cc)
     with I18nSupport {
 
-  def howOldAreYouPageLoad(data: List[Any]): Action[AnyContent] =
+  def howOldAreYouPageLoad(): Action[AnyContent] =
     Action { implicit request: Request[AnyContent] =>
-      Ok(views.html.gender(WhatSexAreYouForm.form()))
+      Ok(views.html.age())
     }
 
   def howOldAreYouOnSubmit(): Action[AnyContent] =

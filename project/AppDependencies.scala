@@ -5,6 +5,9 @@ import play.core.PlayVersion.current
 object AppDependencies {
 
   val compile = Seq(
+    guice,
+    cacheApi,
+    ehcache,
     "org.typelevel" %% "cats-core" % "2.0.0",
     "com.typesafe.play" %% "play-json-joda" % "2.9.2",
     "com.lihaoyi" %% "requests" % "0.6.9",

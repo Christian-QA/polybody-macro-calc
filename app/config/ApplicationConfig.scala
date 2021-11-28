@@ -35,9 +35,21 @@ class ApplicationConfig @Inject() (val configuration: Configuration)(implicit
     )
   )
 
-  lazy val cache: Future[BSONCollection] = db.map(
-    _.collection[BSONCollection](
+  lazy val cache: Future[DB] = connection.flatMap(
+    _.database(
       configuration.getOptional[String]("mongo.cache").getOrElse("")
+    )
+  )
+
+  lazy val sex: Future[BSONCollection] = db.map(
+    _.collection[BSONCollection](
+      configuration.getOptional[String]("cache.sex").getOrElse("")
+    )
+  )
+
+  lazy val age: Future[BSONCollection] = db.map(
+    _.collection[BSONCollection](
+      configuration.getOptional[String]("cache.age").getOrElse("")
     )
   )
 

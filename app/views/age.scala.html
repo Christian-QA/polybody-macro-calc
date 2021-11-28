@@ -3,8 +3,11 @@
 @template("Age") {
 @defining(play.core.PlayVersion.current) { version =>
 
-
-@slider("Age")
-
+    <div>
+        @helper.form(action = controllers.routes.WhatSexAreYouController.whatSexAreYouOnSubmit()) {
+            @slider("Age")
+            <input type="submit" value="Submit">
+            }
+    </div>
 }
 }
