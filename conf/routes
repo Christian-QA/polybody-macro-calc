@@ -6,6 +6,16 @@ GET     /what-sex-are-you                   controllers.WhatSexAreYouController.
 POST    /what-sex-are-you                   controllers.WhatSexAreYouController.whatSexAreYouOnSubmit()
 GET     /how-old-are-you                    controllers.HowOldAreYouController.howOldAreYouPageLoad()
 POST    /how-old-are-you                    controllers.HowOldAreYouController.howOldAreYouOnSubmit()
+GET     /how-tall-are-you                   controllers.HowTallAreYouController.howTallAreYouPageLoad()
+POST    /how-tall-are-you                   controllers.HowTallAreYouController.howTallAreYouOnSubmit()
+GET     /how-much-do-you-weigh              controllers.HowMuchDoYouWeighController.howMuchDoYouWeighPageLoad()
+POST    /how-much-do-you-weigh              controllers.HowMuchDoYouWeighController.howMuchDoYouWeighOnSubmit()
+GET     /what-is-your-target-weight         controllers.WhatIsYourTargetWeightController.whatIsYourTargetWeightPageLoad()
+POST    /what-is-your-target-weight         controllers.WhatIsYourTargetWeightController.whatIsYourTargetWeightOnSubmit()
+GET     /how-active-are-you                 controllers.HowActiveAreYouController.howActiveAreYouPageLoad()
+POST    /how-active-are-you                 controllers.HowActiveAreYouController.howActiveAreYouOnSubmit()
+GET     /short-summary                      controllers.ShortSummaryController.shortSummaryPageLoad()
+#POST    /short-summary                      controllers.HowActiveAreYouController.howActiveAreYouOnSubmit()
 
 GET     /explore                            controllers.HomeController.explore()
 
