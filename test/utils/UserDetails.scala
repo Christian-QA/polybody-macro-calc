@@ -14,7 +14,7 @@ object UserDetails {
 
   lazy val passUserUjson: ArrayBuffer[Value] = ArrayBuffer(
     ujson.Value(
-      """{"_id":"611be0d7e17315ce09335455","username":"testUser","email":"testUser@gmail.com","Age":25,"Gender":"male","Height":190,"targetWeight":140}"""
+      """{"_id":"611be0d7e17315ce09335455","username":"testUser","email":"testUser@gmail.com","dob":"1996-10-10","sex":"male","height":190,"targetWeight":140}"""
     )
   )
 
@@ -22,7 +22,7 @@ object UserDetails {
     "611be0d7e17315ce09335455",
     "testUser",
     "testUser@gmail.com",
-    25,
+    LocalDate.of(1996, 10, 10),
     "male",
     190d,
     Some(140d)
@@ -50,7 +50,7 @@ object UserDetails {
 
   lazy val passMacroStats: List[MacroStat] = List(
     MacroStat(
-      LocalDate.parse("2021-03-09"),
+      Some(LocalDate.parse("2021-03-09")),
       "Sedentary",
       111.0,
       Some(150),
@@ -63,7 +63,7 @@ object UserDetails {
       90
     ),
     MacroStat(
-      LocalDate.parse("2021-08-09"),
+      Some(LocalDate.parse("2021-08-09")),
       "Very Active",
       222.0,
       Some(222),

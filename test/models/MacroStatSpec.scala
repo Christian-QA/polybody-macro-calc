@@ -8,7 +8,7 @@ import java.time.LocalDate
 class MacroStatSpec extends BaseSpec {
 
   val macroStat: MacroStat = new MacroStat(
-    LocalDate.of(2020, 3, 24),
+    Some(LocalDate.of(2020, 3, 24)),
     "Very Active",
     160,
     Some(150),
@@ -84,7 +84,7 @@ class MacroStatSpec extends BaseSpec {
         invalidJson.as[MacroStat]
       }
 
-      ex.getMessage mustBe "JsResultException(errors:List((/activityLevel,List(JsonValidationError(List(error.path.missing),List()))), (/maintenanceCalories,List(JsonValidationError(List(error.path.missing),List()))), (/dateTime,List(JsonValidationError(List(error.path.missing),List()))), (/timeToGoal,List(JsonValidationError(List(error.path.missing),List()))), (/setGoal,List(JsonValidationError(List(error.path.missing),List()))), (/targetCalories,List(JsonValidationError(List(error.path.missing),List())))))"
+      ex.getMessage mustBe "JsResultException(errors:List((/activityLevel,List(JsonValidationError(List(error.path.missing),List()))), (/maintenanceCalories,List(JsonValidationError(List(error.path.missing),List()))), (/timeToGoal,List(JsonValidationError(List(error.path.missing),List()))), (/setGoal,List(JsonValidationError(List(error.path.missing),List()))), (/targetCalories,List(JsonValidationError(List(error.path.missing),List())))))"
     }
 
     "serialise to json" in {

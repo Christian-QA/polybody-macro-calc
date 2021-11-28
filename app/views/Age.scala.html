@@ -1,13 +1,18 @@
-@()
+@import forms.HowOldAreYouForm
+
+@(form: Form[HowOldAreYouForm])(implicit messages: Messages)
 
 @Template("Age") {
 @defining(play.core.PlayVersion.current) { version =>
 
     <div>
         @helper.form(action = controllers.routes.WhatSexAreYouController.whatSexAreYouOnSubmit()) {
-            @Slider("Age")
+            @helper.inputDate(field = form("whatSexAreYou"), args = Symbol("_label") -> Int)
             <input type="submit" value="Submit">
             }
+
+        @*Slider("Age", form)*@
+
     </div>
 }
 }

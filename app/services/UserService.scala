@@ -5,6 +5,7 @@ import connectors.PolybodyConnector
 import errors.CustomErrorHandler
 import models.User
 
+import java.time.LocalDate
 import scala.concurrent.{ExecutionContext, Future}
 
 class UserService @Inject() (polybodyConnector: PolybodyConnector)(implicit
@@ -23,9 +24,9 @@ class UserService @Inject() (polybodyConnector: PolybodyConnector)(implicit
             value(0)("_id").str,
             value(0)("username").str,
             value(0)("email").str,
-            value(0)("Age").num.toInt,
-            value(0)("Gender").str,
-            value(0)("Height").num,
+            LocalDate.parse(value(0)("dob").str),
+            value(0)("sex").str,
+            value(0)("height").num,
             value(0)("targetWeight").numOpt
           )
         )

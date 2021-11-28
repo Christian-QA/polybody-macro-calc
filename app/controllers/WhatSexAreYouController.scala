@@ -22,7 +22,7 @@ class WhatSexAreYouController @Inject() (
 
   def whatSexAreYouPageLoad(): Action[AnyContent] =
     Action { implicit request: Request[AnyContent] =>
-      Ok(views.html.Gender(WhatSexAreYouForm.form()))
+      Ok(views.html.Sex(WhatSexAreYouForm.form()))
     }
 
   def whatSexAreYouOnSubmit(): Action[AnyContent] =

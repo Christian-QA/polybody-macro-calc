@@ -27,7 +27,7 @@ class HowOldAreYouController @Inject() (
 
   def howOldAreYouPageLoad(): Action[AnyContent] =
     Action { implicit request: Request[AnyContent] =>
-      Ok(views.html.Age())
+      Ok(views.html.Age(HowOldAreYouForm.form()))
     }
 
   def howOldAreYouOnSubmit(): Action[AnyContent] =

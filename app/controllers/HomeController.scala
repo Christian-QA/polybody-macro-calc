@@ -33,16 +33,6 @@ class HomeController @Inject() (
       Ok(views.html.Explore())
     }
 
-  def gender() =
-    Action { implicit request: Request[AnyContent] =>
-      Ok(views.html.Gender(WhatSexAreYouForm.form()))
-    }
-
-  def age() =
-    Action { implicit request: Request[AnyContent] =>
-      Ok(views.html.Age())
-    }
-
   def height() =
     Action { implicit request: Request[AnyContent] =>
       Ok(views.html.Height())
