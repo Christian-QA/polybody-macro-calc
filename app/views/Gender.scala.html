@@ -4,7 +4,7 @@
 @import helpers.MaleOrFemale
 @(form: Form[WhatSexAreYouForm])(implicit messages: Messages)
 
-@template("Gender") {
+@Template("Gender") {
     @defining(play.core.PlayVersion.current) { version =>
         <div>
             @helper.form(action = controllers.routes.WhatSexAreYouController.whatSexAreYouOnSubmit()) {

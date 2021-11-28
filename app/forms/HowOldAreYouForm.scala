@@ -24,7 +24,7 @@ object HowOldAreYouForm {
       mapping(
         "howOldAreYou" -> number
           .verifying(
-            error = "Please enter your age using the slider or the text box",
+            error = "Please enter your Age using the Slider or the text box",
             constraint = e => e > 1 && e < 130
           )
       )(HowOldAreYouForm.apply)(HowOldAreYouForm.unapply)

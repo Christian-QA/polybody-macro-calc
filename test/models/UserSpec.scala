@@ -44,9 +44,9 @@ class UserSpec extends BaseSpec {
       "_id" -> "testId",
       "username" -> "testUsername",
       "email" -> "testEmail@email.com",
-      "age" -> 25,
-      "gender" -> "male",
-      "height" -> 175.5,
+      "Age" -> 25,
+      "Gender" -> "male",
+      "Height" -> 175.5,
       "targetWeight" -> 165
     )
 
@@ -63,9 +63,9 @@ class UserSpec extends BaseSpec {
       val invalidJson = Json.obj(
         "username" -> 0,
         "email" -> 0,
-        "age" -> "25",
-        "gender" -> 0,
-        "height" -> "175.5",
+        "Age" -> "25",
+        "Gender" -> 0,
+        "Height" -> "175.5",
         "targetWeight" -> "150.5"
       )
 
@@ -73,7 +73,7 @@ class UserSpec extends BaseSpec {
         invalidJson.as[User]
       }
 
-      ex.getMessage mustBe "JsResultException(errors:List((/height,List(JsonValidationError(List(error.expected.jsnumber),List()))), (/username,List(JsonValidationError(List(error.expected.jsstring),List()))), (/_id,List(JsonValidationError(List(error.path.missing),List()))), (/targetWeight,List(JsonValidationError(List(error.expected.jsnumber),List()))), (/gender,List(JsonValidationError(List(error.expected.jsstring),List()))), (/age,List(JsonValidationError(List(error.expected.jsnumber),List()))), (/email,List(JsonValidationError(List(error.expected.jsstring),List())))))"
+      ex.getMessage mustBe "JsResultException(errors:List((/Height,List(JsonValidationError(List(error.expected.jsnumber),List()))), (/username,List(JsonValidationError(List(error.expected.jsstring),List()))), (/_id,List(JsonValidationError(List(error.path.missing),List()))), (/targetWeight,List(JsonValidationError(List(error.expected.jsnumber),List()))), (/Gender,List(JsonValidationError(List(error.expected.jsstring),List()))), (/Age,List(JsonValidationError(List(error.expected.jsnumber),List()))), (/email,List(JsonValidationError(List(error.expected.jsstring),List())))))"
     }
 
     "deserialise invalid key" in {
@@ -91,7 +91,7 @@ class UserSpec extends BaseSpec {
         invalidJson.as[User]
       }
 
-      ex.getMessage mustBe "JsResultException(errors:List((/height,List(JsonValidationError(List(error.path.missing),List()))), (/username,List(JsonValidationError(List(error.path.missing),List()))), (/_id,List(JsonValidationError(List(error.path.missing),List()))), (/gender,List(JsonValidationError(List(error.path.missing),List()))), (/age,List(JsonValidationError(List(error.path.missing),List()))), (/email,List(JsonValidationError(List(error.path.missing),List())))))"
+      ex.getMessage mustBe "JsResultException(errors:List((/Height,List(JsonValidationError(List(error.path.missing),List()))), (/username,List(JsonValidationError(List(error.path.missing),List()))), (/_id,List(JsonValidationError(List(error.path.missing),List()))), (/Gender,List(JsonValidationError(List(error.path.missing),List()))), (/Age,List(JsonValidationError(List(error.path.missing),List()))), (/email,List(JsonValidationError(List(error.path.missing),List())))))"
     }
 
     "serialise to json" in {

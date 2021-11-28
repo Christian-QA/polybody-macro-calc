@@ -1,11 +1,11 @@
 @()
 
-@template("Age") {
+@Template("Age") {
 @defining(play.core.PlayVersion.current) { version =>
 
     <div>
         @helper.form(action = controllers.routes.WhatSexAreYouController.whatSexAreYouOnSubmit()) {
-            @slider("Age")
+            @Slider("Age")
             <input type="submit" value="Submit">
             }
     </div>

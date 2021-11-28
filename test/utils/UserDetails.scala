@@ -14,7 +14,7 @@ object UserDetails {
 
   lazy val passUserUjson: ArrayBuffer[Value] = ArrayBuffer(
     ujson.Value(
-      """{"_id":"611be0d7e17315ce09335455","username":"testUser","email":"testUser@gmail.com","age":25,"gender":"male","height":190,"targetWeight":140}"""
+      """{"_id":"611be0d7e17315ce09335455","username":"testUser","email":"testUser@gmail.com","Age":25,"Gender":"male","Height":190,"targetWeight":140}"""
     )
   )
 

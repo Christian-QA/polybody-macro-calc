@@ -22,7 +22,7 @@ class WhatSexAreYouController @Inject() (
 
   def whatSexAreYouPageLoad(): Action[AnyContent] =
     Action { implicit request: Request[AnyContent] =>
-      Ok(views.html.gender(WhatSexAreYouForm.form()))
+      Ok(views.html.Gender(WhatSexAreYouForm.form()))
     }
 
   def whatSexAreYouOnSubmit(): Action[AnyContent] =
@@ -36,8 +36,8 @@ class WhatSexAreYouController @Inject() (
           },
           value => {
             val result: CompletionStage[Done] = cache.set("sex", value)
-            val futureMaybeUser: CompletionStage[Optional[MaleOrFemale]] =
-              cache.get[MaleOrFemale]("sex")
+//            val futureMaybeUser: CompletionStage[Optional[MaleOrFemale]] =
+//              cache.get[MaleOrFemale]("sex")
 
             //println(futureMaybeUser)
 

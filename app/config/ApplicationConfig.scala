@@ -17,42 +17,6 @@ class ApplicationConfig @Inject() (val configuration: Configuration)(implicit
     val ec: ExecutionContext
 ) {
 
-  lazy val mongoUri: String =
-    configuration.getOptional[String]("mongo.local.uri").getOrElse("")
-
-  lazy val driver: AsyncDriver = AsyncDriver()
-  lazy val parsedUri: Future[MongoConnection.ParsedURI] =
-    MongoConnection.fromString(mongoUri)
-
-  lazy val client: MongoClient = MongoClient(mongoUri)
-
-  lazy val connection: Future[MongoConnection] =
-    parsedUri.flatMap(driver.connect(_))
-
-  lazy val db: Future[DB] = connection.flatMap(
-    _.database(
-      configuration.getOptional[String]("mongo.database").getOrElse("")
-    )
-  )
-
-  lazy val cache: Future[DB] = connection.flatMap(
-    _.database(
-      configuration.getOptional[String]("mongo.cache").getOrElse("")
-    )
-  )
-
-  lazy val sex: Future[BSONCollection] = db.map(
-    _.collection[BSONCollection](
-      configuration.getOptional[String]("cache.sex").getOrElse("")
-    )
-  )
-
-  lazy val age: Future[BSONCollection] = db.map(
-    _.collection[BSONCollection](
-      configuration.getOptional[String]("cache.age").getOrElse("")
-    )
-  )
-
   lazy val baseUrl: String =
     configuration.getOptional[String]("urls.polybodyBackend").getOrElse("Error")
 

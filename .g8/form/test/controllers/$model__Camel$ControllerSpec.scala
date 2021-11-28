@@ -33,7 +33,7 @@ class $model;format="Camel"$ControllerSpec extends PlaySpec with GuiceOneAppPerT
 
   "$model;format="Camel"$Controller GET" should {
 
-    "render the index page from a new instance of controller" in {
+    "render the Index page from a new instance of controller" in {
       val controller = new $model;format="Camel"$Controller(new StubComponents())
       val request = FakeRequest().withCSRFToken
       val home = controller.$model;format="camel"$Get().apply(request)
@@ -42,7 +42,7 @@ class $model;format="Camel"$ControllerSpec extends PlaySpec with GuiceOneAppPerT
       contentType(home) mustBe Some("text/html")
     }
 
-    "render the index page from the application" in {
+    "render the Index page from the application" in {
       val controller = inject[$model;format="Camel"$Controller]
       val request = FakeRequest().withCSRFToken
       val home = controller.$model;format="camel"$Get().apply(request)
@@ -51,7 +51,7 @@ class $model;format="Camel"$ControllerSpec extends PlaySpec with GuiceOneAppPerT
       contentType(home) mustBe Some("text/html")
     }
 
-    "render the index page from the router" in {
+    "render the Index page from the router" in {
       val request = CSRFTokenHelper.addCSRFToken(FakeRequest(GET, "/derp"))
       val home = route(app, request).get
 
@@ -64,7 +64,7 @@ class $model;format="Camel"$ControllerSpec extends PlaySpec with GuiceOneAppPerT
     "process form" in {
       val request = {
         FakeRequest(POST, "/$model;format="camel"$")
-          .withFormUrlEncodedBody("name" -> "play", "age" -> "4")
+          .withFormUrlEncodedBody("name" -> "play", "Age" -> "4")
       }
       val home = route(app, request).get
 
