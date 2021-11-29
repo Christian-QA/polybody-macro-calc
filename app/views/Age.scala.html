@@ -1,13 +1,16 @@
 @import forms.HowOldAreYouForm
 
+@import java.time.LocalDate
+@import java.util.Date
+@import play.api.data.Forms.localDate
 @(form: Form[HowOldAreYouForm])(implicit messages: Messages)
 
 @Template("Age") {
 @defining(play.core.PlayVersion.current) { version =>
 
     <div>
-        @helper.form(action = controllers.routes.WhatSexAreYouController.whatSexAreYouOnSubmit()) {
-            @helper.inputDate(field = form("whatSexAreYou"), args = Symbol("_label") -> Int)
+        @helper.form(action = controllers.routes.HowOldAreYouController.howOldAreYouOnSubmit()) {
+            @helper.inputDate(field = form("howOldAreYou"), args = Symbol("_label") -> localDate)
             <input type="submit" value="Submit">
             }
 
