@@ -3,20 +3,7 @@ package forms
 import helpers.{Female, Male, MaleOrFemale, Other}
 import play.api.data.Form
 import play.api.data.Forms.{mapping, text}
-import play.api.libs.json.Json.obj
-import play.api.libs.json.{
-  JsError,
-  JsPath,
-  JsResult,
-  JsString,
-  JsSuccess,
-  JsValue,
-  Json,
-  JsonValidationError,
-  OFormat,
-  Reads,
-  Writes
-}
+import play.api.libs.json._
 
 case class WhatSexAreYouForm(sex: MaleOrFemale)
 

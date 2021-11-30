@@ -2,7 +2,7 @@ package controllers
 
 import akka.Done
 import com.google.inject.Inject
-import forms.WhatSexAreYouForm
+import forms.{HowActiveAreYouForm, WhatSexAreYouForm}
 import play.api.i18n.{I18nSupport, Langs, MessagesApi}
 import play.api.mvc.{
   AbstractController,
@@ -26,19 +26,20 @@ class HowActiveAreYouController @Inject() (
 
   def howActiveAreYouPageLoad(): Action[AnyContent] =
     Action { implicit request: Request[AnyContent] =>
-      Ok(views.html.ActivityLevel())
+      Ok(views.html.ActivityLevel(HowActiveAreYouForm.form()))
     }
 
   def howActiveAreYouOnSubmit(): Action[AnyContent] =
     Action.async { implicit request: Request[AnyContent] =>
-      WhatSexAreYouForm
+      HowActiveAreYouForm
         .form()
         .bindFromRequest()
         .fold(
           formWithErrors =>
             Future.successful(Redirect(routes.HomeController.index())),
           value => {
-            val result: CompletionStage[Done] = cache.set("age", value)
+            val result: CompletionStage[Done] =
+              cache.set("activityLevel", value)
 
             Future.successful(
               Redirect(

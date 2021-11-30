@@ -2,7 +2,7 @@ package controllers
 
 import akka.Done
 import com.google.inject.Inject
-import forms.WhatSexAreYouForm
+import forms.{WhatIsYourTargetWeightForm, WhatSexAreYouForm}
 import play.api.i18n.{I18nSupport, Langs, MessagesApi}
 import play.api.mvc.{
   AbstractController,
@@ -26,19 +26,19 @@ class WhatIsYourTargetWeightController @Inject() (
 
   def whatIsYourTargetWeightPageLoad(): Action[AnyContent] =
     Action { implicit request: Request[AnyContent] =>
-      Ok(views.html.TargetWeight())
+      Ok(views.html.TargetWeight(WhatIsYourTargetWeightForm.form()))
     }
 
   def whatIsYourTargetWeightOnSubmit(): Action[AnyContent] =
     Action.async { implicit request: Request[AnyContent] =>
-      WhatSexAreYouForm
+      WhatIsYourTargetWeightForm
         .form()
         .bindFromRequest()
         .fold(
           formWithErrors =>
             Future.successful(Redirect(routes.HomeController.index())),
           value => {
-            val result: CompletionStage[Done] = cache.set("age", value)
+            val result: CompletionStage[Done] = cache.set("targetWeight", value)
 
             Future.successful(
               Redirect(

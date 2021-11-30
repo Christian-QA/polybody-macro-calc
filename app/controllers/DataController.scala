@@ -2,6 +2,7 @@ package controllers
 
 import com.google.inject.Inject
 import errors.{CustomErrorHandler, CustomNoContentResponse}
+import helpers.Sedentary
 import models.MacroStat
 import play.api.Logging
 import play.api.mvc.Results.Ok
@@ -72,7 +73,7 @@ class DataController @Inject() (
     Action.async { implicit request =>
       val macroStat: MacroStat = MacroStat(
         dateTime = None,
-        activityLevel = "Sedentary",
+        activityLevel = Sedentary,
         setGoal = 100d,
         proteinPreference = Some(50),
         fatPreference = Some(150),

@@ -28,23 +28,4 @@ class HomeController @Inject() (
       Ok(views.html.Index())
     }
 
-  def explore() =
-    Action { implicit request: Request[AnyContent] =>
-      Ok(views.html.Explore())
-    }
-
-  def height() =
-    Action { implicit request: Request[AnyContent] =>
-      Ok(views.html.Height())
-    }
-
-  def currentWeight() =
-    Action { implicit request: Request[AnyContent] =>
-      Ok(views.html.CurrentWeight())
-    }
-
-  def targetWeight() =
-    Action { implicit request: Request[AnyContent] =>
-      Ok(views.html.TargetWeight())
-    }
 }

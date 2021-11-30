@@ -3,6 +3,7 @@ package services
 import com.google.inject.Inject
 import connectors.PolybodyConnector
 import errors.{CustomClientResponse, CustomErrorHandler}
+import helpers.ActivityLevel
 import models.MacroStat
 import play.api.http.Status.{BAD_REQUEST, OK}
 import ujson.{Obj, Value}
@@ -35,7 +36,7 @@ class MacroStatService @Inject() (polybodyConnector: PolybodyConnector)(implicit
             println(parsedInput)
             val stats: List[MacroStat] = MacroStat(
               Some(LocalDate.parse(parsedInput(acc)("dateTime").str)),
-              parsedInput(acc)("activityLevel").str,
+              parsedInput(acc)("activityLevel").str.to[ActivityLevel],
               parsedInput(acc)("setGoal").num,
               Some(parsedInput(acc)("proteinPreference").num.toInt),
               Some(parsedInput(acc)("fatPreference").num.toInt),

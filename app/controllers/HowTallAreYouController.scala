@@ -26,7 +26,7 @@ class HowTallAreYouController @Inject() (
 
   def howTallAreYouPageLoad(): Action[AnyContent] =
     Action { implicit request: Request[AnyContent] =>
-      Ok(views.html.Height())
+      Ok(views.html.Height(HowTallAreYouForm.form()))
     }
 
   def howTallAreYouOnSubmit(): Action[AnyContent] =

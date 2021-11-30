@@ -1,4 +1,7 @@
-@()
+@import forms.HowActiveAreYouForm
+
+@(form: Form[HowActiveAreYouForm])(implicit messages: Messages)
+
 
 @Template("Activity Level") {
 @defining(play.core.PlayVersion.current) { version =>

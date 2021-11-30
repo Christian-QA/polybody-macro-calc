@@ -1,4 +1,6 @@
-@()
+@import forms.WhatIsYourTargetWeightForm
+
+@(form: Form[WhatIsYourTargetWeightForm])(implicit messages: Messages)
 
 @Template("Target weight") {
 @defining(play.core.PlayVersion.current) { version =>

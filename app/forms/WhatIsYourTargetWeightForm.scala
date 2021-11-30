@@ -10,10 +10,10 @@ object WhatIsYourTargetWeightForm {
 
   def form(
       errorMessageKey: Option[String] = None
-  ): Form[HowMuchDoYouWeighForm] =
+  ): Form[WhatIsYourTargetWeightForm] =
     Form(
       mapping(
         "howTallAreYou" -> Forms.of[Double]
-      )(HowMuchDoYouWeighForm.apply)(HowMuchDoYouWeighForm.unapply)
+      )(WhatIsYourTargetWeightForm.apply)(WhatIsYourTargetWeightForm.unapply)
     )
 }
