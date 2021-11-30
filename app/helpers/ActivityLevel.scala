@@ -17,7 +17,7 @@ object ActivityLevel {
         } yield {
           (activity) match {
             case (Right(activity)) => Right(ActivityLevel(activity))
-            case _                 => Left("Unable to bind an sex")
+            case _                 => Left("Unable to bind an activity level")
           }
         }
       }
@@ -28,10 +28,10 @@ object ActivityLevel {
 
   def apply(value: String): ActivityLevel =
     value match {
-      case "sedentary"        => Sedentary
-      case "lightlyActive"    => LightlyActive
-      case "moderatelyActive" => ModeratelyActive
-      case "veryActive"       => VeryActive
+      case "Sedentary"        => Sedentary
+      case "LightlyActive"    => LightlyActive
+      case "ModeratelyActive" => ModeratelyActive
+      case "VeryActive"       => VeryActive
     }
 }
 

@@ -50,17 +50,17 @@ object MacroStat {
   implicit val activityLevelFormat: Format[ActivityLevel] =
     new Format[ActivityLevel] {
       override def writes(o: ActivityLevel): JsValue =
-        json.JsString(o.toString.toLowerCase)
+        json.JsString(o.toString)
 
       override def reads(json: JsValue): JsResult[ActivityLevel] =
         json match {
-          case JsString("sedentary")        => JsSuccess(Sedentary)
-          case JsString("lightlyActive")    => JsSuccess(LightlyActive)
-          case JsString("moderatelyActive") => JsSuccess(ModeratelyActive)
-          case JsString("veryActive")       => JsSuccess(VeryActive)
+          case JsString("Sedentary")        => JsSuccess(Sedentary)
+          case JsString("LightlyActive")    => JsSuccess(LightlyActive)
+          case JsString("ModeratelyActive") => JsSuccess(ModeratelyActive)
+          case JsString("VeryActive")       => JsSuccess(VeryActive)
           case _: DateTimeParseException =>
             JsError("That's not an activity level")
-          case _ => JsError("That's not a date")
+          case _ => JsError("That's not an activity level")
         }
     }
 

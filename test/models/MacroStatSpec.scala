@@ -1,5 +1,6 @@
 package models
 
+import helpers.VeryActive
 import play.api.libs.json.{JsResultException, Json}
 import utils.BaseSpec
 
@@ -9,7 +10,7 @@ class MacroStatSpec extends BaseSpec {
 
   val macroStat: MacroStat = new MacroStat(
     Some(LocalDate.of(2020, 3, 24)),
-    "Very Active",
+    VeryActive,
     160,
     Some(150),
     Some(50),
@@ -25,7 +26,7 @@ class MacroStatSpec extends BaseSpec {
 
     val json = Json.obj(
       "dateTime" -> "2020-03-24",
-      "activityLevel" -> "Very Active",
+      "activityLevel" -> "VeryActive",
       "setGoal" -> 160,
       "proteinPreference" -> 150,
       "fatPreference" -> 50,
@@ -46,7 +47,7 @@ class MacroStatSpec extends BaseSpec {
     "deserialise invalid values" in {
       val invalidJson = Json.obj(
         "dateTime" -> "invalidDate",
-        "activityLevel" -> "Very Active",
+        "activityLevel" -> "VeryActive",
         "setGoal" -> 160,
         "proteinPreference" -> 150,
         "fatPreference" -> 50,
@@ -68,7 +69,7 @@ class MacroStatSpec extends BaseSpec {
 
       val invalidJson = Json.obj(
         "invalidKey" -> "2020-03-24",
-        "invalidKey" -> "Very Active",
+        "invalidKey" -> "VeryActive",
         "invalidKey" -> 160,
         "invalidKey" -> 150,
         "invalidKey" -> 50,

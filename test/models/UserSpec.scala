@@ -1,5 +1,6 @@
 package models
 
+import helpers.{Male, VeryActive}
 import play.api.libs.json.{JsObject, JsResultException, Json}
 import utils.BaseSpec
 
@@ -16,7 +17,7 @@ class UserSpec extends BaseSpec {
 
   val macroStat: MacroStat = new MacroStat(
     Some(LocalDate.of(2020, 3, 24)),
-    "Very Active",
+    VeryActive,
     160,
     Some(150),
     Some(50),
@@ -33,7 +34,7 @@ class UserSpec extends BaseSpec {
     "testUsername",
     "testEmail@email.com",
     LocalDate.of(1996, 10, 10),
-    "male",
+    Male,
     175.5,
     Some(165)
   )
@@ -73,7 +74,7 @@ class UserSpec extends BaseSpec {
         invalidJson.as[User]
       }
 
-      ex.getMessage mustBe "JsResultException(errors:List((/height,List(JsonValidationError(List(error.expected.jsnumber),List()))), (/username,List(JsonValidationError(List(error.expected.jsstring),List()))), (/_id,List(JsonValidationError(List(error.path.missing),List()))), (/targetWeight,List(JsonValidationError(List(error.expected.jsnumber),List()))), (/email,List(JsonValidationError(List(error.expected.jsstring),List()))), (/sex,List(JsonValidationError(List(error.expected.jsstring),List())))))"
+      ex.getMessage mustBe "JsResultException(errors:List((/height,List(JsonValidationError(List(error.expected.jsnumber),List()))), (/username,List(JsonValidationError(List(error.expected.jsstring),List()))), (/_id,List(JsonValidationError(List(error.path.missing),List()))), (/targetWeight,List(JsonValidationError(List(error.expected.jsnumber),List()))), (/email,List(JsonValidationError(List(error.expected.jsstring),List()))), (/sex,List(JsonValidationError(List(That's not a sex),List())))))"
     }
 
     "deserialise invalid key" in {
@@ -82,7 +83,7 @@ class UserSpec extends BaseSpec {
         "invalidKey" -> "testUsername",
         "invalidKey" -> "testEmail@email.com",
         "invalidKey" -> "1996-10-10",
-        "invalidKey" -> "male",
+        "invalidKey" -> "Male",
         "invalidKey" -> 175.5,
         "invalidKey" -> 165
       )

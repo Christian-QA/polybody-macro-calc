@@ -11,10 +11,10 @@ object HowActiveAreYouForm {
 
   implicit val formats: OFormat[HowActiveAreYouForm] = {
     implicit val howActiveAreYouReads: Reads[ActivityLevel] = {
-      case JsString("sedentary")        => JsSuccess(Sedentary)
-      case JsString("lightlyActive")    => JsSuccess(LightlyActive)
-      case JsString("moderatelyActive") => JsSuccess(ModeratelyActive)
-      case JsString("veryActive")       => JsSuccess(VeryActive)
+      case JsString("Sedentary")        => JsSuccess(Sedentary)
+      case JsString("LightlyActive")    => JsSuccess(LightlyActive)
+      case JsString("ModeratelyActive") => JsSuccess(ModeratelyActive)
+      case JsString("VeryActive")       => JsSuccess(VeryActive)
       case _ =>
         JsError(
           Seq(
@@ -25,10 +25,7 @@ object HowActiveAreYouForm {
         )
     }
     implicit val howActiveAreYouWrites: Writes[ActivityLevel] = {
-      case Sedentary        => JsString("sedentary")
-      case LightlyActive    => JsString("lightlyActive")
-      case ModeratelyActive => JsString("moderatelyActive")
-      case VeryActive       => JsString("veryActive")
+      activityLevel: ActivityLevel => JsString(activityLevel.toString)
     }
     Json.format[HowActiveAreYouForm]
   }

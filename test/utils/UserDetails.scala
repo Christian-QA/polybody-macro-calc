@@ -1,5 +1,6 @@
 package utils
 
+import helpers.{Male, Sedentary, VeryActive}
 import models.{MacroStat, PreviousWeight, User}
 import ujson.Value
 
@@ -14,7 +15,7 @@ object UserDetails {
 
   lazy val passUserUjson: ArrayBuffer[Value] = ArrayBuffer(
     ujson.Value(
-      """{"_id":"611be0d7e17315ce09335455","username":"testUser","email":"testUser@gmail.com","dob":"1996-10-10","sex":"male","height":190,"targetWeight":140}"""
+      """{"_id":"611be0d7e17315ce09335455","username":"testUser","email":"testUser@gmail.com","dob":"1996-10-10","sex":"Male","height":190,"targetWeight":140}"""
     )
   )
 
@@ -23,7 +24,7 @@ object UserDetails {
     "testUser",
     "testUser@gmail.com",
     LocalDate.of(1996, 10, 10),
-    "male",
+    Male,
     190d,
     Some(140d)
   )
@@ -44,14 +45,14 @@ object UserDetails {
 
   lazy val passMacroStatsUjson: ArrayBuffer[Value] = ArrayBuffer(
     ujson.Value(
-      """[{"dateTime":"2021-08-09","activityLevel":"Very Active","setGoal":222,"proteinPreference":222,"fatPreference":33,"carbPreference":444,"bodyFat":13,"equationPreference":"Default","maintenanceCalories":2900,"targetCalories":2500,"timeToGoal":90},{"dateTime":"2021-03-09","activityLevel":"Sedentary","setGoal":111,"proteinPreference":150,"fatPreference":50,"carbPreference":300,"bodyFat":13,"equationPreference":"Default","maintenanceCalories":2900,"targetCalories":2500,"timeToGoal":90}]"""
+      """[{"dateTime":"2021-08-09","activityLevel":"VeryActive","setGoal":222,"proteinPreference":222,"fatPreference":33,"carbPreference":444,"bodyFat":13,"equationPreference":"Default","maintenanceCalories":2900,"targetCalories":2500,"timeToGoal":90},{"dateTime":"2021-03-09","activityLevel":"Sedentary","setGoal":111,"proteinPreference":150,"fatPreference":50,"carbPreference":300,"bodyFat":13,"equationPreference":"Default","maintenanceCalories":2900,"targetCalories":2500,"timeToGoal":90}]"""
     )
   )
 
   lazy val passMacroStats: List[MacroStat] = List(
     MacroStat(
       Some(LocalDate.parse("2021-03-09")),
-      "Sedentary",
+      Sedentary,
       111.0,
       Some(150),
       Some(50),
@@ -64,7 +65,7 @@ object UserDetails {
     ),
     MacroStat(
       Some(LocalDate.parse("2021-08-09")),
-      "Very Active",
+      VeryActive,
       222.0,
       Some(222),
       Some(33),
@@ -76,5 +77,4 @@ object UserDetails {
       90
     )
   )
-
 }

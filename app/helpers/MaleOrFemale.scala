@@ -17,7 +17,7 @@ object MaleOrFemale {
         } yield {
           (sex) match {
             case (Right(sex)) => Right(MaleOrFemale(sex))
-            case _            => Left("Unable to bind an sex")
+            case _            => Left("Unable to bind a sex")
           }
         }
       }
@@ -28,9 +28,9 @@ object MaleOrFemale {
 
   def apply(value: String): MaleOrFemale =
     value match {
-      case "male"   => Male
-      case "female" => Female
-      case "other"  => Other
+      case "Male"   => Male
+      case "Female" => Female
+      case "Other"  => Other
     }
 }
 

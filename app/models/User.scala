@@ -45,9 +45,9 @@ object User {
 
       override def reads(json: JsValue): JsResult[MaleOrFemale] =
         json match {
-          case JsString("male")   => JsSuccess(Male)
-          case JsString("female") => JsSuccess(Female)
-          case JsString("other")  => JsSuccess(Other)
+          case JsString("Male")   => JsSuccess(Male)
+          case JsString("Female") => JsSuccess(Female)
+          case JsString("Other")  => JsSuccess(Other)
           case _: DateTimeParseException =>
             JsError("That's not a sex")
           case _ => JsError("That's not a sex")
