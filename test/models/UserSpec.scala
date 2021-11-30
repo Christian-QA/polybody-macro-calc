@@ -46,7 +46,7 @@ class UserSpec extends BaseSpec {
       "username" -> "testUsername",
       "email" -> "testEmail@email.com",
       "dob" -> "1996-10-10",
-      "sex" -> "male",
+      "sex" -> "Male",
       "height" -> 175.5,
       "targetWeight" -> 165
     )

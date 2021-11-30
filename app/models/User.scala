@@ -41,7 +41,7 @@ object User {
   implicit val activityLevelFormat: Format[MaleOrFemale] =
     new Format[MaleOrFemale] {
       override def writes(o: MaleOrFemale): JsValue =
-        json.JsString(o.toString.toLowerCase)
+        json.JsString(o.toString)
 
       override def reads(json: JsValue): JsResult[MaleOrFemale] =
         json match {
