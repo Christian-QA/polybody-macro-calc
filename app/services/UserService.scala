@@ -3,6 +3,7 @@ package services
 import com.google.inject.Inject
 import connectors.PolybodyConnector
 import errors.CustomErrorHandler
+import helpers.MaleOrFemale
 import models.User
 
 import java.time.LocalDate
@@ -25,7 +26,7 @@ class UserService @Inject() (polybodyConnector: PolybodyConnector)(implicit
             value(0)("username").str,
             value(0)("email").str,
             LocalDate.parse(value(0)("dob").str),
-            value(0)("sex").str,
+            MaleOrFemale.apply(value(0)("sex").str),
             value(0)("height").num,
             value(0)("targetWeight").numOpt
           )

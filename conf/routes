@@ -17,7 +17,7 @@ POST    /how-active-are-you                 controllers.HowActiveAreYouControlle
 GET     /short-summary                      controllers.ShortSummaryController.shortSummaryPageLoad()
 #POST    /short-summary                      controllers.HowActiveAreYouController.howActiveAreYouOnSubmit()
 
-GET     /explore                            controllers.HomeController.explore()
+#GET     /explore                            controllers.HomeController.explore()
 
 #TODO - Review if needed
 GET     /getUserDetails/:username           controllers.DataController.getUserDetails(username: String)

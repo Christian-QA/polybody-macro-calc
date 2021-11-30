@@ -5,7 +5,20 @@
 
 @Template("Activity Level") {
 @defining(play.core.PlayVersion.current) { version =>
-
-
+    <div>
+        @helper.form(action = controllers.routes.HowActiveAreYouController.howActiveAreYouOnSubmit()) {
+            @helper.inputRadioGroup(
+                field = form("howActiveAreYou"),
+                options = Seq(
+                    "sedentary" -> "Sedentary",
+                    "lightlyActive" -> "LightlyActive",
+                    "moderatelyActive" -> "ModeratelyActive",
+                    "veryActive" -> "VeryActive"
+                ),
+                args = Symbol("_label") -> ActivityLevel
+            )
+            <input type="submit" value="Submit">
+            }
+    </div>
 }
 }

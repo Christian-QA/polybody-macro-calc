@@ -36,7 +36,7 @@ class MacroStatService @Inject() (polybodyConnector: PolybodyConnector)(implicit
             println(parsedInput)
             val stats: List[MacroStat] = MacroStat(
               Some(LocalDate.parse(parsedInput(acc)("dateTime").str)),
-              parsedInput(acc)("activityLevel").str.to[ActivityLevel],
+              ActivityLevel.apply(parsedInput(acc)("activityLevel").str),
               parsedInput(acc)("setGoal").num,
               Some(parsedInput(acc)("proteinPreference").num.toInt),
               Some(parsedInput(acc)("fatPreference").num.toInt),
@@ -57,12 +57,13 @@ class MacroStatService @Inject() (polybodyConnector: PolybodyConnector)(implicit
     }
   }
 
+  ///TODO - Fix issue with requiring .get for Options and .toString with ActivityLevel
   def addMacroStat(
       username: String,
       macroStat: MacroStat
   ): Future[Either[CustomErrorHandler, Int]] = {
     val data: Obj = Obj(
-      "activityLevel" -> macroStat.activityLevel,
+      "activityLevel" -> macroStat.activityLevel.toString,
       "setGoal" -> macroStat.setGoal,
       "proteinPreference" -> macroStat.proteinPreference.get,
       "fatPreference" -> macroStat.fatPreference.get,

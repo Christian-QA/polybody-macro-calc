@@ -13,7 +13,7 @@ object WhatIsYourTargetWeightForm {
   ): Form[WhatIsYourTargetWeightForm] =
     Form(
       mapping(
-        "howTallAreYou" -> Forms.of[Double]
+        "whatIsYourTargetWeight" -> Forms.of[Double]
       )(WhatIsYourTargetWeightForm.apply)(WhatIsYourTargetWeightForm.unapply)
     )
 }

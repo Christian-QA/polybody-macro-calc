@@ -5,6 +5,12 @@
 @Template("Current weight") {
 @defining(play.core.PlayVersion.current) { version =>
 
+    <div>
+        @helper.form(action = controllers.routes.HowMuchDoYouWeighController.howMuchDoYouWeighOnSubmit()) {
+            @helper.inputText(field = form("howMuchDoYouWeigh"), args = Symbol("_label") -> Double)
+            <input type="submit" value="Submit">
+            }
 
+    </div>
 }
 }
