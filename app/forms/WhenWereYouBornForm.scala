@@ -5,11 +5,11 @@ import play.api.data.Forms.{date, localDate, mapping, number}
 
 import java.time.LocalDate
 
-case class HowOldAreYouForm(age: LocalDate)
+case class WhenWereYouBornForm(age: LocalDate)
 
-object HowOldAreYouForm {
+object WhenWereYouBornForm {
 
-  def form(errorMessageKey: Option[String] = None): Form[HowOldAreYouForm] =
+  def form(errorMessageKey: Option[String] = None): Form[WhenWereYouBornForm] =
     Form(
       mapping(
         "howOldAreYou" -> localDate
@@ -17,6 +17,6 @@ object HowOldAreYouForm {
 //            error = "Please enter your Age using the Slider or the text box",
 //            constraint = e => e < 1 && e > 130
 //          )
-      )(HowOldAreYouForm.apply)(HowOldAreYouForm.unapply)
+      )(WhenWereYouBornForm.apply)(WhenWereYouBornForm.unapply)
     )
 }

@@ -74,7 +74,7 @@ class DataController @Inject() (
       val macroStat: MacroStat = MacroStat(
         dateTime = None,
         activityLevel = Sedentary,
-        setGoal = 100d,
+        setGoal = Some(100),
         proteinPreference = Some(50),
         fatPreference = Some(150),
         carbPreference = Some(1500),

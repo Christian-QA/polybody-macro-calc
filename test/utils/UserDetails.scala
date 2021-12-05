@@ -45,7 +45,7 @@ object UserDetails {
 
   lazy val passMacroStatsUjson: ArrayBuffer[Value] = ArrayBuffer(
     ujson.Value(
-      """[{"dateTime":"2021-08-09","activityLevel":"VeryActive","setGoal":222,"proteinPreference":222,"fatPreference":33,"carbPreference":444,"bodyFat":13,"equationPreference":"Default","maintenanceCalories":2900,"targetCalories":2500,"timeToGoal":90},{"dateTime":"2021-03-09","activityLevel":"Sedentary","setGoal":111,"proteinPreference":150,"fatPreference":50,"carbPreference":300,"bodyFat":13,"equationPreference":"Default","maintenanceCalories":2900,"targetCalories":2500,"timeToGoal":90}]"""
+      """[{"dateTime":"2021-08-09","activityLevel":"VeryActive","setGoal":220,"proteinPreference":222,"fatPreference":33,"carbPreference":444,"bodyFat":13,"equationPreference":"Default","maintenanceCalories":2900,"targetCalories":2500,"timeToGoal":90},{"dateTime":"2021-03-09","activityLevel":"Sedentary","setGoal":111,"proteinPreference":150,"fatPreference":50,"carbPreference":300,"bodyFat":13,"equationPreference":"Default","maintenanceCalories":2900,"targetCalories":2500,"timeToGoal":90}]"""
     )
   )
 
@@ -53,7 +53,7 @@ object UserDetails {
     MacroStat(
       Some(LocalDate.parse("2021-03-09")),
       Sedentary,
-      111.0,
+      Some(111),
       Some(150),
       Some(50),
       Some(300),
@@ -66,7 +66,7 @@ object UserDetails {
     MacroStat(
       Some(LocalDate.parse("2021-08-09")),
       VeryActive,
-      222.0,
+      Some(220),
       Some(222),
       Some(33),
       Some(444),

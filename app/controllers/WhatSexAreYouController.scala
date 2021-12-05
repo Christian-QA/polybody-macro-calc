@@ -43,8 +43,8 @@ class WhatSexAreYouController @Inject() (
 
             Future.successful(
               Redirect(
-                routes.HowOldAreYouController
-                  .howOldAreYouPageLoad()
+                routes.WhenWereYouBornController
+                  .whenWereYouBornPageLoad()
               )
             )
           }

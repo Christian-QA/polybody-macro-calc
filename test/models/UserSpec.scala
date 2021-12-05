@@ -18,7 +18,7 @@ class UserSpec extends BaseSpec {
   val macroStat: MacroStat = new MacroStat(
     Some(LocalDate.of(2020, 3, 24)),
     VeryActive,
-    160,
+    Some(160),
     Some(150),
     Some(50),
     Some(200),

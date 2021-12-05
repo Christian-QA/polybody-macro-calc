@@ -11,7 +11,7 @@ class MacroStatSpec extends BaseSpec {
   val macroStat: MacroStat = new MacroStat(
     Some(LocalDate.of(2020, 3, 24)),
     VeryActive,
-    160,
+    Some(160),
     Some(150),
     Some(50),
     Some(200),
@@ -85,7 +85,7 @@ class MacroStatSpec extends BaseSpec {
         invalidJson.as[MacroStat]
       }
 
-      ex.getMessage mustBe "JsResultException(errors:List((/activityLevel,List(JsonValidationError(List(error.path.missing),List()))), (/maintenanceCalories,List(JsonValidationError(List(error.path.missing),List()))), (/timeToGoal,List(JsonValidationError(List(error.path.missing),List()))), (/setGoal,List(JsonValidationError(List(error.path.missing),List()))), (/targetCalories,List(JsonValidationError(List(error.path.missing),List())))))"
+      ex.getMessage mustBe "JsResultException(errors:List((/activityLevel,List(JsonValidationError(List(error.path.missing),List()))), (/maintenanceCalories,List(JsonValidationError(List(error.path.missing),List()))), (/timeToGoal,List(JsonValidationError(List(error.path.missing),List()))), (/targetCalories,List(JsonValidationError(List(error.path.missing),List())))))"
     }
 
     "serialise to json" in {
@@ -99,7 +99,5 @@ class MacroStatSpec extends BaseSpec {
 
       result mustBe macroStat
     }
-
   }
-
 }

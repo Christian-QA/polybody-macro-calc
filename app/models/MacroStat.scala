@@ -19,7 +19,7 @@ import java.time.LocalDate
 case class MacroStat(
     dateTime: Option[LocalDate],
     activityLevel: ActivityLevel,
-    setGoal: Double,
+    setGoal: Option[Int],
     proteinPreference: Option[Int],
     fatPreference: Option[Int],
     carbPreference: Option[Int],
