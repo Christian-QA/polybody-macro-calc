@@ -8,7 +8,7 @@
     @defining(play.core.PlayVersion.current) { version =>
         <div>
             @helper.form(action = controllers.routes.WhatSexAreYouController.whatSexAreYouOnSubmit()) {
-                @helper.inputRadioGroup(field = form("whatSexAreYou"), options = Seq("male"->"Male","female"->"Female"), args = Symbol("_label") -> MaleOrFemale)
+                @helper.inputRadioGroup(field = form("whatSexAreYou"), options = Seq("Male"->"Male","Female"->"Female"), args = Symbol("_label") -> MaleOrFemale)
                 <input type="submit" value="Submit">
             }
         </div>

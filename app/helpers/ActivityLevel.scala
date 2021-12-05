@@ -26,13 +26,15 @@ object ActivityLevel {
       }
     }
 
-  def apply(value: String): ActivityLevel =
+  def apply(value: String): ActivityLevel = {
+    println(value)
     value match {
       case "Sedentary"        => Sedentary
       case "LightlyActive"    => LightlyActive
       case "ModeratelyActive" => ModeratelyActive
       case "VeryActive"       => VeryActive
     }
+  }
 }
 
 sealed trait ActivityLevel

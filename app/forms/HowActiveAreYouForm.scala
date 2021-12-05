@@ -35,11 +35,15 @@ object HowActiveAreYouForm {
       mapping(
         "howActiveAreYou" -> text
           .verifying(
-            error = "Please select your sex to continue with the calculation",
+            error =
+              "Please select your activity level to continue with the calculation ",
             constraint = e => e.nonEmpty
           )
           .transform[ActivityLevel](
-            fromString => ActivityLevel(fromString),
+            fromString => {
+              println(fromString)
+              ActivityLevel(fromString)
+            },
             fromProduct => fromProduct.toString
           )
       )(HowActiveAreYouForm.apply)(HowActiveAreYouForm.unapply)

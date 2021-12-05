@@ -13,7 +13,7 @@ object DoYouHaveAProteinGoalForm {
   ): Form[DoYouHaveAProteinGoalForm] =
     Form(
       mapping(
-        "proteinGoal" -> number
+        "doYouHaveAProteinGoal" -> number
         //          .verifying(
         //            error = "Please enter your Age using the Slider or the text box",
         //            constraint = e => e < 1 && e > 130

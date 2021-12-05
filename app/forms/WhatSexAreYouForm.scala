@@ -11,9 +11,9 @@ object WhatSexAreYouForm {
 
   implicit val formats: OFormat[WhatSexAreYouForm] = {
     implicit val whatSexAreYouReads: Reads[MaleOrFemale] = {
-      case JsString("male")   => JsSuccess(Male)
-      case JsString("female") => JsSuccess(Female)
-      case JsString("other")  => JsSuccess(Other)
+      case JsString("Male")   => JsSuccess(Male)
+      case JsString("Female") => JsSuccess(Female)
+      case JsString("Other")  => JsSuccess(Other)
       case _ =>
         JsError(
           Seq(
@@ -24,9 +24,9 @@ object WhatSexAreYouForm {
         )
     }
     implicit val whatSexAreYouWrites: Writes[MaleOrFemale] = {
-      case Male   => JsString("male")
-      case Female => JsString("female")
-      case Other  => JsString("other")
+      case Male   => JsString("Male")
+      case Female => JsString("Female")
+      case Other  => JsString("Other")
     }
     Json.format[WhatSexAreYouForm]
   }

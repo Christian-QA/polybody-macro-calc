@@ -31,7 +31,7 @@ class DoYouHaveAKcalGoalController @Inject() (
 
   def doYouHaveAKcalGoalOnSubmit(): Action[AnyContent] =
     Action.async { implicit request: Request[AnyContent] =>
-      HowActiveAreYouForm
+      DoYouHaveAKcalGoalForm
         .form()
         .bindFromRequest()
         .fold(
@@ -39,12 +39,12 @@ class DoYouHaveAKcalGoalController @Inject() (
             Future.successful(Redirect(routes.HomeController.index())),
           value => {
             val result: CompletionStage[Done] =
-              cache.set("activityLevel", value)
+              cache.set("kcalGoal", value)
 
             Future.successful(
               Redirect(
-                routes.ShortSummaryController
-                  .shortSummaryPageLoad()
+                routes.DoYouHaveAProteinGoalController
+                  .doYouHaveAProteinGoalPageLoad()
               )
             )
           }
