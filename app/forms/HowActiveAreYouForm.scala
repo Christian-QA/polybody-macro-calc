@@ -40,10 +40,7 @@ object HowActiveAreYouForm {
             constraint = e => e.nonEmpty
           )
           .transform[ActivityLevel](
-            fromString => {
-              println(fromString)
-              ActivityLevel(fromString)
-            },
+            fromString => ActivityLevel(fromString),
             fromProduct => fromProduct.toString
           )
       )(HowActiveAreYouForm.apply)(HowActiveAreYouForm.unapply)

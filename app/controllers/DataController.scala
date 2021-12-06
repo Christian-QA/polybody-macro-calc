@@ -5,7 +5,6 @@ import errors.{CustomErrorHandler, CustomNoContentResponse}
 import helpers.Sedentary
 import models.MacroStat
 import play.api.Logging
-import play.api.mvc.Results.Ok
 import play.api.mvc.{Action, AnyContent, BaseController, ControllerComponents}
 import services.{MacroStatService, PreviousWeightService, UserService}
 

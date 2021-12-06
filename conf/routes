@@ -17,7 +17,7 @@ POST    /how-active-are-you                 controllers.HowActiveAreYouControlle
 GET     /what-is-your-goal                  controllers.DoYouHaveAKcalGoalController.doYouHaveAKcalGoalPageLoad()
 POST    /what-is-your-goal                  controllers.DoYouHaveAKcalGoalController.doYouHaveAKcalGoalOnSubmit()
 GET     /short-summary                      controllers.ShortSummaryController.shortSummaryPageLoad()
-#POST    /short-summary                      controllers.HowActiveAreYouController.howActiveAreYouOnSubmit()
+POST    /short-summary                      controllers.ShortSummaryController.shortSummaryOnSubmit()
 
 GET     /do-you-have-a-kcal-goal            controllers.DoYouHaveAKcalGoalController.doYouHaveAKcalGoalPageLoad()
 POST    /do-you-have-a-kcal-goal            controllers.DoYouHaveAKcalGoalController.doYouHaveAKcalGoalOnSubmit()

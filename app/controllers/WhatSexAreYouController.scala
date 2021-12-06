@@ -3,17 +3,15 @@ package controllers
 import akka.Done
 import com.google.inject.Inject
 import forms.WhatSexAreYouForm
-import helpers.MaleOrFemale
+import play.api.cache.AsyncCacheApi
 import play.api.i18n.{I18nSupport, Langs, MessagesApi}
 import play.api.mvc._
-import play.cache.DefaultAsyncCacheApi
 
-import java.util.Optional
 import java.util.concurrent.CompletionStage
 import scala.concurrent.Future
 
 class WhatSexAreYouController @Inject() (
-    cache: DefaultAsyncCacheApi,
+    cache: AsyncCacheApi,
     cc: ControllerComponents,
     mcc: MessagesApi,
     langs: Langs
@@ -35,11 +33,8 @@ class WhatSexAreYouController @Inject() (
             Future.successful(Redirect(routes.HomeController.index()))
           },
           value => {
-            val result: CompletionStage[Done] = cache.set("sex", value)
-//            val futureMaybeUser: CompletionStage[Optional[MaleOrFemale]] =
-//              cache.get[MaleOrFemale]("sex")
-
-            //println(futureMaybeUser)
+            val result: Future[Done] =
+              cache.set("sex", value.sex)
 
             Future.successful(
               Redirect(

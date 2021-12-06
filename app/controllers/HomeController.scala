@@ -1,7 +1,6 @@
 package controllers
 
 import com.google.inject.Inject
-import forms.WhatSexAreYouForm
 import play.api.i18n.I18nSupport
 import play.api.mvc._
 

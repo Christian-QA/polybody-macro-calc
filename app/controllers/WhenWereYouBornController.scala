@@ -3,15 +3,18 @@ package controllers
 import akka.Done
 import com.google.inject.Inject
 import forms.WhenWereYouBornForm
+import helpers.MaleOrFemale
+import play.api.cache.AsyncCacheApi
 import play.api.i18n.{I18nSupport, Langs, MessagesApi}
 import play.api.mvc._
-import play.cache.DefaultAsyncCacheApi
 
+import java.util.Optional
 import java.util.concurrent.CompletionStage
-import scala.concurrent.Future
+import scala.concurrent.{Await, Future}
+import scala.concurrent.duration.{Duration, SECONDS}
 
 class WhenWereYouBornController @Inject() (
-    cache: DefaultAsyncCacheApi,
+    cache: AsyncCacheApi,
     cc: ControllerComponents,
     mcc: MessagesApi,
     langs: Langs
@@ -32,7 +35,13 @@ class WhenWereYouBornController @Inject() (
           formWithErrors =>
             Future.successful(Redirect(routes.HomeController.index())),
           value => {
-            val result: CompletionStage[Done] = cache.set("age", value)
+            val result: Future[Done] = cache.set("age", value.age)
+
+            val futureMaybeUser: Future[Option[MaleOrFemale]] =
+              cache
+                .get[MaleOrFemale]("sex")
+
+            println(Await.result(futureMaybeUser, Duration(5, SECONDS)))
 
             Future.successful(
               Redirect(routes.HowTallAreYouController.howTallAreYouPageLoad())

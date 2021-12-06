@@ -3,15 +3,14 @@ package controllers
 import akka.Done
 import com.google.inject.Inject
 import forms.DoYouHaveACarbGoalForm
+import play.api.cache.AsyncCacheApi
 import play.api.i18n.{I18nSupport, Langs, MessagesApi}
 import play.api.mvc._
-import play.cache.DefaultAsyncCacheApi
 
-import java.util.concurrent.CompletionStage
 import scala.concurrent.Future
 
 class DoYouHaveACarbGoalController @Inject() (
-    cache: DefaultAsyncCacheApi,
+    cache: AsyncCacheApi,
     cc: ControllerComponents,
     mcc: MessagesApi,
     langs: Langs
@@ -32,8 +31,9 @@ class DoYouHaveACarbGoalController @Inject() (
           formWithErrors =>
             Future.successful(Redirect(routes.HomeController.index())),
           value => {
-            val result: CompletionStage[Done] =
-              cache.set("carbGoal", value)
+            println(value.carb)
+            val result: Future[Done] =
+              cache.set("carbGoal", value.carb)
 
             Future.successful(
               Redirect(
