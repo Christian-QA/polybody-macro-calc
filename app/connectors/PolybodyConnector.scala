@@ -116,8 +116,6 @@ class PolybodyConnector @Inject() (val applicationConfig: ApplicationConfig)(
       username: String,
       data: Obj
   ): Response = {
-
-    println(data)
     requests.put(
       url = addMacroStatsUrl(username),
       headers = Map("Content-Type" -> "application/json"),

@@ -1,6 +1,7 @@
 package models
 
-import play.api.libs.json.{JsResultException, Json}
+import helpers.{Male, VeryActive}
+import play.api.libs.json.{JsObject, JsResultException, Json}
 import utils.BaseSpec
 
 import java.time.LocalDate
@@ -15,9 +16,9 @@ class UserSpec extends BaseSpec {
   }
 
   val macroStat: MacroStat = new MacroStat(
-    LocalDate.of(2020, 3, 24),
-    "Very Active",
-    160,
+    Some(LocalDate.of(2020, 3, 24)),
+    VeryActive,
+    Some(160),
     Some(150),
     Some(50),
     Some(200),
@@ -32,27 +33,27 @@ class UserSpec extends BaseSpec {
     "testId",
     "testUsername",
     "testEmail@email.com",
-    25,
-    "male",
+    LocalDate.of(1996, 10, 10),
+    Male,
     175.5,
     Some(165)
   )
 
   "User" must {
 
-    val json = Json.obj(
+    val json: JsObject = Json.obj(
       "_id" -> "testId",
       "username" -> "testUsername",
       "email" -> "testEmail@email.com",
-      "age" -> 25,
-      "gender" -> "male",
+      "dob" -> "1996-10-10",
+      "sex" -> "Male",
       "height" -> 175.5,
       "targetWeight" -> 165
     )
 
     "deserialise valid values" in {
 
-      val result = json.as[User]
+      val result: User = json.as[User]
 
       result mustBe user
 
@@ -60,20 +61,20 @@ class UserSpec extends BaseSpec {
 
     "deserialise invalid values" in {
 
-      val invalidJson = Json.obj(
+      val invalidJson: JsObject = Json.obj(
         "username" -> 0,
         "email" -> 0,
-        "age" -> "25",
-        "gender" -> 0,
+        "dob" -> "1996-10-10",
+        "sex" -> 0,
         "height" -> "175.5",
         "targetWeight" -> "150.5"
       )
 
-      val ex = intercept[JsResultException] {
+      val ex: JsResultException = intercept[JsResultException] {
         invalidJson.as[User]
       }
 
-      ex.getMessage mustBe "JsResultException(errors:List((/height,List(JsonValidationError(List(error.expected.jsnumber),List()))), (/username,List(JsonValidationError(List(error.expected.jsstring),List()))), (/_id,List(JsonValidationError(List(error.path.missing),List()))), (/targetWeight,List(JsonValidationError(List(error.expected.jsnumber),List()))), (/gender,List(JsonValidationError(List(error.expected.jsstring),List()))), (/age,List(JsonValidationError(List(error.expected.jsnumber),List()))), (/email,List(JsonValidationError(List(error.expected.jsstring),List())))))"
+      ex.getMessage mustBe "JsResultException(errors:List((/height,List(JsonValidationError(List(error.expected.jsnumber),List()))), (/username,List(JsonValidationError(List(error.expected.jsstring),List()))), (/_id,List(JsonValidationError(List(error.path.missing),List()))), (/targetWeight,List(JsonValidationError(List(error.expected.jsnumber),List()))), (/email,List(JsonValidationError(List(error.expected.jsstring),List()))), (/sex,List(JsonValidationError(List(That's not a sex),List())))))"
     }
 
     "deserialise invalid key" in {
@@ -81,8 +82,8 @@ class UserSpec extends BaseSpec {
       val invalidJson = Json.obj(
         "invalidKey" -> "testUsername",
         "invalidKey" -> "testEmail@email.com",
-        "invalidKey" -> 25,
-        "invalidKey" -> "male",
+        "invalidKey" -> "1996-10-10",
+        "invalidKey" -> "Male",
         "invalidKey" -> 175.5,
         "invalidKey" -> 165
       )
@@ -91,7 +92,7 @@ class UserSpec extends BaseSpec {
         invalidJson.as[User]
       }
 
-      ex.getMessage mustBe "JsResultException(errors:List((/height,List(JsonValidationError(List(error.path.missing),List()))), (/username,List(JsonValidationError(List(error.path.missing),List()))), (/_id,List(JsonValidationError(List(error.path.missing),List()))), (/gender,List(JsonValidationError(List(error.path.missing),List()))), (/age,List(JsonValidationError(List(error.path.missing),List()))), (/email,List(JsonValidationError(List(error.path.missing),List())))))"
+      ex.getMessage mustBe "JsResultException(errors:List((/dob,List(JsonValidationError(List(error.path.missing),List()))), (/height,List(JsonValidationError(List(error.path.missing),List()))), (/username,List(JsonValidationError(List(error.path.missing),List()))), (/_id,List(JsonValidationError(List(error.path.missing),List()))), (/email,List(JsonValidationError(List(error.path.missing),List()))), (/sex,List(JsonValidationError(List(error.path.missing),List())))))"
     }
 
     "serialise to json" in {

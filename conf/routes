@@ -1,16 +1,38 @@
 # Routes
 # This file defines all application routes (Higher priority routes first)
-# https://www.playframework.com/documentation/latest/ScalaRouting
-# ~~~~
 
-# An example controller showing a sample home page
 GET     /                                   controllers.HomeController.index()
-GET     /explore                            controllers.HomeController.explore()
-GET     /gender                             controllers.HomeController.gender()
-GET     /age                                controllers.HomeController.age()
-GET     /height                             controllers.HomeController.height()
-GET     /current_weight                     controllers.HomeController.currentWeight()
-GET     /target_weight                      controllers.HomeController.targetWeight()
+GET     /what-sex-are-you                   controllers.WhatSexAreYouController.whatSexAreYouPageLoad()
+POST    /what-sex-are-you                   controllers.WhatSexAreYouController.whatSexAreYouOnSubmit()
+GET     /how-old-are-you                    controllers.WhenWereYouBornController.whenWereYouBornPageLoad()
+POST    /how-old-are-you                    controllers.WhenWereYouBornController.whenWereYouBornOnSubmit()
+GET     /how-tall-are-you                   controllers.HowTallAreYouController.howTallAreYouPageLoad()
+POST    /how-tall-are-you                   controllers.HowTallAreYouController.howTallAreYouOnSubmit()
+GET     /how-much-do-you-weigh              controllers.HowMuchDoYouWeighController.howMuchDoYouWeighPageLoad()
+POST    /how-much-do-you-weigh              controllers.HowMuchDoYouWeighController.howMuchDoYouWeighOnSubmit()
+GET     /what-is-your-target-weight         controllers.WhatIsYourTargetWeightController.whatIsYourTargetWeightPageLoad()
+POST    /what-is-your-target-weight         controllers.WhatIsYourTargetWeightController.whatIsYourTargetWeightOnSubmit()
+GET     /how-active-are-you                 controllers.HowActiveAreYouController.howActiveAreYouPageLoad()
+POST    /how-active-are-you                 controllers.HowActiveAreYouController.howActiveAreYouOnSubmit()
+GET     /what-is-your-goal                  controllers.DoYouHaveAKcalGoalController.doYouHaveAKcalGoalPageLoad()
+POST    /what-is-your-goal                  controllers.DoYouHaveAKcalGoalController.doYouHaveAKcalGoalOnSubmit()
+GET     /short-summary                      controllers.ShortSummaryController.shortSummaryPageLoad()
+POST    /short-summary                      controllers.ShortSummaryController.shortSummaryOnSubmit()
+
+GET     /do-you-have-a-kcal-goal            controllers.DoYouHaveAKcalGoalController.doYouHaveAKcalGoalPageLoad()
+POST    /do-you-have-a-kcal-goal            controllers.DoYouHaveAKcalGoalController.doYouHaveAKcalGoalOnSubmit()
+GET     /do-you-have-a-protein-goal         controllers.DoYouHaveAProteinGoalController.doYouHaveAProteinGoalPageLoad()
+POST    /do-you-have-a-protein-goal         controllers.DoYouHaveAProteinGoalController.doYouHaveAProteinGoalOnSubmit()
+GET     /do-you-have-a-fat-goal             controllers.DoYouHaveAFatGoalController.doYouHaveAFatGoalPageLoad()
+POST    /do-you-have-a-fat-goal             controllers.DoYouHaveAFatGoalController.doYouHaveAFatGoalOnSubmit()
+GET     /do-you-have-a-carb-goal            controllers.DoYouHaveACarbGoalController.doYouHaveACarbGoalPageLoad()
+POST    /do-you-have-a-carb-goal            controllers.DoYouHaveACarbGoalController.doYouHaveACarbGoalOnSubmit()
+GET     /do-you-want-to-use-your-body-fat   controllers.DoYouWantToUseYourBodyFatController.doYouWantToUseYourBodyFatPageLoad()
+POST    /do-you-want-to-use-your-body-fat   controllers.DoYouWantToUseYourBodyFatController.doYouWantToUseYourBodyFatOnSubmit()
+GET     /full-summary                       controllers.FullSummaryController.fullSummaryPageLoad()
+#POST    /short-summary                      controllers.HowActiveAreYouController.howActiveAreYouOnSubmit()
+
+#GET     /explore                            controllers.HomeController.explore()
 
 #TODO - Review if needed
 GET     /getUserDetails/:username           controllers.DataController.getUserDetails(username: String)

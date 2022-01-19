@@ -22,7 +22,7 @@ class $model;format="Camel"$Controller @Inject()(mcc: MessagesControllerComponen
   val $model;format="camel"$Form = Form(
     mapping(
       "name" -> text,
-      "age" -> number
+      "Age" -> number
     )($model;format="Camel"$Data.apply)($model;format="Camel"$Data.unapply)
   )
 

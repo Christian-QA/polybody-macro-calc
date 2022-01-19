@@ -1,0 +1,11 @@
+@import dto.MacroCalcDto
+@(macroCalcDto: MacroCalcDto)(implicit messages: Messages)
+
+@Template("Full Summary") {
+@defining(play.core.PlayVersion.current) { version =>
+
+  <p>@macroCalcDto</p>
+
+
+}
+}

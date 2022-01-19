@@ -1,0 +1,16 @@
+@import forms.WhenWereYouBornForm
+
+@*TODO - Figure out how to make the Form param unspecified *@
+@(label: String, form: Form[WhenWereYouBornForm])
+
+
+<div>
+    @helper.form(action = controllers.routes.WhenWereYouBornController.whenWereYouBornOnSubmit()) {
+        <label for="Slider">@label</label>
+        <input type="range" id="Slider" name="Slider" min="1" max="130" oninput="this.nextElementSibling.value = this.value">
+        <input type="text" id="sliderText" name="sliderText" min="1" max="130" oninput="this.previousElementSibling.value = this.value">
+
+        <input type="submit" value="Submit">
+        }
+</div>
+

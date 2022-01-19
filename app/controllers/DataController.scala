@@ -2,9 +2,9 @@ package controllers
 
 import com.google.inject.Inject
 import errors.{CustomErrorHandler, CustomNoContentResponse}
+import helpers.Sedentary
 import models.MacroStat
 import play.api.Logging
-import play.api.mvc.Results.Ok
 import play.api.mvc.{Action, AnyContent, BaseController, ControllerComponents}
 import services.{MacroStatService, PreviousWeightService, UserService}
 
@@ -72,8 +72,8 @@ class DataController @Inject() (
     Action.async { implicit request =>
       val macroStat: MacroStat = MacroStat(
         dateTime = None,
-        activityLevel = "Sedentary",
-        setGoal = 100d,
+        activityLevel = Sedentary,
+        setGoal = Some(100),
         proteinPreference = Some(50),
         fatPreference = Some(150),
         carbPreference = Some(1500),

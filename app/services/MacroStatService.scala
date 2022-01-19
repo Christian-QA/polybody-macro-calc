@@ -3,6 +3,7 @@ package services
 import com.google.inject.Inject
 import connectors.PolybodyConnector
 import errors.{CustomClientResponse, CustomErrorHandler}
+import helpers.ActivityLevel
 import models.MacroStat
 import play.api.http.Status.{BAD_REQUEST, OK}
 import ujson.{Obj, Value}
@@ -35,8 +36,8 @@ class MacroStatService @Inject() (polybodyConnector: PolybodyConnector)(implicit
             println(parsedInput)
             val stats: List[MacroStat] = MacroStat(
               Some(LocalDate.parse(parsedInput(acc)("dateTime").str)),
-              parsedInput(acc)("activityLevel").str,
-              parsedInput(acc)("setGoal").num,
+              ActivityLevel.apply(parsedInput(acc)("activityLevel").str),
+              Some(parsedInput(acc)("setGoal").num.toInt),
               Some(parsedInput(acc)("proteinPreference").num.toInt),
               Some(parsedInput(acc)("fatPreference").num.toInt),
               Some(parsedInput(acc)("carbPreference").num.toInt),
@@ -56,13 +57,14 @@ class MacroStatService @Inject() (polybodyConnector: PolybodyConnector)(implicit
     }
   }
 
+  ///TODO - Fix issue with requiring .get for Options and .toString with ActivityLevel
   def addMacroStat(
       username: String,
       macroStat: MacroStat
   ): Future[Either[CustomErrorHandler, Int]] = {
     val data: Obj = Obj(
-      "activityLevel" -> macroStat.activityLevel,
-      "setGoal" -> macroStat.setGoal,
+      "activityLevel" -> macroStat.activityLevel.toString,
+      "setGoal" -> macroStat.setGoal.get,
       "proteinPreference" -> macroStat.proteinPreference.get,
       "fatPreference" -> macroStat.fatPreference.get,
       "carbPreference" -> macroStat.carbPreference.get,

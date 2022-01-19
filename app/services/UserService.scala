@@ -3,13 +3,19 @@ package services
 import com.google.inject.Inject
 import connectors.PolybodyConnector
 import errors.CustomErrorHandler
+import helpers.MaleOrFemale
 import models.User
 
+import java.time.LocalDate
 import scala.concurrent.{ExecutionContext, Future}
 
-class UserService @Inject()(polybodyConnector: PolybodyConnector)(implicit ec: ExecutionContext) {
+class UserService @Inject() (polybodyConnector: PolybodyConnector)(implicit
+    ec: ExecutionContext
+) {
 
-  def getUserDetails(username: String): Future[Either[CustomErrorHandler, User]] = {
+  def getUserDetails(
+      username: String
+  ): Future[Either[CustomErrorHandler, User]] = {
     val data = polybodyConnector.getUserDetails(username)
 
     data.map {
@@ -19,8 +25,8 @@ class UserService @Inject()(polybodyConnector: PolybodyConnector)(implicit ec: E
             value(0)("_id").str,
             value(0)("username").str,
             value(0)("email").str,
-            value(0)("age").num.toInt,
-            value(0)("gender").str,
+            LocalDate.parse(value(0)("dob").str),
+            MaleOrFemale.apply(value(0)("sex").str),
             value(0)("height").num,
             value(0)("targetWeight").numOpt
           )

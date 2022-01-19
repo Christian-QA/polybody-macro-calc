@@ -1,0 +1,17 @@
+@import forms.DoYouHaveACarbGoalForm
+
+@(form: Form[DoYouHaveACarbGoalForm])(implicit messages: Messages)
+
+@Template("Carb Goal") {
+@defining(play.core.PlayVersion.current) { version =>
+
+    <div>
+<!--        TODO - Make form value optional-->
+        @helper.form(action = controllers.routes.DoYouHaveACarbGoalController.doYouHaveACarbGoalOnSubmit()) {
+            @helper.inputText(field = form("doYouHaveACarbGoal"), args = Symbol("_label") -> Int)
+            <input type="submit" value="Submit">
+            }
+
+    </div>
+}
+}

@@ -1,0 +1,27 @@
+@import forms.ShortSummaryForm
+@import dto.MacroCalcDto
+
+@(form: Form[ShortSummaryForm], macroCalcDto: MacroCalcDto)(implicit messages: Messages)
+
+@Template("Short Summary") {
+@defining(play.core.PlayVersion.current) { version =>
+
+    <p>@macroCalcDto</p>
+
+    @helper.form(action = controllers.routes.ShortSummaryController.shortSummaryOnSubmit()) {
+        @helper.inputRadioGroup(
+            field = form("doYouWantToUseAdvancedValues"),
+            options = Seq(
+                "true" -> "true",
+                "true" -> "false",
+            ),
+            args = Symbol("_label") -> Boolean
+        )
+        <input type="submit" value="Submit">
+    }
+
+
+
+
+}
+}

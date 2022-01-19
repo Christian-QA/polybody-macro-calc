@@ -1,5 +1,6 @@
 package models
 
+import helpers.VeryActive
 import play.api.libs.json.{JsResultException, Json}
 import utils.BaseSpec
 
@@ -8,9 +9,9 @@ import java.time.LocalDate
 class MacroStatSpec extends BaseSpec {
 
   val macroStat: MacroStat = new MacroStat(
-    LocalDate.of(2020, 3, 24),
-    "Very Active",
-    160,
+    Some(LocalDate.of(2020, 3, 24)),
+    VeryActive,
+    Some(160),
     Some(150),
     Some(50),
     Some(200),
@@ -25,7 +26,7 @@ class MacroStatSpec extends BaseSpec {
 
     val json = Json.obj(
       "dateTime" -> "2020-03-24",
-      "activityLevel" -> "Very Active",
+      "activityLevel" -> "VeryActive",
       "setGoal" -> 160,
       "proteinPreference" -> 150,
       "fatPreference" -> 50,
@@ -46,7 +47,7 @@ class MacroStatSpec extends BaseSpec {
     "deserialise invalid values" in {
       val invalidJson = Json.obj(
         "dateTime" -> "invalidDate",
-        "activityLevel" -> "Very Active",
+        "activityLevel" -> "VeryActive",
         "setGoal" -> 160,
         "proteinPreference" -> 150,
         "fatPreference" -> 50,
@@ -68,7 +69,7 @@ class MacroStatSpec extends BaseSpec {
 
       val invalidJson = Json.obj(
         "invalidKey" -> "2020-03-24",
-        "invalidKey" -> "Very Active",
+        "invalidKey" -> "VeryActive",
         "invalidKey" -> 160,
         "invalidKey" -> 150,
         "invalidKey" -> 50,
@@ -84,7 +85,7 @@ class MacroStatSpec extends BaseSpec {
         invalidJson.as[MacroStat]
       }
 
-      ex.getMessage mustBe "JsResultException(errors:List((/activityLevel,List(JsonValidationError(List(error.path.missing),List()))), (/maintenanceCalories,List(JsonValidationError(List(error.path.missing),List()))), (/dateTime,List(JsonValidationError(List(error.path.missing),List()))), (/timeToGoal,List(JsonValidationError(List(error.path.missing),List()))), (/setGoal,List(JsonValidationError(List(error.path.missing),List()))), (/targetCalories,List(JsonValidationError(List(error.path.missing),List())))))"
+      ex.getMessage mustBe "JsResultException(errors:List((/activityLevel,List(JsonValidationError(List(error.path.missing),List()))), (/maintenanceCalories,List(JsonValidationError(List(error.path.missing),List()))), (/timeToGoal,List(JsonValidationError(List(error.path.missing),List()))), (/targetCalories,List(JsonValidationError(List(error.path.missing),List())))))"
     }
 
     "serialise to json" in {
@@ -98,7 +99,5 @@ class MacroStatSpec extends BaseSpec {
 
       result mustBe macroStat
     }
-
   }
-
 }
