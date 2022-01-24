@@ -101,6 +101,12 @@ class ShortSummaryController @Inject() (
         Duration(5, SECONDS)
       )
 
+    val kcalGoal: Option[Int] =
+      Await.result(
+        cache.get[Int]("kcalGoal"),
+        Duration(5, SECONDS)
+      )
+
     for {
       sex <- sex
       age <- age
@@ -108,6 +114,7 @@ class ShortSummaryController @Inject() (
       currentWeight <- currentWeight
       targetWeight <- targetWeight
       activityLevel <- activityLevel
+      kcalGoal <- kcalGoal
     } yield {
       MacroCalcDto(
         sex,
@@ -115,7 +122,8 @@ class ShortSummaryController @Inject() (
         height,
         currentWeight,
         targetWeight,
-        activityLevel
+        activityLevel,
+        kcalGoal
       )
     }
   }

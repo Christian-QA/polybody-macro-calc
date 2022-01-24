@@ -3,15 +3,19 @@ package controllers
 import com.google.inject.Inject
 import dto.MacroCalcDto
 import helpers.{ActivityLevel, MaleOrFemale}
+import models.{MacroStat, PreviousWeight}
 import play.api.cache.AsyncCacheApi
 import play.api.i18n.{I18nSupport, Langs, MessagesApi}
 import play.api.mvc._
+import services.{MacroStatService, PreviousWeightService}
 
 import java.time.LocalDate
-import scala.concurrent.Await
+import scala.concurrent.{Await, Future}
 import scala.concurrent.duration.{Duration, SECONDS}
 
 class FullSummaryController @Inject() (
+    macroStatService: MacroStatService,
+    previousWeightService: PreviousWeightService,
     cache: AsyncCacheApi,
     cc: ControllerComponents,
     mcc: MessagesApi,
@@ -33,6 +37,43 @@ class FullSummaryController @Inject() (
 
       }
     }
+
+  def fullSummaryOnSubmit(): Action[AnyContent] = {
+    Action.async { implicit request: Request[AnyContent] =>
+      val cacheData: Option[MacroCalcDto] = cacheToDto
+
+      val localDate: LocalDate = LocalDate.now()
+
+      cacheData match {
+        case Some(value) =>
+          val macroStat = MacroStat(
+            localDate,
+            value.activityLevel,
+            value.targetWeight,
+            value.proteinPreference,
+            value.fatPreference,
+            value.carbPreference,
+            value.bodyFat,
+            value.equationPreference,
+            2000,
+            value.kcalGoal,
+            50
+          )
+
+          macroStatService.addMacroStat("", macroStat)
+          previousWeightService.addPreviousWeight("", value.currentWeight)
+
+        case None => Future.successful(InternalServerError(""))
+      }
+
+      Future.successful(
+        Redirect(
+          routes.ShortSummaryController
+            .shortSummaryPageLoad()
+        )
+      )
+    }
+  }
 
   private def cacheToDto: Option[MacroCalcDto] = {
     val sex: Option[MaleOrFemale] = {
@@ -109,6 +150,7 @@ class FullSummaryController @Inject() (
       currentWeight <- currentWeight
       targetWeight <- targetWeight
       activityLevel <- activityLevel
+      kcalGoal <- kcalGoal
     } yield {
       MacroCalcDto(
         sex,
@@ -121,6 +163,7 @@ class FullSummaryController @Inject() (
         proteinGoal,
         fatGoal,
         carbGoal,
+        Some(""),
         bodyFat
       )
     }

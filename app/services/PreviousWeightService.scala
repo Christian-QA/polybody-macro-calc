@@ -49,10 +49,11 @@ class PreviousWeightService @Inject() (polybodyConnector: PolybodyConnector)(
 
   def addPreviousWeight(
       username: String,
-      weight: Double
+      weight: PreviousWeight
   ): Future[Either[CustomErrorHandler, Int]] = {
     val data: Obj = Obj(
-      "weight" -> weight
+      "dateTime" -> weight.dateTime,
+      "weight" -> weight.weight
     )
     polybodyConnector.addPreviousWeights(username, data) match {
       case response if response.statusCode == OK => Future.successful(Right(OK))

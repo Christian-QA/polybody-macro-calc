@@ -11,9 +11,10 @@ case class MacroCalcDto(
     currentWeight: Double,
     targetWeight: Double,
     activityLevel: ActivityLevel,
-    setGoal: Option[Int] = None,
+    kcalGoal: Int,
     proteinPreference: Option[Int] = None,
     fatPreference: Option[Int] = None,
     carbPreference: Option[Int] = None,
+    equationPreference: Option[String] = None,
     bodyFat: Option[Double] = None
 )

@@ -17,9 +17,9 @@ import play.api.libs.json._
 import java.time.LocalDate
 
 case class MacroStat(
-    dateTime: Option[LocalDate],
+    dateTime: LocalDate,
     activityLevel: ActivityLevel,
-    setGoal: Option[Int],
+    targetWeight: Double,
     proteinPreference: Option[Int],
     fatPreference: Option[Int],
     carbPreference: Option[Int],
