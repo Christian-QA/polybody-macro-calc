@@ -8,6 +8,7 @@ import play.api.Logging
 import play.api.mvc.{Action, AnyContent, BaseController, ControllerComponents}
 import services.{MacroStatService, PreviousWeightService, UserService}
 
+import java.time.LocalDate
 import scala.concurrent.{ExecutionContext, Future}
 
 ///Todo - This class is more to live test the routes than provide purpose in production. This will be deleted after the Views have been made
@@ -71,9 +72,9 @@ class DataController @Inject() (
   def addMacroStat(username: String): Action[AnyContent] =
     Action.async { implicit request =>
       val macroStat: MacroStat = MacroStat(
-        dateTime = None,
+        dateTime = LocalDate.now(),
         activityLevel = Sedentary,
-        setGoal = Some(100),
+        targetWeight = 100,
         proteinPreference = Some(50),
         fatPreference = Some(150),
         carbPreference = Some(1500),

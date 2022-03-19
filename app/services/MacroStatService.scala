@@ -35,9 +35,9 @@ class MacroStatService @Inject() (polybodyConnector: PolybodyConnector)(implicit
           if (acc < parsedInput.length) {
             println(parsedInput)
             val stats: List[MacroStat] = MacroStat(
-              Some(LocalDate.parse(parsedInput(acc)("dateTime").str)),
+              LocalDate.parse(parsedInput(acc)("dateTime").str),
               ActivityLevel.apply(parsedInput(acc)("activityLevel").str),
-              Some(parsedInput(acc)("targetWeight").num.toInt),
+              parsedInput(acc)("targetWeight").num.toInt,
               Some(parsedInput(acc)("proteinPreference").num.toInt),
               Some(parsedInput(acc)("fatPreference").num.toInt),
               Some(parsedInput(acc)("carbPreference").num.toInt),
