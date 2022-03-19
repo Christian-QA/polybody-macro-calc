@@ -57,7 +57,7 @@ class MacroStatService @Inject() (polybodyConnector: PolybodyConnector)(implicit
     }
   }
 
-  ///TODO - Fix issue with requiring .get for Options and .toString with ActivityLevel
+  ///TODO - Fix issue with requiring .get for Options and .toString with Page6ActivityLevel
   def addMacroStat(
       username: String,
       macroStat: MacroStat

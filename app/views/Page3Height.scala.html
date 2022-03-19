@@ -2,11 +2,11 @@
 
 @(form: Form[HowTallAreYouForm])(implicit messages: Messages)
 
-@Template("Height") {
+@Template("Page3Height") {
 @defining(play.core.PlayVersion.current) { version =>
 
     <div>
-        @helper.form(action = controllers.routes.HowTallAreYouController.howTallAreYouOnSubmit()) {
+        @helper.form(action = controllers.routes.Page3HowTallAreYouController.howTallAreYouOnSubmit()) {
             @helper.inputText(field = form("howTallAreYou"), args = Symbol("_label") -> Double)
             <input type="submit" value="Submit">
             }

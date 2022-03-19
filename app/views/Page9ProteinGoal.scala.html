@@ -7,7 +7,7 @@
 
     <div>
 <!--        TODO - Make form value optional-->
-        @helper.form(action = controllers.routes.DoYouHaveAProteinGoalController.doYouHaveAProteinGoalOnSubmit()) {
+        @helper.form(action = controllers.routes.Page9DoYouHaveAProteinGoalController.doYouHaveAProteinGoalOnSubmit()) {
             @helper.inputText(field = form("doYouHaveAProteinGoal"), args = Symbol("_label") -> Int)
             <input type="submit" value="Submit">
             }

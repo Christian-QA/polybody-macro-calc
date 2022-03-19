@@ -1,12 +1,13 @@
 @import forms.HowActiveAreYouForm
 
+@import helpers.ActivityLevel
 @(form: Form[HowActiveAreYouForm])(implicit messages: Messages)
 
 
 @Template("Activity Level") {
 @defining(play.core.PlayVersion.current) { version =>
     <div>
-        @helper.form(action = controllers.routes.HowActiveAreYouController.howActiveAreYouOnSubmit()) {
+        @helper.form(action = controllers.routes.Page6HowActiveAreYouController.howActiveAreYouOnSubmit()) {
             @helper.inputRadioGroup(
                 field = form("howActiveAreYou"),
                 options = Seq(

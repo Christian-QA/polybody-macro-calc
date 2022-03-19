@@ -2,17 +2,16 @@ package controllers
 
 import com.google.inject.Inject
 import dto.MacroCalcDto
-import forms.ShortSummaryForm
 import helpers.{ActivityLevel, MaleOrFemale}
 import play.api.cache.AsyncCacheApi
 import play.api.i18n.{I18nSupport, Langs, MessagesApi}
 import play.api.mvc._
 
 import java.time.LocalDate
+import scala.concurrent.Await
 import scala.concurrent.duration.{Duration, SECONDS}
-import scala.concurrent.{Await, Future}
 
-class ShortSummaryController @Inject() (
+class Page13FullSummaryController @Inject() (
     cache: AsyncCacheApi,
     cc: ControllerComponents,
     mcc: MessagesApi,
@@ -20,47 +19,19 @@ class ShortSummaryController @Inject() (
 ) extends AbstractController(cc)
     with I18nSupport {
 
-  def shortSummaryPageLoad(): Action[AnyContent] = {
+  def fullSummaryPageLoad(): Action[AnyContent] =
     Action { implicit request: Request[AnyContent] =>
       println(cacheToDto)
       cacheToDto match {
         case Some(value) =>
           println("1" * 100)
           println(value)
-          Ok(views.html.ShortSummary(ShortSummaryForm.form(), value))
+          Ok(views.html.Page13FullSummary(value))
         case None =>
           println("2" * 100)
           Ok(views.html.Index())
 
-        //BadRequest(views.html.errorViews.BadRequestView)
       }
-    }
-  }
-
-  def shortSummaryOnSubmit(): Action[AnyContent] =
-    Action.async { implicit request: Request[AnyContent] =>
-      ShortSummaryForm
-        .form()
-        .bindFromRequest()
-        .fold(
-          formWithErrors =>
-            Future.successful(Redirect(routes.HomeController.index())),
-          value =>
-            if (value.continue) {
-              Future.successful(
-                Redirect(
-                  routes.DoYouHaveAKcalGoalController
-                    .doYouHaveAKcalGoalPageLoad()
-                )
-              )
-            } else {
-              Future.successful(
-                Redirect(
-                  routes.HomeController.index()
-                )
-              )
-            }
-        )
     }
 
   private def cacheToDto: Option[MacroCalcDto] = {
@@ -101,6 +72,36 @@ class ShortSummaryController @Inject() (
         Duration(5, SECONDS)
       )
 
+    val kcalGoal: Option[Int] =
+      Await.result(
+        cache.get[Int]("kcalGoal"),
+        Duration(5, SECONDS)
+      )
+
+    val proteinGoal: Option[Int] =
+      Await.result(
+        cache.get[Int]("proteinGoal"),
+        Duration(5, SECONDS)
+      )
+
+    val fatGoal: Option[Int] =
+      Await.result(
+        cache.get[Int]("fatGoal"),
+        Duration(5, SECONDS)
+      )
+
+    val carbGoal: Option[Int] =
+      Await.result(
+        cache.get[Int]("carbGoal"),
+        Duration(5, SECONDS)
+      )
+
+    val bodyFat: Option[Double] =
+      Await.result(
+        cache.get[Double]("bodyFat"),
+        Duration(5, SECONDS)
+      )
+
     for {
       sex <- sex
       age <- age
@@ -115,7 +116,12 @@ class ShortSummaryController @Inject() (
         height,
         currentWeight,
         targetWeight,
-        activityLevel
+        activityLevel,
+        kcalGoal,
+        proteinGoal,
+        fatGoal,
+        carbGoal,
+        bodyFat
       )
     }
   }

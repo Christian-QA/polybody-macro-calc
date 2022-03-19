@@ -13,7 +13,7 @@ import java.util.concurrent.CompletionStage
 import scala.concurrent.{Await, Future}
 import scala.concurrent.duration.{Duration, SECONDS}
 
-class WhenWereYouBornController @Inject() (
+class Page2WhenWereYouBornController @Inject() (
     cache: AsyncCacheApi,
     cc: ControllerComponents,
     mcc: MessagesApi,
@@ -23,7 +23,7 @@ class WhenWereYouBornController @Inject() (
 
   def whenWereYouBornPageLoad(): Action[AnyContent] =
     Action { implicit request: Request[AnyContent] =>
-      Ok(views.html.Age(WhenWereYouBornForm.form()))
+      Ok(views.html.Page2Age(WhenWereYouBornForm.form()))
     }
 
   def whenWereYouBornOnSubmit(): Action[AnyContent] =
@@ -33,7 +33,7 @@ class WhenWereYouBornController @Inject() (
         .bindFromRequest()
         .fold(
           formWithErrors =>
-            Future.successful(Redirect(routes.HomeController.index())),
+            Future.successful(Redirect(routes.LandingPageController.index())),
           value => {
             val result: Future[Done] = cache.set("age", value.age)
 
@@ -44,7 +44,9 @@ class WhenWereYouBornController @Inject() (
             println(Await.result(futureMaybeUser, Duration(5, SECONDS)))
 
             Future.successful(
-              Redirect(routes.HowTallAreYouController.howTallAreYouPageLoad())
+              Redirect(
+                routes.Page3HowTallAreYouController.howTallAreYouPageLoad()
+              )
             )
           }
         )

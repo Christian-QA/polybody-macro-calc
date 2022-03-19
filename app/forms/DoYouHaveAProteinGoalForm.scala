@@ -15,7 +15,7 @@ object DoYouHaveAProteinGoalForm {
       mapping(
         "doYouHaveAProteinGoal" -> number
         //          .verifying(
-        //            error = "Please enter your Age using the Slider or the text box",
+        //            error = "Please enter your Page2Age using the Slider or the text box",
         //            constraint = e => e < 1 && e > 130
         //          )
       )(DoYouHaveAProteinGoalForm.apply)(DoYouHaveAProteinGoalForm.unapply)

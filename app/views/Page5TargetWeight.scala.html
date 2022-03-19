@@ -6,7 +6,7 @@
 @defining(play.core.PlayVersion.current) { version =>
 
     <div>
-        @helper.form(action = controllers.routes.WhatIsYourTargetWeightController.whatIsYourTargetWeightOnSubmit()) {
+        @helper.form(action = controllers.routes.Page5WhatIsYourTargetWeightController.whatIsYourTargetWeightOnSubmit()) {
             @helper.inputText(field = form("whatIsYourTargetWeight"), args = Symbol("_label") -> Double)
             <input type="submit" value="Submit">
             }

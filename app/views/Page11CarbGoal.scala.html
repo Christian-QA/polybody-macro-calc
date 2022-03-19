@@ -7,7 +7,7 @@
 
     <div>
 <!--        TODO - Make form value optional-->
-        @helper.form(action = controllers.routes.DoYouHaveACarbGoalController.doYouHaveACarbGoalOnSubmit()) {
+        @helper.form(action = controllers.routes.Page11DoYouHaveACarbGoalController.doYouHaveACarbGoalOnSubmit()) {
             @helper.inputText(field = form("doYouHaveACarbGoal"), args = Symbol("_label") -> Int)
             <input type="submit" value="Submit">
             }

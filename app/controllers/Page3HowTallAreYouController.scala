@@ -10,7 +10,7 @@ import play.api.mvc._
 import java.util.concurrent.CompletionStage
 import scala.concurrent.Future
 
-class HowTallAreYouController @Inject() (
+class Page3HowTallAreYouController @Inject() (
     cache: AsyncCacheApi,
     cc: ControllerComponents,
     mcc: MessagesApi,
@@ -20,7 +20,7 @@ class HowTallAreYouController @Inject() (
 
   def howTallAreYouPageLoad(): Action[AnyContent] =
     Action { implicit request: Request[AnyContent] =>
-      Ok(views.html.Height(HowTallAreYouForm.form()))
+      Ok(views.html.Page3Height(HowTallAreYouForm.form()))
     }
 
   def howTallAreYouOnSubmit(): Action[AnyContent] =
@@ -30,13 +30,14 @@ class HowTallAreYouController @Inject() (
         .bindFromRequest()
         .fold(
           formWithErrors =>
-            Future.successful(Redirect(routes.HomeController.index())),
+            Future.successful(Redirect(routes.LandingPageController.index())),
           value => {
             val result: Future[Done] = cache.set("height", value.height)
 
             Future.successful(
               Redirect(
-                routes.HowMuchDoYouWeighController.howMuchDoYouWeighPageLoad()
+                routes.Page4HowMuchDoYouWeighController
+                  .howMuchDoYouWeighPageLoad()
               )
             )
           }

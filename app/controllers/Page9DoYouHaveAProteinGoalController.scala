@@ -2,7 +2,7 @@ package controllers
 
 import akka.Done
 import com.google.inject.Inject
-import forms.WhatIsYourTargetWeightForm
+import forms.DoYouHaveAProteinGoalForm
 import play.api.cache.AsyncCacheApi
 import play.api.i18n.{I18nSupport, Langs, MessagesApi}
 import play.api.mvc._
@@ -10,7 +10,7 @@ import play.api.mvc._
 import java.util.concurrent.CompletionStage
 import scala.concurrent.Future
 
-class WhatIsYourTargetWeightController @Inject() (
+class Page9DoYouHaveAProteinGoalController @Inject() (
     cache: AsyncCacheApi,
     cc: ControllerComponents,
     mcc: MessagesApi,
@@ -18,26 +18,27 @@ class WhatIsYourTargetWeightController @Inject() (
 ) extends AbstractController(cc)
     with I18nSupport {
 
-  def whatIsYourTargetWeightPageLoad(): Action[AnyContent] =
+  def doYouHaveAProteinGoalPageLoad(): Action[AnyContent] =
     Action { implicit request: Request[AnyContent] =>
-      Ok(views.html.TargetWeight(WhatIsYourTargetWeightForm.form()))
+      Ok(views.html.Page9ProteinGoal(DoYouHaveAProteinGoalForm.form()))
     }
 
-  def whatIsYourTargetWeightOnSubmit(): Action[AnyContent] =
+  def doYouHaveAProteinGoalOnSubmit(): Action[AnyContent] =
     Action.async { implicit request: Request[AnyContent] =>
-      WhatIsYourTargetWeightForm
+      DoYouHaveAProteinGoalForm
         .form()
         .bindFromRequest()
         .fold(
           formWithErrors =>
-            Future.successful(Redirect(routes.HomeController.index())),
+            Future.successful(Redirect(routes.LandingPageController.index())),
           value => {
-            val result: Future[Done] = cache.set("targetWeight", value.weight)
+            val result: Future[Done] =
+              cache.set("proteinGoal", value.protein)
 
             Future.successful(
               Redirect(
-                routes.HowActiveAreYouController
-                  .howActiveAreYouPageLoad()
+                routes.Page10DoYouHaveAFatGoalController
+                  .doYouHaveAFatGoalPageLoad()
               )
             )
           }

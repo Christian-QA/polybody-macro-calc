@@ -7,10 +7,9 @@ import play.api.cache.AsyncCacheApi
 import play.api.i18n.{I18nSupport, Langs, MessagesApi}
 import play.api.mvc._
 
-import java.util.concurrent.CompletionStage
 import scala.concurrent.Future
 
-class DoYouHaveAFatGoalController @Inject() (
+class Page10DoYouHaveAFatGoalController @Inject() (
     cache: AsyncCacheApi,
     cc: ControllerComponents,
     mcc: MessagesApi,
@@ -20,7 +19,7 @@ class DoYouHaveAFatGoalController @Inject() (
 
   def doYouHaveAFatGoalPageLoad(): Action[AnyContent] =
     Action { implicit request: Request[AnyContent] =>
-      Ok(views.html.FatGoal(DoYouHaveAFatGoalForm.form()))
+      Ok(views.html.Page10FatGoal(DoYouHaveAFatGoalForm.form()))
     }
 
   def doYouHaveAFatGoalOnSubmit(): Action[AnyContent] =
@@ -30,14 +29,14 @@ class DoYouHaveAFatGoalController @Inject() (
         .bindFromRequest()
         .fold(
           formWithErrors =>
-            Future.successful(Redirect(routes.HomeController.index())),
+            Future.successful(Redirect(routes.LandingPageController.index())),
           value => {
             val result: Future[Done] =
               cache.set("fatGoal", value.fat)
 
             Future.successful(
               Redirect(
-                routes.DoYouHaveACarbGoalController
+                routes.Page11DoYouHaveACarbGoalController
                   .doYouHaveACarbGoalPageLoad()
               )
             )
