@@ -30,7 +30,7 @@ class Page7ShortSummaryController @Inject() (
           Ok(views.html.Page7ShortSummary(ShortSummaryForm.form(), value))
         case None =>
           println("2" * 100)
-          Ok(views.html.Index())
+          Ok(views.html.LandingPage())
 
         //BadRequest(views.html.errorViews.BadRequestView)
       }

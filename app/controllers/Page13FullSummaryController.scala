@@ -29,7 +29,7 @@ class Page13FullSummaryController @Inject() (
           Ok(views.html.Page13FullSummary(value))
         case None =>
           println("2" * 100)
-          Ok(views.html.Index())
+          Ok(views.html.LandingPage())
 
       }
     }

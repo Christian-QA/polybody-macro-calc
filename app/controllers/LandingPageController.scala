@@ -24,7 +24,7 @@ class LandingPageController @Inject() (
     */
   def index() =
     Action { implicit request: Request[AnyContent] =>
-      Ok(views.html.Index())
+      Ok(views.html.LandingPage())
     }
 
 }
