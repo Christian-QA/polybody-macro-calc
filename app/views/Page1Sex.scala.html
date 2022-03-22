@@ -4,7 +4,7 @@
 
 @(form: Form[WhatSexAreYouForm])(implicit messages: Messages)
 
-@Template("Page1Sex") {
+@Template(messages("page1.sex.title")) {
     @defining(play.core.PlayVersion.current) { version =>
         <div>
             @helper.form(action = controllers.routes.Page1WhatSexAreYouController.whatSexAreYouOnSubmit()) {

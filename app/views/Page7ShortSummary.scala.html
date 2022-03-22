@@ -4,7 +4,7 @@
 
 @(form: Form[ShortSummaryForm], macroCalcDto: MacroCalcDto)(implicit messages: Messages)
 
-@Template("Short Summary") {
+@Template(messages("page7.short-summary.title")) {
 @defining(play.core.PlayVersion.current) { version =>
 
     <p>@macroCalcDto</p>

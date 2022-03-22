@@ -3,8 +3,8 @@
 
 @(form: Form[WhatIsYourTargetWeightForm])(implicit messages: Messages)
 
-@Template("Target weight") {
-@defining(play.core.PlayVersion.current) { version =>
+    @Template(messages("page5.target-weight.title")) {
+        @defining(play.core.PlayVersion.current) { version =>
 
     <div>
         @helper.form(action = controllers.routes.Page5WhatIsYourTargetWeightController.whatIsYourTargetWeightOnSubmit()) {
