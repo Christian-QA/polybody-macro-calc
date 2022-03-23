@@ -1,1 +1,27 @@
 # https://www.playframework.com/documentation/latest/ScalaI18N
+
+page1.sex.title=What is your sex?
+
+page2.age.title=How old are you?
+
+page3.height.title=How tall are you?
+
+page4.current-weight.title=How much do you weigh?
+
+page5.target-weight.title=How much do you want to weigh?
+
+page6.activity-level.title=How active are you?
+
+page7.short-summary.title=What we''ve calculated for you so far
+
+page8.kcal-goal.title=Do you have a calorie goal?
+
+page9.protein-goal.title=Do you have a protein goal?
+
+page10.fat-goal.title=Do you have a fat goal?
+
+page11.carb-goal.title=Do you have a carb goal?
+
+page12.body-fat.title=Do you know your body fat percentage?
+
+page13.full-summary.title=The final calculation

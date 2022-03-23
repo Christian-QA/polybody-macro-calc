@@ -1,17 +1,19 @@
 @import forms.WhenWereYouBornForm
 @import play.api.data.Forms.localDate
+@import views.html.components.Template
+
 @(form: Form[WhenWereYouBornForm])(implicit messages: Messages)
 
-@Template("Age") {
+@Template(messages("page2.age.title")) {
 @defining(play.core.PlayVersion.current) { version =>
 
     <div>
-        @helper.form(action = controllers.routes.WhenWereYouBornController.whenWereYouBornOnSubmit()) {
+        @helper.form(action = controllers.routes.Page2WhenWereYouBornController.whenWereYouBornOnSubmit()) {
             @helper.inputDate(field = form("howOldAreYou"), args = Symbol("_label") -> localDate)
             <input type="submit" value="Submit">
             }
 
-        @*Slider("Age", form)*@
+        @*Slider("Page2Age", form)*@
 
     </div>
 }

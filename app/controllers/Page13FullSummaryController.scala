@@ -11,7 +11,7 @@ import java.time.LocalDate
 import scala.concurrent.Await
 import scala.concurrent.duration.{Duration, SECONDS}
 
-class FullSummaryController @Inject() (
+class Page13FullSummaryController @Inject() (
     cache: AsyncCacheApi,
     cc: ControllerComponents,
     mcc: MessagesApi,
@@ -26,10 +26,10 @@ class FullSummaryController @Inject() (
         case Some(value) =>
           println("1" * 100)
           println(value)
-          Ok(views.html.FullSummary(value))
+          Ok(views.html.Page13FullSummary(value))
         case None =>
           println("2" * 100)
-          Ok(views.html.Index())
+          Ok(views.html.LandingPage())
 
       }
     }

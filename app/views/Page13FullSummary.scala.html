@@ -1,7 +1,9 @@
 @import dto.MacroCalcDto
+@import views.html.components.Template
+
 @(macroCalcDto: MacroCalcDto)(implicit messages: Messages)
 
-@Template("Full Summary") {
+@Template(messages("page13.full-summary.title")) {
 @defining(play.core.PlayVersion.current) { version =>
 
   <p>@macroCalcDto</p>

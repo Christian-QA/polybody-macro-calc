@@ -2,7 +2,7 @@ package controllers
 
 import akka.Done
 import com.google.inject.Inject
-import forms.HowMuchDoYouWeighForm
+import forms.HowActiveAreYouForm
 import play.api.cache.AsyncCacheApi
 import play.api.i18n.{I18nSupport, Langs, MessagesApi}
 import play.api.mvc._
@@ -10,7 +10,7 @@ import play.api.mvc._
 import java.util.concurrent.CompletionStage
 import scala.concurrent.Future
 
-class HowMuchDoYouWeighController @Inject() (
+class Page6HowActiveAreYouController @Inject() (
     cache: AsyncCacheApi,
     cc: ControllerComponents,
     mcc: MessagesApi,
@@ -18,27 +18,27 @@ class HowMuchDoYouWeighController @Inject() (
 ) extends AbstractController(cc)
     with I18nSupport {
 
-  def howMuchDoYouWeighPageLoad(): Action[AnyContent] =
+  def howActiveAreYouPageLoad(): Action[AnyContent] =
     Action { implicit request: Request[AnyContent] =>
-      Ok(views.html.CurrentWeight(HowMuchDoYouWeighForm.form()))
+      Ok(views.html.Page6ActivityLevel(HowActiveAreYouForm.form()))
     }
 
-  def howMuchDoYouWeighOnSubmit(): Action[AnyContent] =
+  def howActiveAreYouOnSubmit(): Action[AnyContent] =
     Action.async { implicit request: Request[AnyContent] =>
-      HowMuchDoYouWeighForm
+      HowActiveAreYouForm
         .form()
         .bindFromRequest()
         .fold(
           formWithErrors =>
-            Future.successful(Redirect(routes.HomeController.index())),
+            Future.successful(Redirect(routes.LandingPageController.index())),
           value => {
             val result: Future[Done] =
-              cache.set("currentWeight", value.weight)
+              cache.set("activityLevel", value.activity)
 
             Future.successful(
               Redirect(
-                routes.WhatIsYourTargetWeightController
-                  .whatIsYourTargetWeightPageLoad()
+                routes.Page7ShortSummaryController
+                  .shortSummaryPageLoad()
               )
             )
           }

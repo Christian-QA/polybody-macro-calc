@@ -2,7 +2,7 @@ package controllers
 
 import akka.Done
 import com.google.inject.Inject
-import forms.DoYouHaveAKcalGoalForm
+import forms.WhatIsYourTargetWeightForm
 import play.api.cache.AsyncCacheApi
 import play.api.i18n.{I18nSupport, Langs, MessagesApi}
 import play.api.mvc._
@@ -10,7 +10,7 @@ import play.api.mvc._
 import java.util.concurrent.CompletionStage
 import scala.concurrent.Future
 
-class DoYouHaveAKcalGoalController @Inject() (
+class Page5WhatIsYourTargetWeightController @Inject() (
     cache: AsyncCacheApi,
     cc: ControllerComponents,
     mcc: MessagesApi,
@@ -18,27 +18,26 @@ class DoYouHaveAKcalGoalController @Inject() (
 ) extends AbstractController(cc)
     with I18nSupport {
 
-  def doYouHaveAKcalGoalPageLoad(): Action[AnyContent] =
+  def whatIsYourTargetWeightPageLoad(): Action[AnyContent] =
     Action { implicit request: Request[AnyContent] =>
-      Ok(views.html.KcalGoal(DoYouHaveAKcalGoalForm.form()))
+      Ok(views.html.Page5TargetWeight(WhatIsYourTargetWeightForm.form()))
     }
 
-  def doYouHaveAKcalGoalOnSubmit(): Action[AnyContent] =
+  def whatIsYourTargetWeightOnSubmit(): Action[AnyContent] =
     Action.async { implicit request: Request[AnyContent] =>
-      DoYouHaveAKcalGoalForm
+      WhatIsYourTargetWeightForm
         .form()
         .bindFromRequest()
         .fold(
           formWithErrors =>
-            Future.successful(Redirect(routes.HomeController.index())),
+            Future.successful(Redirect(routes.LandingPageController.index())),
           value => {
-            val result: Future[Done] =
-              cache.set("kcalGoal", value.kcals)
+            val result: Future[Done] = cache.set("targetWeight", value.weight)
 
             Future.successful(
               Redirect(
-                routes.DoYouHaveAProteinGoalController
-                  .doYouHaveAProteinGoalPageLoad()
+                routes.Page6HowActiveAreYouController
+                  .howActiveAreYouPageLoad()
               )
             )
           }

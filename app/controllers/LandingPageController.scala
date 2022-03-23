@@ -9,7 +9,7 @@ import play.api.mvc._
   * application's home page.
   */
 
-class HomeController @Inject() (
+class LandingPageController @Inject() (
     cc: ControllerComponents,
     messagesControllerComponents: MessagesControllerComponents
 ) extends AbstractController(cc)
@@ -24,7 +24,7 @@ class HomeController @Inject() (
     */
   def index() =
     Action { implicit request: Request[AnyContent] =>
-      Ok(views.html.Index())
+      Ok(views.html.LandingPage())
     }
 
 }

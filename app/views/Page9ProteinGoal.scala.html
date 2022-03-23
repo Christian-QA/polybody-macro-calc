@@ -1,13 +1,14 @@
 @import forms.DoYouHaveAProteinGoalForm
+@import views.html.components.Template
 
 @(form: Form[DoYouHaveAProteinGoalForm])(implicit messages: Messages)
 
-@Template("Protein Goal") {
+@Template(messages("page9.protein-goal.title")) {
 @defining(play.core.PlayVersion.current) { version =>
 
     <div>
 <!--        TODO - Make form value optional-->
-        @helper.form(action = controllers.routes.DoYouHaveAProteinGoalController.doYouHaveAProteinGoalOnSubmit()) {
+        @helper.form(action = controllers.routes.Page9DoYouHaveAProteinGoalController.doYouHaveAProteinGoalOnSubmit()) {
             @helper.inputText(field = form("doYouHaveAProteinGoal"), args = Symbol("_label") -> Int)
             <input type="submit" value="Submit">
             }

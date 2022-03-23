@@ -12,7 +12,7 @@ import java.time.LocalDate
 import scala.concurrent.duration.{Duration, SECONDS}
 import scala.concurrent.{Await, Future}
 
-class ShortSummaryController @Inject() (
+class Page7ShortSummaryController @Inject() (
     cache: AsyncCacheApi,
     cc: ControllerComponents,
     mcc: MessagesApi,
@@ -27,10 +27,10 @@ class ShortSummaryController @Inject() (
         case Some(value) =>
           println("1" * 100)
           println(value)
-          Ok(views.html.ShortSummary(ShortSummaryForm.form(), value))
+          Ok(views.html.Page7ShortSummary(ShortSummaryForm.form(), value))
         case None =>
           println("2" * 100)
-          Ok(views.html.Index())
+          Ok(views.html.LandingPage())
 
         //BadRequest(views.html.errorViews.BadRequestView)
       }
@@ -44,19 +44,19 @@ class ShortSummaryController @Inject() (
         .bindFromRequest()
         .fold(
           formWithErrors =>
-            Future.successful(Redirect(routes.HomeController.index())),
+            Future.successful(Redirect(routes.LandingPageController.index())),
           value =>
             if (value.continue) {
               Future.successful(
                 Redirect(
-                  routes.DoYouHaveAKcalGoalController
+                  routes.Page8DoYouHaveAKcalGoalController
                     .doYouHaveAKcalGoalPageLoad()
                 )
               )
             } else {
               Future.successful(
                 Redirect(
-                  routes.HomeController.index()
+                  routes.LandingPageController.index()
                 )
               )
             }

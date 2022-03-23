@@ -1,12 +1,13 @@
 @import forms.WhatIsYourTargetWeightForm
+@import views.html.components.Template
 
 @(form: Form[WhatIsYourTargetWeightForm])(implicit messages: Messages)
 
-@Template("Target weight") {
-@defining(play.core.PlayVersion.current) { version =>
+    @Template(messages("page5.target-weight.title")) {
+        @defining(play.core.PlayVersion.current) { version =>
 
     <div>
-        @helper.form(action = controllers.routes.WhatIsYourTargetWeightController.whatIsYourTargetWeightOnSubmit()) {
+        @helper.form(action = controllers.routes.Page5WhatIsYourTargetWeightController.whatIsYourTargetWeightOnSubmit()) {
             @helper.inputText(field = form("whatIsYourTargetWeight"), args = Symbol("_label") -> Double)
             <input type="submit" value="Submit">
             }

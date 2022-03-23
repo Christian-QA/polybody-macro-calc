@@ -9,7 +9,7 @@ import play.api.mvc._
 
 import scala.concurrent.Future
 
-class DoYouHaveACarbGoalController @Inject() (
+class Page11DoYouHaveACarbGoalController @Inject() (
     cache: AsyncCacheApi,
     cc: ControllerComponents,
     mcc: MessagesApi,
@@ -19,7 +19,7 @@ class DoYouHaveACarbGoalController @Inject() (
 
   def doYouHaveACarbGoalPageLoad(): Action[AnyContent] =
     Action { implicit request: Request[AnyContent] =>
-      Ok(views.html.CarbGoal(DoYouHaveACarbGoalForm.form()))
+      Ok(views.html.Page11CarbGoal(DoYouHaveACarbGoalForm.form()))
     }
 
   def doYouHaveACarbGoalOnSubmit(): Action[AnyContent] =
@@ -29,7 +29,7 @@ class DoYouHaveACarbGoalController @Inject() (
         .bindFromRequest()
         .fold(
           formWithErrors =>
-            Future.successful(Redirect(routes.HomeController.index())),
+            Future.successful(Redirect(routes.LandingPageController.index())),
           value => {
             println(value.carb)
             val result: Future[Done] =
@@ -37,7 +37,7 @@ class DoYouHaveACarbGoalController @Inject() (
 
             Future.successful(
               Redirect(
-                routes.DoYouWantToUseYourBodyFatController
+                routes.Page12DoYouWantToUseYourBodyFatController
                   .doYouWantToUseYourBodyFatPageLoad()
               )
             )

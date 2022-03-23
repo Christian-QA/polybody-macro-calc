@@ -1,0 +1,26 @@
+@import forms.HowActiveAreYouForm
+@import helpers.ActivityLevel
+@import views.html.components.Template
+
+@(form: Form[HowActiveAreYouForm])(implicit messages: Messages)
+
+
+    @Template(messages("page6.activity-level.title")) {
+        @defining(play.core.PlayVersion.current) { version =>
+            <div>
+                @helper.form(action = controllers.routes.Page6HowActiveAreYouController.howActiveAreYouOnSubmit()) {
+                    @helper.inputRadioGroup(
+                        field = form("howActiveAreYou"),
+                        options = Seq(
+                            "Sedentary" -> "Sedentary",
+                            "LightlyActive" -> "LightlyActive",
+                            "ModeratelyActive" -> "ModeratelyActive",
+                            "VeryActive" -> "VeryActive"
+                        ),
+                        args = Symbol("_label") -> ActivityLevel
+                    )
+                    <input type="submit" value="Submit">
+                    }
+            </div>
+    }
+}

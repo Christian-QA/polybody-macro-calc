@@ -1,14 +1,15 @@
 @import forms.ShortSummaryForm
 @import dto.MacroCalcDto
+@import views.html.components.Template
 
 @(form: Form[ShortSummaryForm], macroCalcDto: MacroCalcDto)(implicit messages: Messages)
 
-@Template("Short Summary") {
+@Template(messages("page7.short-summary.title")) {
 @defining(play.core.PlayVersion.current) { version =>
 
     <p>@macroCalcDto</p>
 
-    @helper.form(action = controllers.routes.ShortSummaryController.shortSummaryOnSubmit()) {
+    @helper.form(action = controllers.routes.Page7ShortSummaryController.shortSummaryOnSubmit()) {
         @helper.inputRadioGroup(
             field = form("doYouWantToUseAdvancedValues"),
             options = Seq(

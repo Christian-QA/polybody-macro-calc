@@ -1,13 +1,14 @@
 @import forms.DoYouWantToUseYourBodyFatForm
+@import views.html.components.Template
 
 @(form: Form[DoYouWantToUseYourBodyFatForm])(implicit messages: Messages)
 
-@Template("Body Fat") {
+@Template(messages("page12.body-fat.title")) {
 @defining(play.core.PlayVersion.current) { version =>
 
     <div>
 <!--        TODO - Make form value optional-->
-        @helper.form(action = controllers.routes.DoYouWantToUseYourBodyFatController.doYouWantToUseYourBodyFatOnSubmit()) {
+        @helper.form(action = controllers.routes.Page12DoYouWantToUseYourBodyFatController.doYouWantToUseYourBodyFatOnSubmit()) {
             @helper.inputText(field = form("doYouWantToUseYourBodyFat"), args = Symbol("_label") -> Double)
             <input type="submit" value="Submit">
             }
