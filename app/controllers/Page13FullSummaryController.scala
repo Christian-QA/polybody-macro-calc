@@ -2,21 +2,27 @@ package controllers
 
 import com.google.inject.Inject
 import dto.MacroCalcDto
+import errors.{CustomErrorHandler, CustomNoContentResponse}
 import helpers.{ActivityLevel, MaleOrFemale}
+import models.{MacroStat, PreviousWeight}
 import play.api.cache.AsyncCacheApi
 import play.api.i18n.{I18nSupport, Langs, MessagesApi}
 import play.api.mvc._
+import services.{MacroStatService, PreviousWeightService}
 
 import java.time.LocalDate
-import scala.concurrent.Await
+import scala.concurrent.{Await, ExecutionContext, Future}
 import scala.concurrent.duration.{Duration, SECONDS}
 
 class Page13FullSummaryController @Inject() (
     cache: AsyncCacheApi,
+    macroStatService: MacroStatService,
+    previousWeightService: PreviousWeightService,
     cc: ControllerComponents,
     mcc: MessagesApi,
     langs: Langs
-) extends AbstractController(cc)
+)(implicit ec: ExecutionContext)
+    extends AbstractController(cc)
     with I18nSupport {
 
   def fullSummaryPageLoad(): Action[AnyContent] =
@@ -30,7 +36,58 @@ class Page13FullSummaryController @Inject() (
         case None =>
           println("2" * 100)
           Ok(views.html.LandingPage())
+      }
+    }
 
+  def fullSummarySaveData(): Action[AnyContent] =
+    Action.async { implicit request: Request[AnyContent] =>
+      cacheToDto match {
+        case Some(data) =>
+          val macroStat: MacroStat = MacroStat(
+            Some(LocalDate.now()),
+            data.activityLevel,
+            data.setGoal,
+            data.proteinPreference,
+            data.fatPreference,
+            data.carbPreference,
+            data.bodyFat,
+            Some("Default"),
+            1000,
+            500,
+            10
+          )
+          macroStatService
+            .addMacroStat(
+              "Calvin", // TODO Change name to username
+              macroStat
+            )
+            .flatMap {
+              case Left(error) =>
+                println("1" * 100)
+                println(error)
+                println("1" * 100)
+
+                Future.successful(InternalServerError(views.html.LandingPage()))
+              case Right(value) =>
+                previousWeightService
+                  .addPreviousWeight(
+                    "Calvin",
+                    data.currentWeight
+                  )
+                  .flatMap {
+                    case Right(value) => Future.successful(Ok(value.toString))
+                    case Left(CustomNoContentResponse) =>
+                      println("2" * 100)
+                      Future.successful(NoContent)
+                    case _ =>
+                      println("3" * 100)
+                      Future.successful(
+                        InternalServerError(views.html.LandingPage())
+                      )
+                  }
+            }
+        case None =>
+          Future.successful(InternalServerError(views.html.LandingPage()))
       }
     }
 

@@ -30,6 +30,8 @@ POST    /do-you-have-a-carb-goal            controllers.Page11DoYouHaveACarbGoal
 GET     /do-you-want-to-use-your-body-fat   controllers.Page12DoYouWantToUseYourBodyFatController.doYouWantToUseYourBodyFatPageLoad()
 POST    /do-you-want-to-use-your-body-fat   controllers.Page12DoYouWantToUseYourBodyFatController.doYouWantToUseYourBodyFatOnSubmit()
 GET     /full-summary                       controllers.Page13FullSummaryController.fullSummaryPageLoad()
+POST    /full-summary                       controllers.Page13FullSummaryController.fullSummarySaveData()
+
 #POST    /short-summary                      controllers.HowActiveAreYouController.howActiveAreYouOnSubmit()
 
 #GET     /explore                            controllers.HomeController.explore()
