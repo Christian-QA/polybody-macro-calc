@@ -58,9 +58,7 @@ object MacroStat {
           case JsString("LightlyActive")    => JsSuccess(LightlyActive)
           case JsString("ModeratelyActive") => JsSuccess(ModeratelyActive)
           case JsString("VeryActive")       => JsSuccess(VeryActive)
-          case _: DateTimeParseException =>
-            JsError("That's not an activity level")
-          case _ => JsError("That's not an activity level")
+          case _                            => JsError("That's not an activity level")
         }
     }
 
