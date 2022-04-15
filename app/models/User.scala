@@ -38,7 +38,7 @@ case class User(
 
 object User {
 
-  implicit val activityLevelFormat: Format[MaleOrFemale] =
+  implicit val sexFormat: Format[MaleOrFemale] =
     new Format[MaleOrFemale] {
       override def writes(o: MaleOrFemale): JsValue =
         json.JsString(o.toString)
@@ -48,9 +48,7 @@ object User {
           case JsString("Male")   => JsSuccess(Male)
           case JsString("Female") => JsSuccess(Female)
           case JsString("Other")  => JsSuccess(Other)
-          case _: DateTimeParseException =>
-            JsError("That's not a sex")
-          case _ => JsError("That's not a sex")
+          case _                  => JsError("That's not a sex")
         }
     }
 
