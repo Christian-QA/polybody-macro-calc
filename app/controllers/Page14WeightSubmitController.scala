@@ -1,11 +1,10 @@
 package controllers
 
 import com.google.inject.Inject
-import forms.PreviousWeightSubmitForm
-import play.api.cache.AsyncCacheApi
+import forms.PreviousWeightForm
 import play.api.i18n.{I18nSupport, Langs, MessagesApi}
 import play.api.mvc._
-import services.{CacheService, MacroStatService, PreviousWeightService}
+import services.{CacheService, PreviousWeightService}
 
 import scala.concurrent.{ExecutionContext, Future}
 
@@ -19,20 +18,26 @@ class Page14WeightSubmitController @Inject() (
     extends AbstractController(cc)
     with I18nSupport {
 
-  def wouldYouLikeToSubmitThisWeightPageLoad(): Action[AnyContent] =
+  def wouldYouLikeToSubmitThisWeightPageLoad(): Action[AnyContent] = {
     Action { implicit request: Request[AnyContent] =>
-      Ok(views.html.Page14WeightSubmitView(PreviousWeightSubmitForm.form()))
+      cacheService.cacheToWeightDouble match {
+        case Some(value) =>
+          Ok(
+            views.html.Page14WeightSubmitView(PreviousWeightForm.form(), value)
+          )
+        case None => Redirect(routes.LandingPageController.index())
+      }
     }
+  }
 
-  def wouldYouLikeToSubmitThisWeightOnSubmit(): Action[AnyContent] =
+  def wouldYouLikeToSubmitThisWeightOnSubmit(): Action[AnyContent] = {
     Action.async { implicit request: Request[AnyContent] =>
-      PreviousWeightSubmitForm
+      PreviousWeightForm
         .form()
         .bindFromRequest()
         .fold(
-          formWithErrors => {
-            Future.successful(Redirect(routes.LandingPageController.index()))
-          },
+          formWithErrors =>
+            Future.successful(Redirect(routes.LandingPageController.index())),
           value => {
             if (value.save) {
               cacheService.cacheToWeightDouble match {
@@ -73,6 +78,6 @@ class Page14WeightSubmitController @Inject() (
             }
           }
         )
-
     }
+  }
 }

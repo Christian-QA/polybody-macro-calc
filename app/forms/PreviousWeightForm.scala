@@ -3,16 +3,16 @@ package forms
 import play.api.data.Form
 import play.api.data.Forms.{boolean, mapping}
 
-case class PreviousWeightSubmitForm(save: Boolean)
+case class PreviousWeightForm(save: Boolean)
 
-object PreviousWeightSubmitForm {
+object PreviousWeightForm {
 
   def form(
       errorMessageKey: Option[String] = None
-  ): Form[PreviousWeightSubmitForm] =
+  ): Form[PreviousWeightForm] =
     Form(
       mapping(
         "wouldYouLikeToSave" -> boolean
-      )(PreviousWeightSubmitForm.apply)(PreviousWeightSubmitForm.unapply)
+      )(PreviousWeightForm.apply)(PreviousWeightForm.unapply)
     )
 }

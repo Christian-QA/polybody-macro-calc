@@ -3,11 +3,10 @@ package controllers
 import com.google.inject.Inject
 import forms.FullSummaryForm
 import models.MacroStat
-import play.api.cache.AsyncCacheApi
 import play.api.data.Form
 import play.api.i18n.{I18nSupport, Langs, MessagesApi}
 import play.api.mvc._
-import services.{CacheService, MacroStatService, PreviousWeightService}
+import services.{CacheService, MacroStatService}
 
 import java.time.LocalDate
 import scala.concurrent.{ExecutionContext, Future}
@@ -29,7 +28,7 @@ class Page13FullSummaryController @Inject() (
         case Some(value) =>
           println("1" * 100)
           println(value)
-          Ok(views.html.Page13FullSummary(Form[FullSummaryForm], value))
+          Ok(views.html.Page13FullSummary(FullSummaryForm.form(), value))
         case None =>
           println("2" * 100)
           Ok(views.html.LandingPage())
@@ -45,7 +44,7 @@ class Page13FullSummaryController @Inject() (
           formWithErrors =>
             Future.successful(Redirect(routes.LandingPageController.index())),
           value => {
-            case true => {
+            if (value.save) {
               cacheService.cacheToFullDto match {
                 case Some(data) =>
                   val macroStat: MacroStat = MacroStat(
@@ -95,17 +94,15 @@ class Page13FullSummaryController @Inject() (
                       )
                     )
               }
-            }
-            case _ =>
+            } else {
               Future.successful(
                 Redirect(
                   routes.LandingPageController
                     .index()
                 )
               )
-
+            }
           }
         )
-
     }
 }
