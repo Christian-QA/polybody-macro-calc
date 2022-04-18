@@ -25,3 +25,5 @@ page11.carb-goal.title=Do you have a carb goal?
 page12.body-fat.title=Do you know your body fat percentage?
 
 page13.full-summary.title=The final calculation
+
+page14.macroStatSubmit.title = Would you like to submit this calculation?

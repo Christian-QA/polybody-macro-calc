@@ -7,13 +7,14 @@ import helpers.{ActivityLevel, MaleOrFemale}
 import play.api.cache.AsyncCacheApi
 import play.api.i18n.{I18nSupport, Langs, MessagesApi}
 import play.api.mvc._
+import services.CacheService
 
 import java.time.LocalDate
 import scala.concurrent.duration.{Duration, SECONDS}
 import scala.concurrent.{Await, Future}
 
 class Page7ShortSummaryController @Inject() (
-    cache: AsyncCacheApi,
+    cacheService: CacheService,
     cc: ControllerComponents,
     mcc: MessagesApi,
     langs: Langs
@@ -22,8 +23,8 @@ class Page7ShortSummaryController @Inject() (
 
   def shortSummaryPageLoad(): Action[AnyContent] = {
     Action { implicit request: Request[AnyContent] =>
-      println(cacheToDto)
-      cacheToDto match {
+      println(cacheService.cacheToShortDto)
+      cacheService.cacheToShortDto match {
         case Some(value) =>
           println("1" * 100)
           println(value)
@@ -37,7 +38,7 @@ class Page7ShortSummaryController @Inject() (
     }
   }
 
-  def shortSummaryOnSubmit(): Action[AnyContent] =
+  def shortSummaryOnSubmit(): Action[AnyContent] = {
     Action.async { implicit request: Request[AnyContent] =>
       ShortSummaryForm
         .form()
@@ -61,62 +62,6 @@ class Page7ShortSummaryController @Inject() (
               )
             }
         )
-    }
-
-  private def cacheToDto: Option[MacroCalcDto] = {
-    val sex: Option[MaleOrFemale] = {
-      Await.result(
-        cache.get[MaleOrFemale]("sex"),
-        Duration(5, SECONDS)
-      )
-    }
-
-    val age: Option[LocalDate] =
-      Await.result(
-        cache.get[LocalDate]("age"),
-        Duration(5, SECONDS)
-      )
-
-    val height: Option[Double] =
-      Await.result(
-        cache.get[Double]("height"),
-        Duration(5, SECONDS)
-      )
-
-    val currentWeight: Option[Double] =
-      Await.result(
-        cache.get[Double]("currentWeight"),
-        Duration(5, SECONDS)
-      )
-
-    val targetWeight: Option[Double] =
-      Await.result(
-        cache.get[Double]("targetWeight"),
-        Duration(5, SECONDS)
-      )
-
-    val activityLevel: Option[ActivityLevel] =
-      Await.result(
-        cache.get[ActivityLevel]("activityLevel"),
-        Duration(5, SECONDS)
-      )
-
-    for {
-      sex <- sex
-      age <- age
-      height <- height
-      currentWeight <- currentWeight
-      targetWeight <- targetWeight
-      activityLevel <- activityLevel
-    } yield {
-      MacroCalcDto(
-        sex,
-        age,
-        height,
-        currentWeight,
-        targetWeight,
-        activityLevel
-      )
     }
   }
 }

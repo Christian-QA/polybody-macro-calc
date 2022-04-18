@@ -31,6 +31,8 @@ GET     /do-you-want-to-use-your-body-fat   controllers.Page12DoYouWantToUseYour
 POST    /do-you-want-to-use-your-body-fat   controllers.Page12DoYouWantToUseYourBodyFatController.doYouWantToUseYourBodyFatOnSubmit()
 GET     /full-summary                       controllers.Page13FullSummaryController.fullSummaryPageLoad()
 POST    /full-summary                       controllers.Page13FullSummaryController.fullSummarySaveData()
+GET     /weight-submit                      controllers.Page14WeightSubmitController.wouldYouLikeToSubmitThisWeightPageLoad()
+POST    /weight-submit                      controllers.Page14WeightSubmitController.wouldYouLikeToSubmitThisWeightOnSubmit()
 
 #POST    /short-summary                      controllers.HowActiveAreYouController.howActiveAreYouOnSubmit()
 
