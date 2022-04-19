@@ -6,11 +6,13 @@ import forms.WhatSexAreYouForm
 import play.api.cache.AsyncCacheApi
 import play.api.i18n.{I18nSupport, Langs, MessagesApi}
 import play.api.mvc._
+import views.html.Page1SexView
 
 import java.util.concurrent.CompletionStage
 import scala.concurrent.Future
 
 class Page1WhatSexAreYouController @Inject() (
+    page1SexView: Page1SexView,
     cache: AsyncCacheApi,
     cc: ControllerComponents,
     mcc: MessagesApi,
@@ -20,7 +22,7 @@ class Page1WhatSexAreYouController @Inject() (
 
   def whatSexAreYouPageLoad(): Action[AnyContent] =
     Action { implicit request: Request[AnyContent] =>
-      Ok(views.html.Page1Sex(WhatSexAreYouForm.form()))
+      Ok(page1SexView(WhatSexAreYouForm.form()))
     }
 
   def whatSexAreYouOnSubmit(): Action[AnyContent] =

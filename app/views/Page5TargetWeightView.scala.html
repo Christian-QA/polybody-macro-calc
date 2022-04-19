@@ -1,6 +1,8 @@
 @import forms.WhatIsYourTargetWeightForm
 @import views.html.components.Template
 
+@this()
+
 @(form: Form[WhatIsYourTargetWeightForm])(implicit messages: Messages)
 
     @Template(messages("page5.target-weight.title")) {

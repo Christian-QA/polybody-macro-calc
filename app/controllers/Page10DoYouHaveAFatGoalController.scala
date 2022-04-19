@@ -6,10 +6,12 @@ import forms.DoYouHaveAFatGoalForm
 import play.api.cache.AsyncCacheApi
 import play.api.i18n.{I18nSupport, Langs, MessagesApi}
 import play.api.mvc._
+import views.html.Page10FatGoalView
 
 import scala.concurrent.Future
 
 class Page10DoYouHaveAFatGoalController @Inject() (
+    page10FatGoalView: Page10FatGoalView,
     cache: AsyncCacheApi,
     cc: ControllerComponents,
     mcc: MessagesApi,
@@ -19,7 +21,7 @@ class Page10DoYouHaveAFatGoalController @Inject() (
 
   def doYouHaveAFatGoalPageLoad(): Action[AnyContent] =
     Action { implicit request: Request[AnyContent] =>
-      Ok(views.html.Page10FatGoal(DoYouHaveAFatGoalForm.form()))
+      Ok(page10FatGoalView(DoYouHaveAFatGoalForm.form()))
     }
 
   def doYouHaveAFatGoalOnSubmit(): Action[AnyContent] =

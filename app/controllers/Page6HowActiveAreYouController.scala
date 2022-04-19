@@ -6,11 +6,12 @@ import forms.HowActiveAreYouForm
 import play.api.cache.AsyncCacheApi
 import play.api.i18n.{I18nSupport, Langs, MessagesApi}
 import play.api.mvc._
+import views.html.Page6ActivityLevelView
 
-import java.util.concurrent.CompletionStage
 import scala.concurrent.Future
 
 class Page6HowActiveAreYouController @Inject() (
+    page6ActivityLevelView: Page6ActivityLevelView,
     cache: AsyncCacheApi,
     cc: ControllerComponents,
     mcc: MessagesApi,
@@ -20,7 +21,7 @@ class Page6HowActiveAreYouController @Inject() (
 
   def howActiveAreYouPageLoad(): Action[AnyContent] =
     Action { implicit request: Request[AnyContent] =>
-      Ok(views.html.Page6ActivityLevel(HowActiveAreYouForm.form()))
+      Ok(page6ActivityLevelView(HowActiveAreYouForm.form()))
     }
 
   def howActiveAreYouOnSubmit(): Action[AnyContent] =

@@ -6,11 +6,12 @@ import forms.WhatIsYourTargetWeightForm
 import play.api.cache.AsyncCacheApi
 import play.api.i18n.{I18nSupport, Langs, MessagesApi}
 import play.api.mvc._
+import views.html.Page5TargetWeightView
 
-import java.util.concurrent.CompletionStage
 import scala.concurrent.Future
 
 class Page5WhatIsYourTargetWeightController @Inject() (
+    page5TargetWeightView: Page5TargetWeightView,
     cache: AsyncCacheApi,
     cc: ControllerComponents,
     mcc: MessagesApi,
@@ -20,7 +21,7 @@ class Page5WhatIsYourTargetWeightController @Inject() (
 
   def whatIsYourTargetWeightPageLoad(): Action[AnyContent] =
     Action { implicit request: Request[AnyContent] =>
-      Ok(views.html.Page5TargetWeight(WhatIsYourTargetWeightForm.form()))
+      Ok(page5TargetWeightView(WhatIsYourTargetWeightForm.form()))
     }
 
   def whatIsYourTargetWeightOnSubmit(): Action[AnyContent] =

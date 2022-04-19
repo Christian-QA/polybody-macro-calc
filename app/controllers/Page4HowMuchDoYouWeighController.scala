@@ -6,11 +6,13 @@ import forms.HowMuchDoYouWeighForm
 import play.api.cache.AsyncCacheApi
 import play.api.i18n.{I18nSupport, Langs, MessagesApi}
 import play.api.mvc._
+import views.html.Page4CurrentWeightView
 
 import java.util.concurrent.CompletionStage
 import scala.concurrent.Future
 
 class Page4HowMuchDoYouWeighController @Inject() (
+    page4CurrentWeightView: Page4CurrentWeightView,
     cache: AsyncCacheApi,
     cc: ControllerComponents,
     mcc: MessagesApi,
@@ -20,7 +22,7 @@ class Page4HowMuchDoYouWeighController @Inject() (
 
   def howMuchDoYouWeighPageLoad(): Action[AnyContent] =
     Action { implicit request: Request[AnyContent] =>
-      Ok(views.html.Page4CurrentWeight(HowMuchDoYouWeighForm.form()))
+      Ok(page4CurrentWeightView(HowMuchDoYouWeighForm.form()))
     }
 
   def howMuchDoYouWeighOnSubmit(): Action[AnyContent] =

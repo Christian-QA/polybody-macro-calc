@@ -1,6 +1,8 @@
 @import views.html.components.Template
 @import forms.PreviousWeightForm
 
+@this()
+
 @(form: Form[PreviousWeightForm], weight: Double)(implicit messages: Messages)
 
 @Template(messages("page14.previousWeightSubmit.title")) {

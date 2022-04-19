@@ -6,11 +6,13 @@ import forms.DoYouHaveAProteinGoalForm
 import play.api.cache.AsyncCacheApi
 import play.api.i18n.{I18nSupport, Langs, MessagesApi}
 import play.api.mvc._
+import views.html.Page9ProteinGoalView
 
 import java.util.concurrent.CompletionStage
 import scala.concurrent.Future
 
 class Page9DoYouHaveAProteinGoalController @Inject() (
+    page9ProteinGoalView: Page9ProteinGoalView,
     cache: AsyncCacheApi,
     cc: ControllerComponents,
     mcc: MessagesApi,
@@ -20,7 +22,7 @@ class Page9DoYouHaveAProteinGoalController @Inject() (
 
   def doYouHaveAProteinGoalPageLoad(): Action[AnyContent] =
     Action { implicit request: Request[AnyContent] =>
-      Ok(views.html.Page9ProteinGoal(DoYouHaveAProteinGoalForm.form()))
+      Ok(page9ProteinGoalView(DoYouHaveAProteinGoalForm.form()))
     }
 
   def doYouHaveAProteinGoalOnSubmit(): Action[AnyContent] =

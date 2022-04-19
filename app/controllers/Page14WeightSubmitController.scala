@@ -7,6 +7,7 @@ import forms.PreviousWeightForm
 import play.api.i18n.{I18nSupport, Langs, MessagesApi}
 import play.api.mvc._
 import services.{CacheService, PreviousWeightService}
+import views.html.Page14WeightSubmitView
 
 import scala.concurrent.{ExecutionContext, Future}
 
@@ -14,6 +15,7 @@ class Page14WeightSubmitController @Inject() (
     previousWeightService: PreviousWeightService,
     cacheService: CacheService,
     errorHandler: ErrorHandler,
+    page14WeightSubmitView: Page14WeightSubmitView,
     cc: ControllerComponents,
     mcc: MessagesApi,
     langs: Langs
@@ -22,13 +24,16 @@ class Page14WeightSubmitController @Inject() (
     with I18nSupport {
 
   def wouldYouLikeToSubmitThisWeightPageLoad(): Action[AnyContent] = {
-    Action { implicit request: Request[AnyContent] =>
+    Action.async { implicit request: Request[AnyContent] =>
       cacheService.cacheToWeightDouble match {
         case Some(value) =>
-          Ok(
-            views.html.Page14WeightSubmitView(PreviousWeightForm.form(), value)
+          Future.successful(
+            Ok(
+              page14WeightSubmitView(PreviousWeightForm.form(), value)
+            )
           )
-        case None => Redirect(routes.LandingPageController.index())
+        case None =>
+          errorHandler.handle(CustomTimeoutResponse)
       }
     }
   }

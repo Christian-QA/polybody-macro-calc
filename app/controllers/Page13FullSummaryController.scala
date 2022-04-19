@@ -2,13 +2,14 @@ package controllers
 
 import com.google.inject.Inject
 import controllers.handler.ErrorHandler
+import errors.CustomTimeoutResponse
 import forms.FullSummaryForm
 import models.MacroStat
 import play.api.data.Form
 import play.api.i18n.{I18nSupport, Langs, MessagesApi}
 import play.api.mvc._
 import services.{CacheService, MacroStatService}
-import views.html.LandingPage
+import views.html.{LandingPageView, Page13FullSummaryView}
 
 import java.time.LocalDate
 import scala.concurrent.{ExecutionContext, Future}
@@ -17,7 +18,8 @@ class Page13FullSummaryController @Inject() (
     macroStatService: MacroStatService,
     cacheService: CacheService,
     errorHandler: ErrorHandler,
-    landingPage: LandingPage, //TODO - Change to error
+    page13FullSummaryView: Page13FullSummaryView,
+    landingPage: LandingPageView, //TODO - Change to error
     cc: ControllerComponents,
     mcc: MessagesApi,
     langs: Langs
@@ -33,7 +35,7 @@ class Page13FullSummaryController @Inject() (
           println("1" * 100)
           println(value)
           Future.successful(
-            Ok(views.html.Page13FullSummary(FullSummaryForm.form(), value))
+            Ok(page13FullSummaryView(FullSummaryForm.form(), value))
           )
         case None =>
           println("2" * 100)
@@ -77,34 +79,23 @@ class Page13FullSummaryController @Inject() (
                         println(error)
                         println("1" * 100)
 
-                        Future.successful(
-                          Redirect(
-                            routes.LandingPageController
-                              .index()
-                          )
-                        )
+                        errorHandler.handle(error)
                       case Right(value) =>
                         Future.successful(
                           Redirect(
-                            routes.LandingPageController
-                              .index()
+                            routes.Page14WeightSubmitController
+                              .wouldYouLikeToSubmitThisWeightPageLoad()
                           )
                         )
                     }
                 case None =>
-                  Future
-                    .successful(
-                      Redirect(
-                        routes.LandingPageController
-                          .index()
-                      )
-                    )
+                  errorHandler.handle(CustomTimeoutResponse)
               }
             } else {
               Future.successful(
                 Redirect(
-                  routes.LandingPageController
-                    .index()
+                  routes.Page14WeightSubmitController
+                    .wouldYouLikeToSubmitThisWeightPageLoad()
                 )
               )
             }

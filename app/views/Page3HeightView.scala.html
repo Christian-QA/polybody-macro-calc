@@ -1,6 +1,8 @@
 @import forms.HowTallAreYouForm
 @import views.html.components.Template
 
+@this()
+
 @(form: Form[HowTallAreYouForm])(implicit messages: Messages)
 
 @Template(messages("page3.height.title")) {

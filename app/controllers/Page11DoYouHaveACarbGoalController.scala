@@ -6,10 +6,12 @@ import forms.DoYouHaveACarbGoalForm
 import play.api.cache.AsyncCacheApi
 import play.api.i18n.{I18nSupport, Langs, MessagesApi}
 import play.api.mvc._
+import views.html.Page11CarbGoalView
 
 import scala.concurrent.Future
 
 class Page11DoYouHaveACarbGoalController @Inject() (
+    page11CarbGoalView: Page11CarbGoalView,
     cache: AsyncCacheApi,
     cc: ControllerComponents,
     mcc: MessagesApi,
@@ -19,7 +21,7 @@ class Page11DoYouHaveACarbGoalController @Inject() (
 
   def doYouHaveACarbGoalPageLoad(): Action[AnyContent] =
     Action { implicit request: Request[AnyContent] =>
-      Ok(views.html.Page11CarbGoal(DoYouHaveACarbGoalForm.form()))
+      Ok(page11CarbGoalView(DoYouHaveACarbGoalForm.form()))
     }
 
   def doYouHaveACarbGoalOnSubmit(): Action[AnyContent] =
