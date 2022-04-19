@@ -8,3 +8,4 @@ case class CustomClientResponse(message: String, reportedAs: Int)
 case class CustomUpstreamResponse(message: String, reportedAs: Int)
     extends CustomErrorHandler
 case object CustomBackendDownResponse extends CustomErrorHandler
+case object CustomTimeoutResponse extends CustomErrorHandler

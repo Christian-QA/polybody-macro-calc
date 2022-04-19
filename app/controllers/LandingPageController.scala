@@ -3,6 +3,7 @@ package controllers
 import com.google.inject.Inject
 import play.api.i18n.I18nSupport
 import play.api.mvc._
+import views.html.LandingPage
 
 /**
   * This controller creates an `Action` to handle HTTP requests to the
@@ -10,6 +11,7 @@ import play.api.mvc._
   */
 
 class LandingPageController @Inject() (
+    landingPage: LandingPage,
     cc: ControllerComponents,
     messagesControllerComponents: MessagesControllerComponents
 ) extends AbstractController(cc)
@@ -24,7 +26,7 @@ class LandingPageController @Inject() (
     */
   def index() =
     Action { implicit request: Request[AnyContent] =>
-      Ok(views.html.LandingPage())
+      Ok(landingPage())
     }
 
 }

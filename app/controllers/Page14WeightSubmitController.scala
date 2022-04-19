@@ -1,6 +1,8 @@
 package controllers
 
 import com.google.inject.Inject
+import controllers.handler.ErrorHandler
+import errors.CustomTimeoutResponse
 import forms.PreviousWeightForm
 import play.api.i18n.{I18nSupport, Langs, MessagesApi}
 import play.api.mvc._
@@ -11,6 +13,7 @@ import scala.concurrent.{ExecutionContext, Future}
 class Page14WeightSubmitController @Inject() (
     previousWeightService: PreviousWeightService,
     cacheService: CacheService,
+    errorHandler: ErrorHandler,
     cc: ControllerComponents,
     mcc: MessagesApi,
     langs: Langs
@@ -46,12 +49,7 @@ class Page14WeightSubmitController @Inject() (
                     .addPreviousWeight("Calvin", value)
                     .flatMap {
                       case Left(error) =>
-                        Future.successful(
-                          Redirect(
-                            routes.LandingPageController
-                              .index()
-                          )
-                        )
+                        errorHandler.handle(error)
                       case Right(value) =>
                         Future.successful(
                           Redirect(
@@ -61,18 +59,12 @@ class Page14WeightSubmitController @Inject() (
                         )
                     }
                 case None =>
-                  Future.successful(
-                    Redirect(
-                      routes.LandingPageController
-                        .index()
-                    )
-                  )
+                  errorHandler.handle(CustomTimeoutResponse)
               }
-
             } else {
               Future.successful(
                 Redirect(
-                  routes.LandingPageController.index()
+                  routes.LandingPageController.index() // Todo - Closing page
                 )
               )
             }

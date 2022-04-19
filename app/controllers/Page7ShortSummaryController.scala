@@ -1,20 +1,18 @@
 package controllers
 
 import com.google.inject.Inject
-import dto.MacroCalcDto
 import forms.ShortSummaryForm
-import helpers.{ActivityLevel, MaleOrFemale}
-import play.api.cache.AsyncCacheApi
 import play.api.i18n.{I18nSupport, Langs, MessagesApi}
 import play.api.mvc._
 import services.CacheService
+import views.html.{LandingPage, Page7ShortSummary}
 
-import java.time.LocalDate
-import scala.concurrent.duration.{Duration, SECONDS}
-import scala.concurrent.{Await, Future}
+import scala.concurrent.Future
 
 class Page7ShortSummaryController @Inject() (
     cacheService: CacheService,
+    page7ShortSummary: Page7ShortSummary,
+    landingPage: LandingPage, //TODO - Change to error
     cc: ControllerComponents,
     mcc: MessagesApi,
     langs: Langs
@@ -22,18 +20,20 @@ class Page7ShortSummaryController @Inject() (
     with I18nSupport {
 
   def shortSummaryPageLoad(): Action[AnyContent] = {
-    Action { implicit request: Request[AnyContent] =>
+    Action.async { implicit request: Request[AnyContent] =>
       println(cacheService.cacheToShortDto)
       cacheService.cacheToShortDto match {
         case Some(value) =>
           println("1" * 100)
           println(value)
-          Ok(views.html.Page7ShortSummary(ShortSummaryForm.form(), value))
+          Future.successful(
+            Ok(page7ShortSummary(ShortSummaryForm.form(), value))
+          )
         case None =>
           println("2" * 100)
-          Ok(views.html.LandingPage())
+          Future.successful(Ok(landingPage()))
 
-        //BadRequest(views.html.errorViews.BadRequestView)
+        //BadRequest(views.html.errorViews.ErrorBadRequestView)
       }
     }
   }

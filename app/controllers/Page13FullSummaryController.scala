@@ -1,12 +1,14 @@
 package controllers
 
 import com.google.inject.Inject
+import controllers.handler.ErrorHandler
 import forms.FullSummaryForm
 import models.MacroStat
 import play.api.data.Form
 import play.api.i18n.{I18nSupport, Langs, MessagesApi}
 import play.api.mvc._
 import services.{CacheService, MacroStatService}
+import views.html.LandingPage
 
 import java.time.LocalDate
 import scala.concurrent.{ExecutionContext, Future}
@@ -14,6 +16,8 @@ import scala.concurrent.{ExecutionContext, Future}
 class Page13FullSummaryController @Inject() (
     macroStatService: MacroStatService,
     cacheService: CacheService,
+    errorHandler: ErrorHandler,
+    landingPage: LandingPage, //TODO - Change to error
     cc: ControllerComponents,
     mcc: MessagesApi,
     langs: Langs
@@ -22,16 +26,18 @@ class Page13FullSummaryController @Inject() (
     with I18nSupport {
 
   def fullSummaryPageLoad(): Action[AnyContent] =
-    Action { implicit request: Request[AnyContent] =>
+    Action.async { implicit request: Request[AnyContent] =>
       println(cacheService.cacheToFullDto)
       cacheService.cacheToFullDto match {
         case Some(value) =>
           println("1" * 100)
           println(value)
-          Ok(views.html.Page13FullSummary(FullSummaryForm.form(), value))
+          Future.successful(
+            Ok(views.html.Page13FullSummary(FullSummaryForm.form(), value))
+          )
         case None =>
           println("2" * 100)
-          Ok(views.html.LandingPage())
+          Future.successful(Ok(landingPage()))
       }
     }
 
