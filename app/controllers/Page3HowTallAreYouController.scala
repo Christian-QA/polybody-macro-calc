@@ -21,8 +21,8 @@ class Page3HowTallAreYouController @Inject() (
     with I18nSupport {
 
   def howTallAreYouPageLoad(): Action[AnyContent] =
-    Action { implicit request: Request[AnyContent] =>
-      Ok(page3HeightView(HowTallAreYouForm.form()))
+    Action.async { implicit request: Request[AnyContent] =>
+      Future.successful(Ok(page3HeightView(HowTallAreYouForm.form())))
     }
 
   def howTallAreYouOnSubmit(): Action[AnyContent] =

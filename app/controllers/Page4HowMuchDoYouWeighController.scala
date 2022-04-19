@@ -21,8 +21,10 @@ class Page4HowMuchDoYouWeighController @Inject() (
     with I18nSupport {
 
   def howMuchDoYouWeighPageLoad(): Action[AnyContent] =
-    Action { implicit request: Request[AnyContent] =>
-      Ok(page4CurrentWeightView(HowMuchDoYouWeighForm.form()))
+    Action.async { implicit request: Request[AnyContent] =>
+      Future.successful(
+        Ok(page4CurrentWeightView(HowMuchDoYouWeighForm.form()))
+      )
     }
 
   def howMuchDoYouWeighOnSubmit(): Action[AnyContent] =

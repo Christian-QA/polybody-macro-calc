@@ -20,8 +20,8 @@ class Page10DoYouHaveAFatGoalController @Inject() (
     with I18nSupport {
 
   def doYouHaveAFatGoalPageLoad(): Action[AnyContent] =
-    Action { implicit request: Request[AnyContent] =>
-      Ok(page10FatGoalView(DoYouHaveAFatGoalForm.form()))
+    Action.async { implicit request: Request[AnyContent] =>
+      Future.successful(Ok(page10FatGoalView(DoYouHaveAFatGoalForm.form())))
     }
 
   def doYouHaveAFatGoalOnSubmit(): Action[AnyContent] =

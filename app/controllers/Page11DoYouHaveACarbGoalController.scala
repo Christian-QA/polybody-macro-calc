@@ -20,8 +20,8 @@ class Page11DoYouHaveACarbGoalController @Inject() (
     with I18nSupport {
 
   def doYouHaveACarbGoalPageLoad(): Action[AnyContent] =
-    Action { implicit request: Request[AnyContent] =>
-      Ok(page11CarbGoalView(DoYouHaveACarbGoalForm.form()))
+    Action.async { implicit request: Request[AnyContent] =>
+      Future.successful(Ok(page11CarbGoalView(DoYouHaveACarbGoalForm.form())))
     }
 
   def doYouHaveACarbGoalOnSubmit(): Action[AnyContent] =

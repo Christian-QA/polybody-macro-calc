@@ -21,8 +21,10 @@ class Page9DoYouHaveAProteinGoalController @Inject() (
     with I18nSupport {
 
   def doYouHaveAProteinGoalPageLoad(): Action[AnyContent] =
-    Action { implicit request: Request[AnyContent] =>
-      Ok(page9ProteinGoalView(DoYouHaveAProteinGoalForm.form()))
+    Action.async { implicit request: Request[AnyContent] =>
+      Future.successful(
+        Ok(page9ProteinGoalView(DoYouHaveAProteinGoalForm.form()))
+      )
     }
 
   def doYouHaveAProteinGoalOnSubmit(): Action[AnyContent] =

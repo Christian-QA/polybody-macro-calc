@@ -20,8 +20,10 @@ class Page5WhatIsYourTargetWeightController @Inject() (
     with I18nSupport {
 
   def whatIsYourTargetWeightPageLoad(): Action[AnyContent] =
-    Action { implicit request: Request[AnyContent] =>
-      Ok(page5TargetWeightView(WhatIsYourTargetWeightForm.form()))
+    Action.async { implicit request: Request[AnyContent] =>
+      Future.successful(
+        Ok(page5TargetWeightView(WhatIsYourTargetWeightForm.form()))
+      )
     }
 
   def whatIsYourTargetWeightOnSubmit(): Action[AnyContent] =

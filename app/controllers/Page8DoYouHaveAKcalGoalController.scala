@@ -21,8 +21,8 @@ class Page8DoYouHaveAKcalGoalController @Inject() (
     with I18nSupport {
 
   def doYouHaveAKcalGoalPageLoad(): Action[AnyContent] =
-    Action { implicit request: Request[AnyContent] =>
-      Ok(page8KcalGoalView(DoYouHaveAKcalGoalForm.form()))
+    Action.async { implicit request: Request[AnyContent] =>
+      Future.successful(Ok(page8KcalGoalView(DoYouHaveAKcalGoalForm.form())))
     }
 
   def doYouHaveAKcalGoalOnSubmit(): Action[AnyContent] =

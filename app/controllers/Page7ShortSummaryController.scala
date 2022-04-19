@@ -1,18 +1,21 @@
 package controllers
 
 import com.google.inject.Inject
+import controllers.handler.ErrorHandler
+import errors.CustomTimeoutResponse
 import forms.ShortSummaryForm
 import play.api.i18n.{I18nSupport, Langs, MessagesApi}
 import play.api.mvc._
 import services.CacheService
-import views.html.{LandingPage, Page7ShortSummary}
+import views.html.{LandingPageView, Page7ShortSummaryView}
 
 import scala.concurrent.Future
 
 class Page7ShortSummaryController @Inject() (
     cacheService: CacheService,
-    page7ShortSummary: Page7ShortSummary,
-    landingPage: LandingPage, //TODO - Change to error
+    errorHandler: ErrorHandler,
+    page7ShortSummaryView: Page7ShortSummaryView,
+    landingPageView: LandingPageView, //TODO - Change to error
     cc: ControllerComponents,
     mcc: MessagesApi,
     langs: Langs
@@ -27,12 +30,11 @@ class Page7ShortSummaryController @Inject() (
           println("1" * 100)
           println(value)
           Future.successful(
-            Ok(page7ShortSummary(ShortSummaryForm.form(), value))
+            Ok(page7ShortSummaryView(ShortSummaryForm.form(), value))
           )
         case None =>
           println("2" * 100)
-          Future.successful(Ok(landingPage()))
-
+          errorHandler.handle(CustomTimeoutResponse)
         //BadRequest(views.html.errorViews.ErrorBadRequestView)
       }
     }

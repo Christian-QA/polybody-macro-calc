@@ -24,8 +24,8 @@ class Page2WhenWereYouBornController @Inject() (
     with I18nSupport {
 
   def whenWereYouBornPageLoad(): Action[AnyContent] =
-    Action { implicit request: Request[AnyContent] =>
-      Ok(page2AgeView(WhenWereYouBornForm.form()))
+    Action.async { implicit request: Request[AnyContent] =>
+      Future.successful(Ok(page2AgeView(WhenWereYouBornForm.form())))
     }
 
   def whenWereYouBornOnSubmit(): Action[AnyContent] =

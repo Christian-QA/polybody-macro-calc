@@ -21,8 +21,8 @@ class Page1WhatSexAreYouController @Inject() (
     with I18nSupport {
 
   def whatSexAreYouPageLoad(): Action[AnyContent] =
-    Action { implicit request: Request[AnyContent] =>
-      Ok(page1SexView(WhatSexAreYouForm.form()))
+    Action.async { implicit request: Request[AnyContent] =>
+      Future.successful(Ok(page1SexView(WhatSexAreYouForm.form())))
     }
 
   def whatSexAreYouOnSubmit(): Action[AnyContent] =

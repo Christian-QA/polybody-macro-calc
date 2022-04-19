@@ -20,8 +20,8 @@ class Page6HowActiveAreYouController @Inject() (
     with I18nSupport {
 
   def howActiveAreYouPageLoad(): Action[AnyContent] =
-    Action { implicit request: Request[AnyContent] =>
-      Ok(page6ActivityLevelView(HowActiveAreYouForm.form()))
+    Action.async { implicit request: Request[AnyContent] =>
+      Future.successful(Ok(page6ActivityLevelView(HowActiveAreYouForm.form())))
     }
 
   def howActiveAreYouOnSubmit(): Action[AnyContent] =

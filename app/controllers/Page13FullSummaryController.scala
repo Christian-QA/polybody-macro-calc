@@ -39,7 +39,7 @@ class Page13FullSummaryController @Inject() (
           )
         case None =>
           println("2" * 100)
-          Future.successful(Ok(landingPage()))
+          errorHandler.handle(CustomTimeoutResponse)
       }
     }
 
