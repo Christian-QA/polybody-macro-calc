@@ -9,7 +9,7 @@
     @defining(play.core.PlayVersion.current) { version =>
         <div>
             @helper.form(action = controllers.routes.Page14WeightSubmitController.wouldYouLikeToSubmitThisWeightOnSubmit()) {
-                @helper.inputRadioGroup(field = form("wouldYouLikeToSubmitMacroStat"), options = Seq("No"->"false","Yes"->"true"), args = Symbol("_label") -> Boolean)
+                @helper.inputRadioGroup(field = form("wouldYouLikeToSubmitMacroStat"), options = Seq("false"->"Discard","true"->"Save"), args = Symbol("_label") -> Boolean)
                 <input type="submit" value="Submit">
                 }
         </div>

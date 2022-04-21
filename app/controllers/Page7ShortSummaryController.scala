@@ -34,7 +34,7 @@ class Page7ShortSummaryController @Inject() (
           )
         case None =>
           println("2" * 100)
-          errorHandler.handle(CustomTimeoutResponse)
+          errorHandler.handle(CustomTimeoutResponse, this.getClass.getName)
         //BadRequest(views.html.errorViews.ErrorBadRequestView)
       }
     }

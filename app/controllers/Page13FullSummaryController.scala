@@ -32,14 +32,12 @@ class Page13FullSummaryController @Inject() (
       println(cacheService.cacheToFullDto)
       cacheService.cacheToFullDto match {
         case Some(value) =>
-          println("1" * 100)
           println(value)
           Future.successful(
             Ok(page13FullSummaryView(FullSummaryForm.form(), value))
           )
         case None =>
-          println("2" * 100)
-          errorHandler.handle(CustomTimeoutResponse)
+          errorHandler.handle(CustomTimeoutResponse, this.getClass.getName)
       }
     }
 
@@ -49,8 +47,11 @@ class Page13FullSummaryController @Inject() (
         .form()
         .bindFromRequest()
         .fold(
-          formWithErrors =>
-            Future.successful(Redirect(routes.LandingPageController.index())),
+          formWithErrors => {
+            println("5" * 100)
+
+            Future.successful(Redirect(routes.LandingPageController.index()))
+          },
           value => {
             if (value.save) {
               cacheService.cacheToFullDto match {
@@ -79,8 +80,12 @@ class Page13FullSummaryController @Inject() (
                         println(error)
                         println("1" * 100)
 
-                        errorHandler.handle(error)
+                        errorHandler.handle(error, this.getClass.getName)
                       case Right(value) =>
+                        println("2" * 100)
+                        println(value)
+                        println("2" * 100)
+
                         Future.successful(
                           Redirect(
                             routes.Page14WeightSubmitController
@@ -89,9 +94,14 @@ class Page13FullSummaryController @Inject() (
                         )
                     }
                 case None =>
-                  errorHandler.handle(CustomTimeoutResponse)
+                  println("3" * 100)
+
+                  errorHandler
+                    .handle(CustomTimeoutResponse, this.getClass.getName)
               }
             } else {
+              println("4" * 100)
+
               Future.successful(
                 Redirect(
                   routes.Page14WeightSubmitController

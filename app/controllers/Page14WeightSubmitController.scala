@@ -33,7 +33,7 @@ class Page14WeightSubmitController @Inject() (
             )
           )
         case None =>
-          errorHandler.handle(CustomTimeoutResponse)
+          errorHandler.handle(CustomTimeoutResponse, this.getClass.getName)
       }
     }
   }
@@ -54,7 +54,7 @@ class Page14WeightSubmitController @Inject() (
                     .addPreviousWeight("Calvin", value)
                     .flatMap {
                       case Left(error) =>
-                        errorHandler.handle(error)
+                        errorHandler.handle(error, this.getClass.getName)
                       case Right(value) =>
                         Future.successful(
                           Redirect(
@@ -64,7 +64,8 @@ class Page14WeightSubmitController @Inject() (
                         )
                     }
                 case None =>
-                  errorHandler.handle(CustomTimeoutResponse)
+                  errorHandler
+                    .handle(CustomTimeoutResponse, this.getClass.getName)
               }
             } else {
               Future.successful(

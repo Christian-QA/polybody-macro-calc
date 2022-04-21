@@ -13,7 +13,7 @@
 
   <div>
     @helper.form(action = controllers.routes.Page13FullSummaryController.fullSummarySaveData()) {
-      @helper.inputRadioGroup(field = form("wouldYouLikeToSave"), options = Seq("Discard"->"false","Save"->"true"), args = Symbol("_label") -> Boolean)
+      @helper.inputRadioGroup(field = form("wouldYouLikeToSave"), options = Seq("false"->"Discard","true"->"Save"), args = Symbol("_label") -> Boolean)
       <input type="submit" value="Submit">
   </div>
 }

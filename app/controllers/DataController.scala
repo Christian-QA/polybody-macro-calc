@@ -89,14 +89,10 @@ class DataController @Inject() (
 
       result.map {
         case Right(value) =>
-          println("1" * 100)
           Ok(value.toString)
         case Left(CustomNoContentResponse) =>
-          println("2" * 100)
-
           NoContent
         case _ =>
-          println("3" * 100)
           InternalServerError
       }
     }
