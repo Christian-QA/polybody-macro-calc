@@ -1,13 +1,16 @@
 package controllers.handler
 
 import com.google.inject.Inject
+import controllers.routes
 import errors._
 import play.api.Logging
+import play.api.i18n.MessagesApi
 import play.api.mvc.Result
 import play.api.mvc.Results.{
   BadRequest,
   InternalServerError,
   Ok,
+  Redirect,
   RequestTimeout
 }
 import views.html.{
@@ -31,7 +34,7 @@ class ErrorHandler @Inject() (
   def handle(
       error: CustomErrorHandler,
       controllerName: String
-  ): Future[Result] = {
+  )(implicit messages: MessagesApi): Future[Result] = {
     error match {
       case CustomBackendDownResponse =>
         logger.warn(
@@ -47,7 +50,8 @@ class ErrorHandler @Inject() (
         logger.warn(
           s"Controller with the name '$controllerName' failed due to error: $error"
         )
-        Future.successful(Ok(landingPageView())) //TODO - Change to error
+        Future.successful(Redirect(routes.LandingPageController.index()))
+      //TODO - Change to error
       case CustomUpstreamResponse(message, reportedAs) =>
         logger.error(
           s"Controller with the name '$controllerName' failed due to error: $error"
@@ -59,7 +63,8 @@ class ErrorHandler @Inject() (
         )
         Future.successful(RequestTimeout(errorTimeoutView()))
       case _ =>
-        Future.successful(Ok(landingPageView())) //TODO - Change to error
+        Future.successful(Redirect(routes.LandingPageController.index()))
+      //TODO - Change to error
     }
 
   }

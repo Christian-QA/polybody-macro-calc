@@ -2,9 +2,9 @@
 
 @this()
 
-@()
+@()(implicit messages: Messages)
 
-@Template("Welcome") {
+@Template(messages("landing.title")) {
 @defining(play.core.PlayVersion.current) { version =>
 
 }

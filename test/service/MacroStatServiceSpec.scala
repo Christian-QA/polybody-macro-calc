@@ -2,14 +2,18 @@ package service
 
 import connectors.PolybodyConnector
 import errors.{
+  CustomBackendDownResponse,
+  CustomClientResponse,
   CustomErrorHandler,
   CustomNoContentResponse,
+  CustomTimeoutResponse,
   CustomUpstreamResponse
 }
-import models.MacroStat
+import models.{MacroStat, PreviousWeight}
+import org.mockito.ArgumentMatchers.any
 import org.mockito.Mockito.when
 import org.scalatest.concurrent.ScalaFutures
-import play.api.http.Status.INTERNAL_SERVER_ERROR
+import play.api.http.Status.{BAD_REQUEST, INTERNAL_SERVER_ERROR}
 import services.MacroStatService
 import utils.BaseSpec
 import utils.UserDetails.{passMacroStats, passMacroStatsUjson, passUsername}
@@ -38,33 +42,26 @@ class MacroStatServiceSpec extends BaseSpec with ScalaFutures {
 
         result mustBe Right(passMacroStats)
       }
-      "return a CustomNoContentResponse if no data is retrieved from the connector" in {
-        when(polybodyConnector.getMacroStats(passUsername))
-          .thenReturn(Future.successful(Left(CustomNoContentResponse)))
 
-        val response: Future[Either[CustomErrorHandler, List[MacroStat]]] =
-          sut.getMacroStats(passUsername)
+      List(
+        CustomNoContentResponse,
+        CustomClientResponse("", BAD_REQUEST),
+        CustomUpstreamResponse("", INTERNAL_SERVER_ERROR),
+        CustomBackendDownResponse,
+        CustomTimeoutResponse
+      ).foreach { error =>
+        s"return $error if returned from the connector" in {
+          when(polybodyConnector.getMacroStats(any()))
+            .thenReturn(Future.successful(Left(error)))
 
-        val result: Either[CustomErrorHandler, List[MacroStat]] =
-          Await.result(response, Duration(5, "seconds"))
+          val response: Either[CustomErrorHandler, List[MacroStat]] =
+            sut.getMacroStats(passUsername).futureValue
 
-        result mustBe Left(CustomNoContentResponse)
-      }
-      "return a CustomUpstreamResponse if the connection to the backend fails" in {
-        when(polybodyConnector.getMacroStats(passUsername)).thenReturn(
-          Future
-            .successful(Left(CustomUpstreamResponse("", INTERNAL_SERVER_ERROR)))
-        )
-
-        val response: Future[Either[CustomErrorHandler, List[MacroStat]]] =
-          sut.getMacroStats(passUsername)
-
-        val result: Either[CustomErrorHandler, List[MacroStat]] =
-          Await.result(response, Duration(5, "seconds"))
-
-        result mustBe Left(CustomUpstreamResponse("", INTERNAL_SERVER_ERROR))
+          response mustBe Left(error)
+        }
       }
     }
   }
 
+  // TODO - Need addMacroStat test following Either refactor
 }
