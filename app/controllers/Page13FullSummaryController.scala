@@ -5,7 +5,6 @@ import controllers.handler.ErrorHandler
 import errors.CustomTimeoutResponse
 import forms.FullSummaryForm
 import models.MacroStat
-import play.api.data.Form
 import play.api.i18n.{I18nSupport, Langs, MessagesApi}
 import play.api.mvc._
 import services.{CacheService, MacroStatService}

@@ -63,7 +63,7 @@ class Page4HowMuchDoYouWeighSpec extends BaseSpec with BeforeAndAfterEach {
     // TODO - Add weight validation
 
     "howMuchDoYouWeighOnSubmit method" must {
-      "redirect to Page5TargetWeightView with the value set in the cache when a height is inputted" in {
+      "redirect to Page5TargetWeightView with the value set in the cache when a weight is inputted" in {
         val result: Future[Result] =
           controller.howMuchDoYouWeighOnSubmit()(
             FakeRequest().withFormUrlEncodedBody(

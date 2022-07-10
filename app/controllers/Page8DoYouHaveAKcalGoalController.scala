@@ -8,7 +8,6 @@ import play.api.i18n.{I18nSupport, Langs, MessagesApi}
 import play.api.mvc._
 import views.html.Page8KcalGoalView
 
-import java.util.concurrent.CompletionStage
 import scala.concurrent.Future
 
 class Page8DoYouHaveAKcalGoalController @Inject() (

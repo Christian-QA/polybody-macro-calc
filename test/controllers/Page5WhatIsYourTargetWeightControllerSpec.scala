@@ -65,7 +65,7 @@ class Page5WhatIsYourTargetWeightControllerSpec
     // TODO - Add weight validation
 
     "whatIsYourTargetWeightOnSubmit method" must {
-      "redirect to Page6ActivityLevelView with the value set in the cache when a height is inputted" in {
+      "redirect to Page6ActivityLevelView with the value set in the cache when a weight is inputted" in {
         val result: Future[Result] =
           controller.whatIsYourTargetWeightOnSubmit()(
             FakeRequest().withFormUrlEncodedBody(

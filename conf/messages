@@ -14,7 +14,7 @@ page5.target-weight.title=How much do you want to weigh?
 
 page6.activity-level.title=How active are you?
 
-page7.short-summary.title=What we''ve calculated for you so far
+page7.short-summary.title=What we have calculated for you so far
 
 page8.kcal-goal.title=Do you have a calorie goal?
 
@@ -29,3 +29,13 @@ page12.body-fat.title=Do you know your body fat percentage?
 page13.full-summary.title=The final calculation
 
 page14.previousWeightSubmit.title = Would you like to submit this weight?
+
+error.bad-request.title = Bad Request
+
+error.internal-server-error.title = Internal Server Error
+
+error.service-down.title = Service Unavailable
+
+error.timeout.title = Timeout
+
+error.generic.title = Technical Difficulties

@@ -2,10 +2,10 @@
 
 @this()
 
-@()
+@()(implicit messages: Messages)
 
-@Template("Internal Server Error") {
-    @defining(play.core.PlayVersion.current) { version =>
+    @Template(messages("error.internal-server-error.title")) {
+        @defining(play.core.PlayVersion.current) { version =>
 
-    }
+        }
 }

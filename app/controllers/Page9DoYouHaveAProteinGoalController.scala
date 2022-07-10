@@ -8,7 +8,6 @@ import play.api.i18n.{I18nSupport, Langs, MessagesApi}
 import play.api.mvc._
 import views.html.Page9ProteinGoalView
 
-import java.util.concurrent.CompletionStage
 import scala.concurrent.Future
 
 class Page9DoYouHaveAProteinGoalController @Inject() (

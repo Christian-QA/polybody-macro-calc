@@ -8,8 +8,7 @@ import play.api.i18n.{I18nSupport, Langs, MessagesApi}
 import play.api.mvc._
 import views.html.Page12BodyFatView
 
-import scala.concurrent.duration.{Duration, SECONDS}
-import scala.concurrent.{Await, Future}
+import scala.concurrent.Future
 
 class Page12DoYouWantToUseYourBodyFatController @Inject() (
     page12BodyFatView: Page12BodyFatView,

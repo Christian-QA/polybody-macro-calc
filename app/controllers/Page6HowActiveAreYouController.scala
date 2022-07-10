@@ -31,7 +31,8 @@ class Page6HowActiveAreYouController @Inject() (
         .bindFromRequest()
         .fold(
           formWithErrors =>
-            Future.successful(Redirect(routes.LandingPageController.index())),
+            Future
+              .successful(BadRequest(page6ActivityLevelView(formWithErrors))),
           value => {
             val result: Future[Done] =
               cache.set("activityLevel", value.activity)

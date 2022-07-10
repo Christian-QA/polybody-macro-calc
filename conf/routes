@@ -14,8 +14,6 @@ GET     /what-is-your-target-weight         controllers.Page5WhatIsYourTargetWei
 POST    /what-is-your-target-weight         controllers.Page5WhatIsYourTargetWeightController.whatIsYourTargetWeightOnSubmit()
 GET     /how-active-are-you                 controllers.Page6HowActiveAreYouController.howActiveAreYouPageLoad()
 POST    /how-active-are-you                 controllers.Page6HowActiveAreYouController.howActiveAreYouOnSubmit()
-GET     /what-is-your-goal                  controllers.Page8DoYouHaveAKcalGoalController.doYouHaveAKcalGoalPageLoad()
-POST    /what-is-your-goal                  controllers.Page8DoYouHaveAKcalGoalController.doYouHaveAKcalGoalOnSubmit()
 GET     /short-summary                      controllers.Page7ShortSummaryController.shortSummaryPageLoad()
 POST    /short-summary                      controllers.Page7ShortSummaryController.shortSummaryOnSubmit()
 

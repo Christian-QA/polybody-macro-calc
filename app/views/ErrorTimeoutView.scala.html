@@ -2,9 +2,9 @@
 
 @this()
 
-@()
+@()(implicit messages: Messages)
 
-@Template("Timeout") {
+@Template(messages("error.timeout.title")) {
     @defining(play.core.PlayVersion.current) { version =>
 
     }

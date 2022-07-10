@@ -3,16 +3,12 @@ package controllers
 import akka.Done
 import com.google.inject.Inject
 import forms.WhenWereYouBornForm
-import helpers.MaleOrFemale
 import play.api.cache.AsyncCacheApi
 import play.api.i18n.{I18nSupport, Langs, MessagesApi}
 import play.api.mvc._
 import views.html.Page2AgeView
 
-import java.util.Optional
-import java.util.concurrent.CompletionStage
-import scala.concurrent.{Await, Future}
-import scala.concurrent.duration.{Duration, SECONDS}
+import scala.concurrent.Future
 
 class Page2WhenWereYouBornController @Inject() (
     page2AgeView: Page2AgeView,

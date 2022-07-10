@@ -4,22 +4,16 @@ import com.google.inject.Inject
 import controllers.routes
 import errors._
 import play.api.Logging
-import play.api.i18n.MessagesApi
-import play.api.mvc.Result
+import play.api.i18n.{Messages, MessagesApi}
 import play.api.mvc.Results.{
   BadRequest,
   InternalServerError,
-  Ok,
   Redirect,
-  RequestTimeout
+  RequestTimeout,
+  ServiceUnavailable
 }
-import views.html.{
-  ErrorBadRequestView,
-  ErrorInternalServerView,
-  ErrorServiceDownView,
-  ErrorTimeoutView,
-  LandingPageView
-}
+import play.api.mvc.{AnyContent, Request, Result}
+import views.html._
 
 import scala.concurrent.Future
 
@@ -28,19 +22,23 @@ class ErrorHandler @Inject() (
     errorBadRequestView: ErrorBadRequestView,
     errorInternalServerView: ErrorInternalServerView,
     errorServiceDownView: ErrorServiceDownView,
-    errorTimeoutView: ErrorTimeoutView
+    errorTimeoutView: ErrorTimeoutView,
+    mcc: MessagesApi
 ) extends Logging {
 
   def handle(
       error: CustomErrorHandler,
       controllerName: String
-  )(implicit messages: MessagesApi): Future[Result] = {
+  )(implicit
+      messages: Messages,
+      request: Request[AnyContent]
+  ): Future[Result] = {
     error match {
       case CustomBackendDownResponse =>
         logger.warn(
           s"Controller with the name '$controllerName' failed due to error: $error"
         )
-        Future.successful(BadRequest(errorServiceDownView()))
+        Future.successful(ServiceUnavailable(errorServiceDownView()))
       case CustomClientResponse(message, reportedAs) =>
         logger.error(
           s"Controller with the name '$controllerName' failed due to error: $error"
@@ -51,7 +49,7 @@ class ErrorHandler @Inject() (
           s"Controller with the name '$controllerName' failed due to error: $error"
         )
         Future.successful(Redirect(routes.LandingPageController.index()))
-      //TODO - Change to error
+      //TODO - Change to error or review if needed
       case CustomUpstreamResponse(message, reportedAs) =>
         logger.error(
           s"Controller with the name '$controllerName' failed due to error: $error"

@@ -8,7 +8,6 @@ import play.api.i18n.{I18nSupport, Langs, MessagesApi}
 import play.api.mvc._
 import views.html.Page4CurrentWeightView
 
-import java.util.concurrent.CompletionStage
 import scala.concurrent.Future
 
 class Page4HowMuchDoYouWeighController @Inject() (
