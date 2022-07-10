@@ -32,11 +32,17 @@ class Page1WhatSexAreYouController @Inject() (
         .bindFromRequest()
         .fold(
           formWithErrors => {
-            Future.successful(Redirect(routes.LandingPageController.index()))
+            println("1" * 100)
+            Future.successful(
+              BadRequest(
+                page1SexView(formWithErrors)
+              )
+            )
           },
           value => {
             val result: Future[Done] =
               cache.set("sex", value.sex)
+            println("2" * 100)
 
             Future.successful(
               Redirect(
