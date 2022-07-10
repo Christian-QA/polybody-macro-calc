@@ -1,7 +1,7 @@
 package controllers
 
 import akka.Done
-import helpers.{Female, Male, Other}
+import helpers.{Female, Male}
 import org.mockito.ArgumentMatchers.any
 import org.mockito.Mockito.{reset, times, verify, when}
 import org.scalatest.BeforeAndAfterEach
@@ -11,28 +11,28 @@ import play.api.i18n.{Lang, Langs}
 import play.api.mvc.Result
 import play.api.test.FakeRequest
 import play.api.test.Helpers.{
-  LOCATION,
   contentAsString,
   defaultAwaitTimeout,
   redirectLocation,
   status
 }
 import utils.BaseSpec
-import views.html.Page1SexView
+import views.html.{Page1SexView, Page2AgeView}
 
+import java.time.LocalDate
 import scala.concurrent.Future
 
-class Page1WhatSexAreYouControllerSpec
+class Page2WhenWereYouBornControllerSpec
     extends BaseSpec
     with BeforeAndAfterEach {
 
-  val page1SexView: Page1SexView = inject[Page1SexView]
+  val page2AgeView: Page2AgeView = inject[Page2AgeView]
 
   val cache: AsyncCacheApi = mock[AsyncCacheApi]
 
   def controller =
-    new Page1WhatSexAreYouController(
-      page1SexView,
+    new Page2WhenWereYouBornController(
+      page2AgeView,
       cache,
       cc,
       messages,
@@ -50,65 +50,39 @@ class Page1WhatSexAreYouControllerSpec
 
   //TODO - Remember to add test when implementing auth
 
-  "Page1WhatSexAreYouController" when {
-    "whatSexAreYouPageLoad method" must {
+  "Page2WhenWereYouBornController" when {
+    "whenWereYouBornPageLoad method" must {
       "open page1SexView" in {
         val request: Future[Result] =
-          controller.whatSexAreYouPageLoad()(FakeRequest())
+          controller.whenWereYouBornPageLoad()(FakeRequest())
 
         status(request) mustBe OK
         contentAsString(request) must include(
-          messages.apply("page1.sex.title")(Lang.defaultLang)
+          messages.apply("page2.age.title")(Lang.defaultLang)
         )
       }
     }
 
-    "whatSexAreYouOnSubmit method" must {
-      "redirect to page2WhenWereYouBornView with the sex set in the cache when Male is selected" in {
-        val result: Future[Result] =
-          controller.whatSexAreYouOnSubmit()(
-            FakeRequest().withFormUrlEncodedBody(
-              ("whatSexAreYou", Male.toString)
-            )
-          )
+    // TODO - Add age validation
 
-        status(result) mustBe SEE_OTHER
-        redirectLocation(result) mustBe Some(
-          "/how-old-are-you"
-        )
-        verify(cache, times(1)).set(any(), any(), any())
-      }
+    "whenWereYouBornOnSubmit method" must {
       "redirect to page2WhenWereYouBornView with the sex set in the cache when Female is selected" in {
         val result: Future[Result] =
-          controller.whatSexAreYouOnSubmit()(
+          controller.whenWereYouBornOnSubmit()(
             FakeRequest().withFormUrlEncodedBody(
-              ("whatSexAreYou", Female.toString)
+              ("howOldAreYou", LocalDate.now.minusYears(20).toString)
             )
           )
 
         status(result) mustBe SEE_OTHER
         redirectLocation(result) mustBe Some(
-          "/how-old-are-you"
-        )
-        verify(cache, times(1)).set(any(), any(), any())
-      }
-      "redirect to page2WhenWereYouBornView with the sex set in the cache when Other is selected" in {
-        val result: Future[Result] =
-          controller.whatSexAreYouOnSubmit()(
-            FakeRequest().withFormUrlEncodedBody(
-              ("whatSexAreYou", Other.toString)
-            )
-          )
-
-        status(result) mustBe SEE_OTHER
-        redirectLocation(result) mustBe Some(
-          "/how-old-are-you"
+          "/how-tall-are-you"
         )
         verify(cache, times(1)).set(any(), any(), any())
       }
       "not continue to next page with a bad request status if nothing is selected on submit" in {
         val result: Future[Result] =
-          controller.whatSexAreYouOnSubmit()(
+          controller.whenWereYouBornOnSubmit()(
             FakeRequest()
           )
 

@@ -35,15 +35,9 @@ class Page2WhenWereYouBornController @Inject() (
         .bindFromRequest()
         .fold(
           formWithErrors =>
-            Future.successful(Redirect(routes.LandingPageController.index())),
+            Future.successful(BadRequest(page2AgeView(formWithErrors))),
           value => {
             val result: Future[Done] = cache.set("age", value.age)
-
-            val futureMaybeUser: Future[Option[MaleOrFemale]] =
-              cache
-                .get[MaleOrFemale]("sex")
-
-            println(Await.result(futureMaybeUser, Duration(5, SECONDS)))
 
             Future.successful(
               Redirect(
