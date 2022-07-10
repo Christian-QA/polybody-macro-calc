@@ -1,7 +1,6 @@
 package controllers
 
 import akka.Done
-import helpers.{Female, Male}
 import org.mockito.ArgumentMatchers.any
 import org.mockito.Mockito.{reset, times, verify, when}
 import org.scalatest.BeforeAndAfterEach
@@ -17,22 +16,22 @@ import play.api.test.Helpers.{
   status
 }
 import utils.BaseSpec
-import views.html.{Page1SexView, Page2AgeView}
+import views.html.{Page4CurrentWeightView, Page5TargetWeightView}
 
-import java.time.LocalDate
 import scala.concurrent.Future
 
-class Page2WhenWereYouBornControllerSpec
+class Page5WhatIsYourTargetWeightControllerSpec
     extends BaseSpec
     with BeforeAndAfterEach {
 
-  val page2AgeView: Page2AgeView = inject[Page2AgeView]
+  val page5TargetWeightView: Page5TargetWeightView =
+    inject[Page5TargetWeightView]
 
   val cache: AsyncCacheApi = mock[AsyncCacheApi]
 
   def controller =
-    new Page2WhenWereYouBornController(
-      page2AgeView,
+    new Page5WhatIsYourTargetWeightController(
+      page5TargetWeightView,
       cache,
       cc,
       messages,
@@ -50,39 +49,39 @@ class Page2WhenWereYouBornControllerSpec
 
   //TODO - Remember to add test when implementing auth
 
-  "Page2WhenWereYouBornController" when {
-    "whenWereYouBornPageLoad method" must {
-      "open Page2AgeView" in {
+  "Page5WhatIsYourTargetWeightController" when {
+    "whatIsYourTargetWeightPageLoad method" must {
+      "open Page5TargetWeightView" in {
         val request: Future[Result] =
-          controller.whenWereYouBornPageLoad()(FakeRequest())
+          controller.whatIsYourTargetWeightPageLoad()(FakeRequest())
 
         status(request) mustBe OK
         contentAsString(request) must include(
-          messages.apply("page2.age.title")(Lang.defaultLang)
+          messages.apply("page5.target-weight.title")(Lang.defaultLang)
         )
       }
     }
 
-    // TODO - Add age validation
+    // TODO - Add weight validation
 
-    "whenWereYouBornOnSubmit method" must {
-      "redirect to page3HeightView with the date of birth set in the cache when a valid date is selected" in {
+    "whatIsYourTargetWeightOnSubmit method" must {
+      "redirect to Page6ActivityLevelView with the value set in the cache when a height is inputted" in {
         val result: Future[Result] =
-          controller.whenWereYouBornOnSubmit()(
+          controller.whatIsYourTargetWeightOnSubmit()(
             FakeRequest().withFormUrlEncodedBody(
-              ("howOldAreYou", LocalDate.now.minusYears(20).toString)
+              ("whatIsYourTargetWeight", 200.00.toString)
             )
           )
 
         status(result) mustBe SEE_OTHER
         redirectLocation(result) mustBe Some(
-          "/how-tall-are-you"
+          "/how-active-are-you"
         )
         verify(cache, times(1)).set(any(), any(), any())
       }
       "not continue to next page with a bad request status if nothing is selected on submit" in {
         val result: Future[Result] =
-          controller.whenWereYouBornOnSubmit()(
+          controller.whatIsYourTargetWeightOnSubmit()(
             FakeRequest()
           )
 

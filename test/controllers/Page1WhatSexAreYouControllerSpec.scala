@@ -52,7 +52,7 @@ class Page1WhatSexAreYouControllerSpec
 
   "Page1WhatSexAreYouController" when {
     "whatSexAreYouPageLoad method" must {
-      "open page1SexView" in {
+      "open Page1SexView" in {
         val request: Future[Result] =
           controller.whatSexAreYouPageLoad()(FakeRequest())
 
@@ -64,7 +64,7 @@ class Page1WhatSexAreYouControllerSpec
     }
 
     "whatSexAreYouOnSubmit method" must {
-      "redirect to page2WhenWereYouBornView with the sex set in the cache when Male is selected" in {
+      "redirect to Page2AgeView with the sex set in the cache when Male is selected" in {
         val result: Future[Result] =
           controller.whatSexAreYouOnSubmit()(
             FakeRequest().withFormUrlEncodedBody(
@@ -78,7 +78,7 @@ class Page1WhatSexAreYouControllerSpec
         )
         verify(cache, times(1)).set(any(), any(), any())
       }
-      "redirect to page2WhenWereYouBornView with the sex set in the cache when Female is selected" in {
+      "redirect to Page2AgeView with the sex set in the cache when Female is selected" in {
         val result: Future[Result] =
           controller.whatSexAreYouOnSubmit()(
             FakeRequest().withFormUrlEncodedBody(
@@ -92,7 +92,7 @@ class Page1WhatSexAreYouControllerSpec
         )
         verify(cache, times(1)).set(any(), any(), any())
       }
-      "redirect to page2WhenWereYouBornView with the sex set in the cache when Other is selected" in {
+      "redirect to Page2AgeView with the sex set in the cache when Other is selected" in {
         val result: Future[Result] =
           controller.whatSexAreYouOnSubmit()(
             FakeRequest().withFormUrlEncodedBody(

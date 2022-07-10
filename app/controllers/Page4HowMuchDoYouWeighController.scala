@@ -34,7 +34,8 @@ class Page4HowMuchDoYouWeighController @Inject() (
         .bindFromRequest()
         .fold(
           formWithErrors =>
-            Future.successful(Redirect(routes.LandingPageController.index())),
+            Future
+              .successful(BadRequest(page4CurrentWeightView(formWithErrors))),
           value => {
             val result: Future[Done] =
               cache.set("currentWeight", value.weight)

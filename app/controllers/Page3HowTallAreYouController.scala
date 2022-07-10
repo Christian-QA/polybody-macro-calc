@@ -32,7 +32,7 @@ class Page3HowTallAreYouController @Inject() (
         .bindFromRequest()
         .fold(
           formWithErrors =>
-            Future.successful(Redirect(routes.LandingPageController.index())),
+            Future.successful(BadRequest(page3HeightView(formWithErrors))),
           value => {
             val result: Future[Done] = cache.set("height", value.height)
 
