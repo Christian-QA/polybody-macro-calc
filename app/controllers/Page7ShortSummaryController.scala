@@ -35,7 +35,9 @@ class Page7ShortSummaryController @Inject() (
         .form()
         .bindFromRequest()
         .fold(
-          formWithErrors => cacheHandler(formWithErrors, submit = true),
+          formWithErrors => {
+            cacheHandler(formWithErrors, onSubmit = true)
+          },
           value =>
             if (value.continue) {
               Future.successful(
@@ -58,25 +60,16 @@ class Page7ShortSummaryController @Inject() (
 
   private def cacheHandler(
       form: Form[ShortSummaryForm],
-      submit: Boolean = false
+      onSubmit: Boolean = false
   )(implicit request: Request[AnyContent]): Future[Result] = {
     cacheService.cacheToShortDto match {
       case Some(value) =>
-        if (submit) {
-          println("1" * 100)
-          println(value)
-          Future.successful(
-            BadRequest(page7ShortSummaryView(form, value))
-          )
+        if (onSubmit) {
+          Future.successful(BadRequest(page7ShortSummaryView(form, value)))
         } else {
-          println("2" * 100)
-          println(value)
-          Future.successful(
-            Ok(page7ShortSummaryView(form, value))
-          )
+          Future.successful(Ok(page7ShortSummaryView(form, value)))
         }
       case None =>
-        println("3" * 100)
         errorHandler.handle(CustomTimeoutResponse, this.getClass.getName)
     }
   }
