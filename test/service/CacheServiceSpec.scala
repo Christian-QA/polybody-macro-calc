@@ -242,8 +242,6 @@ class CacheServiceSpec extends BaseSpec with BeforeAndAfterEach {
 
         sut.cacheToFullDto mustBe None
       }
-
     }
-
   }
 }
