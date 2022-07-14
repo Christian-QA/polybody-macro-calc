@@ -14,7 +14,7 @@ import utils.UserDetails.{passUser, passUserUjson, passUsername}
 import scala.concurrent.duration.Duration
 import scala.concurrent.{Await, Future}
 
-class UserServiceSpec extends BaseSpec with ScalaFutures {
+class UserServiceSpec extends BaseSpec {
 
   lazy val polybodyConnector: PolybodyConnector = mock[PolybodyConnector]
 

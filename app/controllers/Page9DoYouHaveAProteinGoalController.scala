@@ -33,7 +33,7 @@ class Page9DoYouHaveAProteinGoalController @Inject() (
         .bindFromRequest()
         .fold(
           formWithErrors =>
-            Future.successful(Redirect(routes.LandingPageController.index())),
+            Future.successful(BadRequest(page9ProteinGoalView(formWithErrors))),
           value => {
             val result: Future[Done] =
               cache.set("proteinGoal", value.protein)

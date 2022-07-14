@@ -92,26 +92,26 @@ class Page7ShortSummaryControllerSpec extends BaseSpec with BeforeAndAfterEach {
         val result: Future[Result] =
           controller.shortSummaryOnSubmit()(
             FakeRequest().withFormUrlEncodedBody(
-              ("howActiveAreYou", Sedentary.toString)
+              ("doYouWantToUseAdvancedValues", true.toString)
             )
           )
 
         status(result) mustBe SEE_OTHER
         redirectLocation(result) mustBe Some(
-          "/short-summary"
+          "/do-you-have-a-kcal-goal"
         )
       }
       "redirect to Page13FullSummary WHAT????" in {
         val result: Future[Result] =
           controller.shortSummaryOnSubmit()(
             FakeRequest().withFormUrlEncodedBody(
-              ("howActiveAreYou", Sedentary.toString)
+              ("doYouWantToUseAdvancedValues", false.toString)
             )
           )
 
         status(result) mustBe SEE_OTHER
         redirectLocation(result) mustBe Some(
-          "/short-summary"
+          "/weight-submit"
         )
       }
 

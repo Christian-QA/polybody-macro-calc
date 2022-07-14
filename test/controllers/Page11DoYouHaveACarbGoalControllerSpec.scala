@@ -16,22 +16,22 @@ import play.api.test.Helpers.{
   status
 }
 import utils.BaseSpec
-import views.html.{Page10FatGoalView, Page9ProteinGoalView}
+import views.html.Page11CarbGoalView
 
 import scala.concurrent.Future
 
-class Page10DoYouHaveAFatGoalControllerSpec
+class Page11DoYouHaveACarbGoalControllerSpec
     extends BaseSpec
     with BeforeAndAfterEach {
 
-  val page10FatGoalView: Page10FatGoalView =
-    inject[Page10FatGoalView]
+  val page11CarbGoalView: Page11CarbGoalView =
+    inject[Page11CarbGoalView]
 
   val cache: AsyncCacheApi = mock[AsyncCacheApi]
 
   def controller =
-    new Page10DoYouHaveAFatGoalController(
-      page10FatGoalView,
+    new Page11DoYouHaveACarbGoalController(
+      page11CarbGoalView,
       cache,
       cc,
       messages,
@@ -49,39 +49,39 @@ class Page10DoYouHaveAFatGoalControllerSpec
 
   //TODO - Remember to add test when implementing auth
 
-  "Page10DoYouHaveAFatGoalController" when {
-    "doYouHaveAFatGoalPageLoad method" must {
-      "open Page10FatGoalView" in {
+  "Page11DoYouHaveACarbGoalController" when {
+    "doYouHaveACarbGoalPageLoad method" must {
+      "open Page11CarbGoalView" in {
         val request: Future[Result] =
-          controller.doYouHaveAFatGoalPageLoad()(FakeRequest())
+          controller.doYouHaveACarbGoalPageLoad()(FakeRequest())
 
         status(request) mustBe OK
         contentAsString(request) must include(
-          messages.apply("page10.fat-goal.title")(Lang.defaultLang)
+          messages.apply("page11.carb-goal.title")(Lang.defaultLang)
         )
       }
     }
 
     // TODO - Add boolean to decide if value is present or not, with validation to enforce value if true
 
-    "doYouHaveAFatGoalOnSubmit method" must {
-      "redirect to Page11CarbGoalView with the value set in the cache when a weight is inputted" in {
+    "doYouHaveACarbGoalOnSubmit method" must {
+      "redirect to Page12BodyFatView with the value set in the cache when a weight is inputted" in {
         val result: Future[Result] =
-          controller.doYouHaveAFatGoalOnSubmit()(
+          controller.doYouHaveACarbGoalOnSubmit()(
             FakeRequest().withFormUrlEncodedBody(
-              ("doYouHaveAFatGoal", 50.toString)
+              ("doYouHaveACarbGoal", 250.toString)
             )
           )
 
         status(result) mustBe SEE_OTHER
         redirectLocation(result) mustBe Some(
-          "/do-you-have-a-carb-goal"
+          "/do-you-want-to-use-your-body-fat"
         )
         verify(cache, times(1)).set(any(), any(), any())
       }
       "not continue to next page with a bad request status if nothing is selected on submit" in {
         val result: Future[Result] =
-          controller.doYouHaveAFatGoalOnSubmit()(
+          controller.doYouHaveACarbGoalOnSubmit()(
             FakeRequest()
           )
 

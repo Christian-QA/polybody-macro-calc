@@ -16,25 +16,27 @@ import play.api.test.Helpers.{
   status
 }
 import utils.BaseSpec
-import views.html.{Page3HeightView, Page4CurrentWeightView}
+import views.html.{Page4CurrentWeightView, Page8KcalGoalView}
 
 import scala.concurrent.Future
 
-class Page4HowMuchDoYouWeighSpec extends BaseSpec with BeforeAndAfterEach {
+class Page8DoYouHaveAKcalGoalControllerSpec
+    extends BaseSpec
+    with BeforeAndAfterEach {
 
-  val page4CurrentWeightView: Page4CurrentWeightView =
-    inject[Page4CurrentWeightView]
+  val page8KcalGoalView: Page8KcalGoalView =
+    inject[Page8KcalGoalView]
 
   val cache: AsyncCacheApi = mock[AsyncCacheApi]
 
   def controller =
-    new Page4HowMuchDoYouWeighController(
-      page4CurrentWeightView,
+    new Page8DoYouHaveAKcalGoalController(
+      page8KcalGoalView,
       cache,
       cc,
       messages,
       inject[Langs]
-    ) Page8DoYouHaveAKcalGoalController
+    )
 
   when(cache.set(any(), any(), any())).thenReturn {
     Future.successful(Done)
@@ -47,39 +49,39 @@ class Page4HowMuchDoYouWeighSpec extends BaseSpec with BeforeAndAfterEach {
 
   //TODO - Remember to add test when implementing auth
 
-  "Page4HowMuchDoYouWeighController" when {
-    "howMuchDoYouWeighPageLoad method" must {
-      "open Page4CurrentWeightView" in {
+  "Page8DoYouHaveAKcalGoalController" when {
+    "doYouHaveAKcalGoalPageLoad method" must {
+      "open Page8KcalGoalView" in {
         val request: Future[Result] =
-          controller.howMuchDoYouWeighPageLoad()(FakeRequest())
+          controller.doYouHaveAKcalGoalPageLoad()(FakeRequest())
 
         status(request) mustBe OK
         contentAsString(request) must include(
-          messages.apply("page4.current-weight.title")(Lang.defaultLang)
+          messages.apply("page8.kcal-goal.title")(Lang.defaultLang)
         )
       }
     }
 
-    // TODO - Add weight validation
+    // TODO - Add boolean to decide if value is present or not, with validation to enforce value if true
 
-    "howMuchDoYouWeighOnSubmit method" must {
-      "redirect to Page5TargetWeightView with the value set in the cache when a weight is inputted" in {
+    "doYouHaveAKcalGoalOnSubmit method" must {
+      "redirect to Page9ProteinGoalView with the value set in the cache when a weight is inputted" in {
         val result: Future[Result] =
-          controller.howMuchDoYouWeighOnSubmit()(
+          controller.doYouHaveAKcalGoalOnSubmit()(
             FakeRequest().withFormUrlEncodedBody(
-              ("howMuchDoYouWeigh", 200.00.toString)
+              ("doYouHaveAKcalGoal", 2000.toString)
             )
           )
 
         status(result) mustBe SEE_OTHER
         redirectLocation(result) mustBe Some(
-          "/what-is-your-target-weight"
+          "/do-you-have-a-protein-goal"
         )
         verify(cache, times(1)).set(any(), any(), any())
       }
       "not continue to next page with a bad request status if nothing is selected on submit" in {
         val result: Future[Result] =
-          controller.howMuchDoYouWeighOnSubmit()(
+          controller.doYouHaveAKcalGoalOnSubmit()(
             FakeRequest()
           )
 

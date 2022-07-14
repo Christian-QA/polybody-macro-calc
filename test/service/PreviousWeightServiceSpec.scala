@@ -31,7 +31,7 @@ import utils.UserDetails.{
 import scala.concurrent.duration.Duration
 import scala.concurrent.{Await, Future}
 
-class PreviousWeightServiceSpec extends BaseSpec with ScalaFutures {
+class PreviousWeightServiceSpec extends BaseSpec {
 
   lazy val polybodyConnector: PolybodyConnector = mock[PolybodyConnector]
 

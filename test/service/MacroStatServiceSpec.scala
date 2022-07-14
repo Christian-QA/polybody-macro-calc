@@ -21,7 +21,7 @@ import utils.UserDetails.{passMacroStats, passMacroStatsUjson, passUsername}
 import scala.concurrent.duration.Duration
 import scala.concurrent.{Await, Future}
 
-class MacroStatServiceSpec extends BaseSpec with ScalaFutures {
+class MacroStatServiceSpec extends BaseSpec {
 
   lazy val polybodyConnector: PolybodyConnector = mock[PolybodyConnector]
 

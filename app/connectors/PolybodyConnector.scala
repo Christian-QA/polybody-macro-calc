@@ -10,8 +10,8 @@ import errors.{
 }
 import play.api.Logging
 import play.api.http.Status.{INTERNAL_SERVER_ERROR, NO_CONTENT, OK}
-import requests.Response
-import ujson.{Value, Obj}
+import requests.{Response, connectTimeout, readTimeout}
+import ujson.{Obj, Value}
 
 import scala.collection.mutable.ArrayBuffer
 import scala.concurrent.{ExecutionContext, Future}
@@ -120,6 +120,6 @@ class PolybodyConnector @Inject() (val applicationConfig: ApplicationConfig)(
       url = addMacroStatsUrl(username),
       headers = Map("Content-Type" -> "application/json"),
       data = data.render()
-    )
+    ) // TODO - Timeout issues, may need exception handler
   }
 }

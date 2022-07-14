@@ -33,7 +33,7 @@ class Page12DoYouWantToUseYourBodyFatController @Inject() (
         .bindFromRequest()
         .fold(
           formWithErrors =>
-            Future.successful(Redirect(routes.LandingPageController.index())),
+            Future.successful(BadRequest(page12BodyFatView(formWithErrors))),
           value => {
             val result: Future[Done] =
               cache.set("bodyFat", value.bodyFat)

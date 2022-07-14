@@ -31,7 +31,7 @@ class Page8DoYouHaveAKcalGoalController @Inject() (
         .bindFromRequest()
         .fold(
           formWithErrors =>
-            Future.successful(Redirect(routes.LandingPageController.index())),
+            Future.successful(BadRequest(page8KcalGoalView(formWithErrors))),
           value => {
             val result: Future[Done] =
               cache.set("kcalGoal", value.kcals)

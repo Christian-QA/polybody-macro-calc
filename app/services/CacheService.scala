@@ -16,7 +16,7 @@ class CacheService @Inject() (cache: AsyncCacheApi) {
       cache.get[Double]("currentWeight"),
       Duration(5, SECONDS)
     )
-  }
+  } // TODO - Change to Future.successful()
 
   def cacheToShortDto: Option[MacroCalcDto] = {
     val sex: Option[MaleOrFemale] = {

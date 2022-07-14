@@ -31,7 +31,7 @@ class Page11DoYouHaveACarbGoalController @Inject() (
         .bindFromRequest()
         .fold(
           formWithErrors =>
-            Future.successful(Redirect(routes.LandingPageController.index())),
+            Future.successful(BadRequest(page11CarbGoalView(formWithErrors))),
           value => {
             println(value.carb)
             val result: Future[Done] =

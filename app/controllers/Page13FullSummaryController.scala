@@ -50,6 +50,8 @@ class Page13FullSummaryController @Inject() (
             println("5" * 100)
 
             Future.successful(Redirect(routes.LandingPageController.index()))
+//            Future.successful(BadRequest(page13FullSummaryView(formWithErrors)))
+
           },
           value => {
             if (value.save) {

@@ -31,7 +31,7 @@ class Page10DoYouHaveAFatGoalController @Inject() (
         .bindFromRequest()
         .fold(
           formWithErrors =>
-            Future.successful(Redirect(routes.LandingPageController.index())),
+            Future.successful(BadRequest(page10FatGoalView(formWithErrors))),
           value => {
             val result: Future[Done] =
               cache.set("fatGoal", value.fat)
