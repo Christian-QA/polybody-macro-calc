@@ -2,34 +2,33 @@ package connectors
 
 import com.github.tomakehurst.wiremock.client.WireMock
 import com.github.tomakehurst.wiremock.client.WireMock.{aResponse, urlEqualTo}
-import errors.{
-  CustomErrorHandler,
-  CustomNoContentResponse,
-  CustomUpstreamResponse
-}
-import org.mockito.Mockito.when
 import org.scalatest.concurrent.{IntegrationPatience, ScalaFutures}
+import org.scalatest.matchers.must.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import play.api.Application
-import play.api.http.Status.{INTERNAL_SERVER_ERROR, OK}
+import play.api.http.Status.OK
 import play.api.inject.guice.GuiceApplicationBuilder
-import ujson.Value
-import utils.{BaseSpec, WireMockHelper}
+import play.api.test.Injecting
 import utils.UserDetails.{passUserUjson, passUsername}
-
-import scala.collection.mutable.ArrayBuffer
-import scala.concurrent.duration.Duration
-import scala.concurrent.{Await, Future}
+import utils.WireMockHelper
 
 class PolybodyConnectorSpec
-    extends BaseSpec
-    with ScalaFutures
-    with IntegrationPatience
-    with WireMockHelper {
+    extends AnyWordSpec
+      with ScalaFutures
+      with IntegrationPatience
+      with Matchers
+      with Injecting
+      with WireMockHelper {
 
-  lazy val polybodyConnector: PolybodyConnector = mock[PolybodyConnector]
+  override lazy val app: Application =
+    new GuiceApplicationBuilder()
+      .configure(
+        "microservice.polybody-backend.port" -> server.port(),
+        "microservice.polybody-backend.host" -> "127.0.0.1"
+      )
+      .build()
 
-  override lazy val app: Application = GuiceApplicationBuilder()
-    .build()
+  lazy val polybodyConnector: PolybodyConnector = inject[PolybodyConnector]
 
   "PolybodyConnector" when {
     "getUserDetails is called" must {

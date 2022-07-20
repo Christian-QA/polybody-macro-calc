@@ -10,19 +10,17 @@ import play.api.inject.guice.GuiceApplicationBuilder
 trait WireMockHelper extends BeforeAndAfterAll with BeforeAndAfterEach {
   this: Suite =>
 
-  protected val server: WireMockServer = new WireMockServer(
+  val server: WireMockServer = new WireMockServer(
     wireMockConfig().dynamicPort()
   )
 
-  protected lazy val app: Application =
+  lazy val app: Application =
     new GuiceApplicationBuilder()
       .configure(
         "microservice.polybody-backend.port" -> server.port(),
         "microservice.polybody-backend.host" -> "127.0.0.1"
       )
       .build()
-
-  protected lazy val injector: Injector = app.injector
 
   override def beforeAll(): Unit = {
     server.start()
