@@ -1,0 +1,11 @@
+@import views.html.components.Template
+
+@this()
+
+@()(implicit messages: Messages)
+
+    @Template(messages("error.internal-server-error.title")) {
+        @defining(play.core.PlayVersion.current) { version =>
+
+        }
+}

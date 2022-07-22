@@ -1,8 +1,10 @@
 @import views.html.components.Template
 
-@()
+@this()
 
-@Template("Welcome") {
+@()(implicit messages: Messages)
+
+@Template(messages("landing.title")) {
 @defining(play.core.PlayVersion.current) { version =>
 
 }

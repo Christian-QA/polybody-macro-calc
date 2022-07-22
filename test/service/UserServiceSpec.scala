@@ -1,15 +1,12 @@
 package service
 
 import connectors.PolybodyConnector
-import errors.{
-  CustomErrorHandler,
-  CustomNoContentResponse,
-  CustomUpstreamResponse
-}
+import errors._
 import models.User
+import org.mockito.ArgumentMatchers.any
 import org.mockito.Mockito.when
 import org.scalatest.concurrent.ScalaFutures
-import play.api.http.Status.INTERNAL_SERVER_ERROR
+import play.api.http.Status.{BAD_REQUEST, INTERNAL_SERVER_ERROR}
 import services.UserService
 import utils.BaseSpec
 import utils.UserDetails.{passUser, passUserUjson, passUsername}
@@ -17,7 +14,7 @@ import utils.UserDetails.{passUser, passUserUjson, passUsername}
 import scala.concurrent.duration.Duration
 import scala.concurrent.{Await, Future}
 
-class UserServiceSpec extends BaseSpec with ScalaFutures {
+class UserServiceSpec extends BaseSpec {
 
   lazy val polybodyConnector: PolybodyConnector = mock[PolybodyConnector]
 
@@ -27,42 +24,31 @@ class UserServiceSpec extends BaseSpec with ScalaFutures {
     "getUserDetails is called" must {
       "return a User containing user data if data is retrieved from the connector" in {
 
-        when(polybodyConnector.getUserDetails(passUsername))
+        when(polybodyConnector.getUserDetails(any()))
           .thenReturn(Future.successful(Right(passUserUjson)))
 
-        val response: Future[Either[CustomErrorHandler, User]] =
-          sut.getUserDetails(passUsername)
+        val response: Either[CustomErrorHandler, User] =
+          sut.getUserDetails(passUsername).futureValue
 
-        val result: Either[CustomErrorHandler, User] =
-          Await.result(response, Duration(5, "seconds"))
-
-        result mustBe Right(passUser)
+        response mustBe Right(passUser)
       }
-      "return a CustomNoContentResponse if no data is retrieved from the connector" in {
-        when(polybodyConnector.getUserDetails(passUsername))
-          .thenReturn(Future.successful(Left(CustomNoContentResponse)))
 
-        val response: Future[Either[CustomErrorHandler, User]] =
-          sut.getUserDetails(passUsername)
+      List(
+        CustomNoContentResponse,
+        CustomClientResponse("", BAD_REQUEST),
+        CustomUpstreamResponse("", INTERNAL_SERVER_ERROR),
+        CustomBackendDownResponse,
+        CustomTimeoutResponse
+      ).foreach { error =>
+        s"return $error if returned from the connector" in {
+          when(polybodyConnector.getUserDetails(any()))
+            .thenReturn(Future.successful(Left(error)))
 
-        val result: Either[CustomErrorHandler, User] =
-          Await.result(response, Duration(5, "seconds"))
+          val response: Either[CustomErrorHandler, User] =
+            sut.getUserDetails(passUsername).futureValue
 
-        result mustBe Left(CustomNoContentResponse)
-      }
-      "return a CustomUpstreamResponse if the connection to the backend fails" in {
-        when(polybodyConnector.getUserDetails(passUsername)).thenReturn(
-          Future
-            .successful(Left(CustomUpstreamResponse("", INTERNAL_SERVER_ERROR)))
-        )
-
-        val response: Future[Either[CustomErrorHandler, User]] =
-          sut.getUserDetails(passUsername)
-
-        val result: Either[CustomErrorHandler, User] =
-          Await.result(response, Duration(5, "seconds"))
-
-        result mustBe Left(CustomUpstreamResponse("", INTERNAL_SERVER_ERROR))
+          response mustBe Left(error)
+        }
       }
     }
   }

@@ -5,7 +5,7 @@ import connectors.PolybodyConnector
 import errors.{CustomClientResponse, CustomErrorHandler}
 import helpers.ActivityLevel
 import models.MacroStat
-import play.api.http.Status.{BAD_REQUEST, OK}
+import play.api.http.Status.{BAD_REQUEST, CREATED, OK}
 import ujson.{Obj, Value}
 
 import java.time.LocalDate
@@ -33,7 +33,6 @@ class MacroStatService @Inject() (polybodyConnector: PolybodyConnector)(implicit
             acc: Int
         ): List[MacroStat] = {
           if (acc < parsedInput.length) {
-            println(parsedInput)
             val stats: List[MacroStat] = MacroStat(
               Some(LocalDate.parse(parsedInput(acc)("dateTime").str)),
               ActivityLevel.apply(parsedInput(acc)("activityLevel").str),
@@ -75,7 +74,8 @@ class MacroStatService @Inject() (polybodyConnector: PolybodyConnector)(implicit
       "timeToGoal" -> macroStat.timeToGoal
     )
     polybodyConnector.addMacroStats(username, data) match {
-      case response if response.statusCode == OK => Future.successful(Right(OK))
+      case response if response.statusCode == CREATED =>
+        Future.successful(Right(OK))
       case _ =>
         Future.successful(
           Left(CustomClientResponse("Invalid data submitted", BAD_REQUEST))

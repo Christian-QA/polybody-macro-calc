@@ -1,128 +1,101 @@
 package controllers
 
 import com.google.inject.Inject
-import dto.MacroCalcDto
-import helpers.{ActivityLevel, MaleOrFemale}
-import play.api.cache.AsyncCacheApi
+import controllers.handler.ErrorHandler
+import errors.CustomTimeoutResponse
+import forms.FullSummaryForm
+import models.MacroStat
 import play.api.i18n.{I18nSupport, Langs, MessagesApi}
 import play.api.mvc._
+import services.{CacheService, MacroStatService}
+import views.html.{LandingPageView, Page13FullSummaryView}
 
 import java.time.LocalDate
-import scala.concurrent.Await
-import scala.concurrent.duration.{Duration, SECONDS}
+import scala.concurrent.{ExecutionContext, Future}
 
 class Page13FullSummaryController @Inject() (
-    cache: AsyncCacheApi,
+    macroStatService: MacroStatService,
+    cacheService: CacheService,
+    errorHandler: ErrorHandler,
+    page13FullSummaryView: Page13FullSummaryView,
+    landingPage: LandingPageView, //TODO - Change to error
     cc: ControllerComponents,
     mcc: MessagesApi,
     langs: Langs
-) extends AbstractController(cc)
+)(implicit ec: ExecutionContext)
+    extends AbstractController(cc)
     with I18nSupport {
 
   def fullSummaryPageLoad(): Action[AnyContent] =
-    Action { implicit request: Request[AnyContent] =>
-      println(cacheToDto)
-      cacheToDto match {
+    Action.async { implicit request: Request[AnyContent] =>
+      cacheService.cacheToFullDto match {
         case Some(value) =>
-          println("1" * 100)
-          println(value)
-          Ok(views.html.Page13FullSummary(value))
+          Future.successful(
+            Ok(page13FullSummaryView(FullSummaryForm.form(), value))
+          )
         case None =>
-          println("2" * 100)
-          Ok(views.html.LandingPage())
-
+          errorHandler.handle(CustomTimeoutResponse, this.getClass.getName)
       }
     }
 
-  private def cacheToDto: Option[MacroCalcDto] = {
-    val sex: Option[MaleOrFemale] = {
-      Await.result(
-        cache.get[MaleOrFemale]("sex"),
-        Duration(5, SECONDS)
-      )
+  def fullSummarySaveData(): Action[AnyContent] =
+    Action.async { implicit request: Request[AnyContent] =>
+      FullSummaryForm
+        .form()
+        .bindFromRequest()
+        .fold(
+          formWithErrors => {
+
+            Future.successful(Redirect(routes.LandingPageController.index()))
+//            Future.successful(BadRequest(page13FullSummaryView(formWithErrors)))
+
+          },
+          value => {
+            if (value.save) {
+              cacheService.cacheToFullDto match {
+                case Some(data) =>
+                  val macroStat: MacroStat = MacroStat(
+                    Some(LocalDate.now()),
+                    data.activityLevel,
+                    data.setGoal,
+                    data.proteinPreference,
+                    data.fatPreference,
+                    data.carbPreference,
+                    data.bodyFat,
+                    Some("Default"),
+                    1000,
+                    500,
+                    10
+                  )
+                  macroStatService
+                    .addMacroStat(
+                      "Calvin", // TODO Change name to username
+                      macroStat
+                    )
+                    .flatMap {
+                      case Left(error) =>
+                        errorHandler.handle(error, this.getClass.getName)
+                      case Right(value) =>
+                        Future.successful(
+                          Redirect(
+                            routes.Page14WeightSubmitController
+                              .wouldYouLikeToSubmitThisWeightPageLoad()
+                          )
+                        )
+                    }
+                case None =>
+                  errorHandler
+                    .handle(CustomTimeoutResponse, this.getClass.getName)
+              }
+            } else {
+              Future.successful(
+                Redirect(
+                  routes.Page14WeightSubmitController
+                    .wouldYouLikeToSubmitThisWeightPageLoad()
+                )
+              )
+            }
+          }
+        )
     }
-
-    val age: Option[LocalDate] =
-      Await.result(
-        cache.get[LocalDate]("age"),
-        Duration(5, SECONDS)
-      )
-
-    val height: Option[Double] =
-      Await.result(
-        cache.get[Double]("height"),
-        Duration(5, SECONDS)
-      )
-
-    val currentWeight: Option[Double] =
-      Await.result(
-        cache.get[Double]("currentWeight"),
-        Duration(5, SECONDS)
-      )
-
-    val targetWeight: Option[Double] =
-      Await.result(
-        cache.get[Double]("targetWeight"),
-        Duration(5, SECONDS)
-      )
-
-    val activityLevel: Option[ActivityLevel] =
-      Await.result(
-        cache.get[ActivityLevel]("activityLevel"),
-        Duration(5, SECONDS)
-      )
-
-    val kcalGoal: Option[Int] =
-      Await.result(
-        cache.get[Int]("kcalGoal"),
-        Duration(5, SECONDS)
-      )
-
-    val proteinGoal: Option[Int] =
-      Await.result(
-        cache.get[Int]("proteinGoal"),
-        Duration(5, SECONDS)
-      )
-
-    val fatGoal: Option[Int] =
-      Await.result(
-        cache.get[Int]("fatGoal"),
-        Duration(5, SECONDS)
-      )
-
-    val carbGoal: Option[Int] =
-      Await.result(
-        cache.get[Int]("carbGoal"),
-        Duration(5, SECONDS)
-      )
-
-    val bodyFat: Option[Double] =
-      Await.result(
-        cache.get[Double]("bodyFat"),
-        Duration(5, SECONDS)
-      )
-
-    for {
-      sex <- sex
-      age <- age
-      height <- height
-      currentWeight <- currentWeight
-      targetWeight <- targetWeight
-      activityLevel <- activityLevel
-    } yield {
-      MacroCalcDto(
-        sex,
-        age,
-        height,
-        currentWeight,
-        targetWeight,
-        activityLevel,
-        kcalGoal,
-        proteinGoal,
-        fatGoal,
-        carbGoal,
-        bodyFat
-      )
-    }
-  }
 }

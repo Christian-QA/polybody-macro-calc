@@ -1,0 +1,17 @@
+@import views.html.components.Template
+@import forms.PreviousWeightForm
+
+@this()
+
+@(form: Form[PreviousWeightForm], weight: Double)(implicit messages: Messages)
+
+@Template(messages("page14.previousWeightSubmit.title")) {
+    @defining(play.core.PlayVersion.current) { version =>
+        <div>
+            @helper.form(action = controllers.routes.Page14WeightSubmitController.wouldYouLikeToSubmitThisWeightOnSubmit()) {
+                @helper.inputRadioGroup(field = form("wouldYouLikeToSubmitMacroStat"), options = Seq("false"->"Discard","true"->"Save"), args = Symbol("_label") -> Boolean)
+                <input type="submit" value="Submit">
+                }
+        </div>
+    }
+}

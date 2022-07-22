@@ -6,11 +6,12 @@ import forms.DoYouHaveAProteinGoalForm
 import play.api.cache.AsyncCacheApi
 import play.api.i18n.{I18nSupport, Langs, MessagesApi}
 import play.api.mvc._
+import views.html.Page9ProteinGoalView
 
-import java.util.concurrent.CompletionStage
 import scala.concurrent.Future
 
 class Page9DoYouHaveAProteinGoalController @Inject() (
+    page9ProteinGoalView: Page9ProteinGoalView,
     cache: AsyncCacheApi,
     cc: ControllerComponents,
     mcc: MessagesApi,
@@ -19,8 +20,10 @@ class Page9DoYouHaveAProteinGoalController @Inject() (
     with I18nSupport {
 
   def doYouHaveAProteinGoalPageLoad(): Action[AnyContent] =
-    Action { implicit request: Request[AnyContent] =>
-      Ok(views.html.Page9ProteinGoal(DoYouHaveAProteinGoalForm.form()))
+    Action.async { implicit request: Request[AnyContent] =>
+      Future.successful(
+        Ok(page9ProteinGoalView(DoYouHaveAProteinGoalForm.form()))
+      )
     }
 
   def doYouHaveAProteinGoalOnSubmit(): Action[AnyContent] =
@@ -30,7 +33,7 @@ class Page9DoYouHaveAProteinGoalController @Inject() (
         .bindFromRequest()
         .fold(
           formWithErrors =>
-            Future.successful(Redirect(routes.LandingPageController.index())),
+            Future.successful(BadRequest(page9ProteinGoalView(formWithErrors))),
           value => {
             val result: Future[Done] =
               cache.set("proteinGoal", value.protein)

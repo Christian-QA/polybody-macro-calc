@@ -2,6 +2,8 @@
 @import dto.MacroCalcDto
 @import views.html.components.Template
 
+@this()
+
 @(form: Form[ShortSummaryForm], macroCalcDto: MacroCalcDto)(implicit messages: Messages)
 
 @Template(messages("page7.short-summary.title")) {

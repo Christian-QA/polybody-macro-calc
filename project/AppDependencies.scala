@@ -25,14 +25,15 @@ object AppDependencies {
   object Test {
     def apply(): Seq[ModuleID] =
       new TestDependencies {
-        override lazy val test = Seq(
+        override lazy val test: Seq[sbt.ModuleID] = Seq(
           guice,
           "org.scalatest" %% "scalatest" % "3.2.3",
           "org.scalatestplus.play" %% "scalatestplus-play" % "5.1.0" % scope,
           "org.mockito" % "mockito-core" % "2.28.2" % scope,
           "com.typesafe.play" %% "play-test" % current % scope,
           "org.scalacheck" %% "scalacheck" % "1.14.3" % scope,
-          "org.scalatestplus" %% "mockito-3-4" % "3.2.3.0"
+          "org.scalatestplus" %% "mockito-3-4" % "3.2.3.0",
+          "com.github.tomakehurst" % "wiremock-standalone" % "2.27.2"
         )
       }.test
   }

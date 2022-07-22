@@ -1,0 +1,23 @@
+@import dto.MacroCalcDto
+@import views.html.components.Template
+@import forms.FullSummaryForm
+
+@this()
+
+@(form: Form[FullSummaryForm], macroCalcDto: MacroCalcDto)(implicit messages: Messages)
+
+@Template(messages("page13.full-summary.title")) {
+@defining(play.core.PlayVersion.current) { version =>
+
+  <p>@macroCalcDto</p>
+
+  <div>
+    @helper.form(action = controllers.routes.Page13FullSummaryController.fullSummarySaveData()) {
+      @helper.inputRadioGroup(field = form("wouldYouLikeToSave"), options = Seq("false"->"Discard","true"->"Save"), args = Symbol("_label") -> Boolean)
+      <input type="submit" value="Submit">
+  </div>
+}
+
+
+}
+}

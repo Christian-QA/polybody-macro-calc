@@ -1,0 +1,11 @@
+@import views.html.components.Template
+
+@this()
+
+@()(implicit messages: Messages)
+
+@Template(messages("error.timeout.title")) {
+    @defining(play.core.PlayVersion.current) { version =>
+
+    }
+}

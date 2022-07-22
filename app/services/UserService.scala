@@ -5,8 +5,10 @@ import connectors.PolybodyConnector
 import errors.CustomErrorHandler
 import helpers.MaleOrFemale
 import models.User
+import ujson.Value
 
 import java.time.LocalDate
+import scala.collection.mutable.ArrayBuffer
 import scala.concurrent.{ExecutionContext, Future}
 
 class UserService @Inject() (polybodyConnector: PolybodyConnector)(implicit
@@ -16,7 +18,8 @@ class UserService @Inject() (polybodyConnector: PolybodyConnector)(implicit
   def getUserDetails(
       username: String
   ): Future[Either[CustomErrorHandler, User]] = {
-    val data = polybodyConnector.getUserDetails(username)
+    val data: Future[Either[CustomErrorHandler, ArrayBuffer[Value]]] =
+      polybodyConnector.getUserDetails(username)
 
     data.map {
       case Right(value) =>

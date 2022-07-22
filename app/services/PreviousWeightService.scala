@@ -5,7 +5,7 @@ import com.google.inject.Inject
 import connectors.PolybodyConnector
 import errors.{CustomClientResponse, CustomErrorHandler}
 import models.PreviousWeight
-import play.api.http.Status.{BAD_REQUEST, OK}
+import play.api.http.Status.{BAD_REQUEST, CREATED, OK}
 import ujson.{Obj, Value}
 
 import java.time.LocalDate
@@ -55,7 +55,8 @@ class PreviousWeightService @Inject() (polybodyConnector: PolybodyConnector)(
       "weight" -> weight
     )
     polybodyConnector.addPreviousWeights(username, data) match {
-      case response if response.statusCode == OK => Future.successful(Right(OK))
+      case response if response.statusCode == CREATED =>
+        Future.successful(Right(OK))
       case _ =>
         Future.successful(
           Left(CustomClientResponse("Invalid data submitted", BAD_REQUEST))

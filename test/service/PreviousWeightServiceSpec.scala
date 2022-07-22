@@ -2,14 +2,24 @@ package service
 
 import connectors.PolybodyConnector
 import errors.{
+  CustomBackendDownResponse,
+  CustomClientResponse,
   CustomErrorHandler,
   CustomNoContentResponse,
+  CustomTimeoutResponse,
   CustomUpstreamResponse
 }
-import models.PreviousWeight
+import models.{PreviousWeight, User}
+import org.mockito.ArgumentMatchers.any
 import org.mockito.Mockito.when
 import org.scalatest.concurrent.ScalaFutures
-import play.api.http.Status.INTERNAL_SERVER_ERROR
+import play.api.http.Status.{
+  BAD_GATEWAY,
+  BAD_REQUEST,
+  INTERNAL_SERVER_ERROR,
+  SERVICE_UNAVAILABLE
+}
+import requests.Response
 import services.PreviousWeightService
 import utils.BaseSpec
 import utils.UserDetails.{
@@ -21,7 +31,7 @@ import utils.UserDetails.{
 import scala.concurrent.duration.Duration
 import scala.concurrent.{Await, Future}
 
-class PreviousWeightServiceSpec extends BaseSpec with ScalaFutures {
+class PreviousWeightServiceSpec extends BaseSpec {
 
   lazy val polybodyConnector: PolybodyConnector = mock[PolybodyConnector]
 
@@ -31,7 +41,7 @@ class PreviousWeightServiceSpec extends BaseSpec with ScalaFutures {
     "getPreviousWeights is called" must {
       "return PreviousWeights containing user data if data is retrieved from the connector" in {
 
-        when(polybodyConnector.getPreviousWeights(passUsername))
+        when(polybodyConnector.getPreviousWeights(any()))
           .thenReturn(Future.successful(Right(passPreviousWeightUjson)))
 
         val response: Future[Either[CustomErrorHandler, List[PreviousWeight]]] =
@@ -42,33 +52,60 @@ class PreviousWeightServiceSpec extends BaseSpec with ScalaFutures {
 
         result mustBe Right(passPreviousWeights)
       }
-      "return a CustomNoContentResponse if no data is retrieved from the connector" in {
-        when(polybodyConnector.getPreviousWeights(passUsername))
-          .thenReturn(Future.successful(Left(CustomNoContentResponse)))
 
-        val response: Future[Either[CustomErrorHandler, List[PreviousWeight]]] =
-          sut.getPreviousWeights(passUsername)
+      List(
+        CustomNoContentResponse,
+        CustomClientResponse("", BAD_REQUEST),
+        CustomUpstreamResponse("", INTERNAL_SERVER_ERROR),
+        CustomBackendDownResponse,
+        CustomTimeoutResponse
+      ).foreach { error =>
+        s"return $error if returned from the connector" in {
+          when(polybodyConnector.getPreviousWeights(any()))
+            .thenReturn(Future.successful(Left(error)))
 
-        val result: Either[CustomErrorHandler, List[PreviousWeight]] =
-          Await.result(response, Duration(5, "seconds"))
+          val response: Either[CustomErrorHandler, List[PreviousWeight]] =
+            sut.getPreviousWeights(passUsername).futureValue
 
-        result mustBe Left(CustomNoContentResponse)
-      }
-      "return a CustomUpstreamResponse if the connection to the backend fails" in {
-        when(polybodyConnector.getPreviousWeights(passUsername)).thenReturn(
-          Future
-            .successful(Left(CustomUpstreamResponse("", INTERNAL_SERVER_ERROR)))
-        )
-
-        val response: Future[Either[CustomErrorHandler, List[PreviousWeight]]] =
-          sut.getPreviousWeights(passUsername)
-
-        val result: Either[CustomErrorHandler, List[PreviousWeight]] =
-          Await.result(response, Duration(5, "seconds"))
-
-        result mustBe Left(CustomUpstreamResponse("", INTERNAL_SERVER_ERROR))
+          response mustBe Left(error)
+        }
       }
     }
-  }
 
+//    "addPreviousWeight is called" must {
+//      "return PreviousWeights containing user data if data is retrieved from the connector" in {
+//
+//        Response()
+//
+//        when(polybodyConnector.addPreviousWeights(any(), any()))
+//          .thenReturn(Future.successful(Right(passPreviousWeightUjson)))
+//
+//        val response: Future[Either[CustomErrorHandler, List[PreviousWeight]]] =
+//          sut.getPreviousWeights(passUsername)
+//
+//        val result: Either[CustomErrorHandler, List[PreviousWeight]] =
+//          Await.result(response, Duration(5, "seconds"))
+//
+//        result mustBe Right(passPreviousWeights)
+//      }
+//
+//      List(
+//        CustomNoContentResponse,
+//        CustomClientResponse("", BAD_REQUEST),
+//        CustomUpstreamResponse("", INTERNAL_SERVER_ERROR),
+//        CustomBackendDownResponse,
+//        CustomTimeoutResponse
+//      ).foreach { error =>
+//        s"return $error if returned from the connector" in {
+//          when(polybodyConnector.getPreviousWeights(passUsername))
+//            .thenReturn(Future.successful(Left(error)))
+//
+//          val response: Either[CustomErrorHandler, List[PreviousWeight]] =
+//            sut.getPreviousWeights(passUsername).futureValue
+//
+//          response mustBe Left(error)
+//        }
+//      }
+//    }
+  }
 }

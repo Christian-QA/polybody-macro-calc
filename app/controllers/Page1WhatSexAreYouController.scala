@@ -6,11 +6,12 @@ import forms.WhatSexAreYouForm
 import play.api.cache.AsyncCacheApi
 import play.api.i18n.{I18nSupport, Langs, MessagesApi}
 import play.api.mvc._
+import views.html.Page1SexView
 
-import java.util.concurrent.CompletionStage
 import scala.concurrent.Future
 
 class Page1WhatSexAreYouController @Inject() (
+    page1SexView: Page1SexView,
     cache: AsyncCacheApi,
     cc: ControllerComponents,
     mcc: MessagesApi,
@@ -19,8 +20,8 @@ class Page1WhatSexAreYouController @Inject() (
     with I18nSupport {
 
   def whatSexAreYouPageLoad(): Action[AnyContent] =
-    Action { implicit request: Request[AnyContent] =>
-      Ok(views.html.Page1Sex(WhatSexAreYouForm.form()))
+    Action.async { implicit request: Request[AnyContent] =>
+      Future.successful(Ok(page1SexView(WhatSexAreYouForm.form())))
     }
 
   def whatSexAreYouOnSubmit(): Action[AnyContent] =
@@ -30,7 +31,11 @@ class Page1WhatSexAreYouController @Inject() (
         .bindFromRequest()
         .fold(
           formWithErrors => {
-            Future.successful(Redirect(routes.LandingPageController.index()))
+            Future.successful(
+              BadRequest(
+                page1SexView(formWithErrors)
+              )
+            )
           },
           value => {
             val result: Future[Done] =

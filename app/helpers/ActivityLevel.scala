@@ -27,7 +27,6 @@ object ActivityLevel {
     }
 
   def apply(value: String): ActivityLevel = {
-    println(value)
     value match {
       case "Sedentary"        => Sedentary
       case "LightlyActive"    => LightlyActive

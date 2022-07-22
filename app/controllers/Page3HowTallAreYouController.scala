@@ -6,11 +6,12 @@ import forms.HowTallAreYouForm
 import play.api.cache.AsyncCacheApi
 import play.api.i18n.{I18nSupport, Langs, MessagesApi}
 import play.api.mvc._
+import views.html.Page3HeightView
 
-import java.util.concurrent.CompletionStage
 import scala.concurrent.Future
 
 class Page3HowTallAreYouController @Inject() (
+    page3HeightView: Page3HeightView,
     cache: AsyncCacheApi,
     cc: ControllerComponents,
     mcc: MessagesApi,
@@ -19,8 +20,8 @@ class Page3HowTallAreYouController @Inject() (
     with I18nSupport {
 
   def howTallAreYouPageLoad(): Action[AnyContent] =
-    Action { implicit request: Request[AnyContent] =>
-      Ok(views.html.Page3Height(HowTallAreYouForm.form()))
+    Action.async { implicit request: Request[AnyContent] =>
+      Future.successful(Ok(page3HeightView(HowTallAreYouForm.form())))
     }
 
   def howTallAreYouOnSubmit(): Action[AnyContent] =
@@ -30,7 +31,7 @@ class Page3HowTallAreYouController @Inject() (
         .bindFromRequest()
         .fold(
           formWithErrors =>
-            Future.successful(Redirect(routes.LandingPageController.index())),
+            Future.successful(BadRequest(page3HeightView(formWithErrors))),
           value => {
             val result: Future[Done] = cache.set("height", value.height)
 

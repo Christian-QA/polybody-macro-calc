@@ -1,7 +1,7 @@
 package forms
 
 import play.api.data.{Form, Forms}
-import play.api.data.Forms.{boolean, mapping}
+import play.api.data.Forms.{boolean, mapping, nonEmptyText}
 
 case class ShortSummaryForm(continue: Boolean)
 

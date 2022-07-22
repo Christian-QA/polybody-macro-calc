@@ -6,11 +6,12 @@ import forms.HowMuchDoYouWeighForm
 import play.api.cache.AsyncCacheApi
 import play.api.i18n.{I18nSupport, Langs, MessagesApi}
 import play.api.mvc._
+import views.html.Page4CurrentWeightView
 
-import java.util.concurrent.CompletionStage
 import scala.concurrent.Future
 
 class Page4HowMuchDoYouWeighController @Inject() (
+    page4CurrentWeightView: Page4CurrentWeightView,
     cache: AsyncCacheApi,
     cc: ControllerComponents,
     mcc: MessagesApi,
@@ -19,8 +20,10 @@ class Page4HowMuchDoYouWeighController @Inject() (
     with I18nSupport {
 
   def howMuchDoYouWeighPageLoad(): Action[AnyContent] =
-    Action { implicit request: Request[AnyContent] =>
-      Ok(views.html.Page4CurrentWeight(HowMuchDoYouWeighForm.form()))
+    Action.async { implicit request: Request[AnyContent] =>
+      Future.successful(
+        Ok(page4CurrentWeightView(HowMuchDoYouWeighForm.form()))
+      )
     }
 
   def howMuchDoYouWeighOnSubmit(): Action[AnyContent] =
@@ -30,7 +33,8 @@ class Page4HowMuchDoYouWeighController @Inject() (
         .bindFromRequest()
         .fold(
           formWithErrors =>
-            Future.successful(Redirect(routes.LandingPageController.index())),
+            Future
+              .successful(BadRequest(page4CurrentWeightView(formWithErrors))),
           value => {
             val result: Future[Done] =
               cache.set("currentWeight", value.weight)
