@@ -33,7 +33,6 @@ class Page11DoYouHaveACarbGoalController @Inject() (
           formWithErrors =>
             Future.successful(BadRequest(page11CarbGoalView(formWithErrors))),
           value => {
-            println(value.carb)
             val result: Future[Done] =
               cache.set("carbGoal", value.carb)
 

@@ -33,7 +33,6 @@ class MacroStatService @Inject() (polybodyConnector: PolybodyConnector)(implicit
             acc: Int
         ): List[MacroStat] = {
           if (acc < parsedInput.length) {
-            println(parsedInput)
             val stats: List[MacroStat] = MacroStat(
               Some(LocalDate.parse(parsedInput(acc)("dateTime").str)),
               ActivityLevel.apply(parsedInput(acc)("activityLevel").str),

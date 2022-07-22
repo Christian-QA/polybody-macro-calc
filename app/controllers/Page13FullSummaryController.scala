@@ -28,10 +28,8 @@ class Page13FullSummaryController @Inject() (
 
   def fullSummaryPageLoad(): Action[AnyContent] =
     Action.async { implicit request: Request[AnyContent] =>
-      println(cacheService.cacheToFullDto)
       cacheService.cacheToFullDto match {
         case Some(value) =>
-          println(value)
           Future.successful(
             Ok(page13FullSummaryView(FullSummaryForm.form(), value))
           )
@@ -47,7 +45,6 @@ class Page13FullSummaryController @Inject() (
         .bindFromRequest()
         .fold(
           formWithErrors => {
-            println("5" * 100)
 
             Future.successful(Redirect(routes.LandingPageController.index()))
 //            Future.successful(BadRequest(page13FullSummaryView(formWithErrors)))
@@ -77,16 +74,8 @@ class Page13FullSummaryController @Inject() (
                     )
                     .flatMap {
                       case Left(error) =>
-                        println("1" * 100)
-                        println(error)
-                        println("1" * 100)
-
                         errorHandler.handle(error, this.getClass.getName)
                       case Right(value) =>
-                        println("2" * 100)
-                        println(value)
-                        println("2" * 100)
-
                         Future.successful(
                           Redirect(
                             routes.Page14WeightSubmitController
@@ -95,14 +84,10 @@ class Page13FullSummaryController @Inject() (
                         )
                     }
                 case None =>
-                  println("3" * 100)
-
                   errorHandler
                     .handle(CustomTimeoutResponse, this.getClass.getName)
               }
             } else {
-              println("4" * 100)
-
               Future.successful(
                 Redirect(
                   routes.Page14WeightSubmitController

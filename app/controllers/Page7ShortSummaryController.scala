@@ -24,7 +24,6 @@ class Page7ShortSummaryController @Inject() (
 
   def shortSummaryPageLoad(): Action[AnyContent] = {
     Action.async { implicit request: Request[AnyContent] =>
-      println(cacheService.cacheToShortDto)
       cacheHandler(ShortSummaryForm.form())
     }
   }
