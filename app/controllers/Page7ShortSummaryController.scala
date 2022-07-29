@@ -8,6 +8,7 @@ import play.api.data.Form
 import play.api.i18n.{I18nSupport, Langs, MessagesApi}
 import play.api.mvc._
 import services.CacheService
+import utils.TDEECalculator
 import views.html.Page7ShortSummaryView
 
 import scala.concurrent.Future
@@ -16,6 +17,7 @@ class Page7ShortSummaryController @Inject() (
     cacheService: CacheService,
     errorHandler: ErrorHandler,
     page7ShortSummaryView: Page7ShortSummaryView,
+    tdeeCalculator: TDEECalculator,
     cc: ControllerComponents,
     mcc: MessagesApi,
     langs: Langs
@@ -63,10 +65,19 @@ class Page7ShortSummaryController @Inject() (
   )(implicit request: Request[AnyContent]): Future[Result] = {
     cacheService.cacheToShortDto match {
       case Some(value) =>
+        val bmr: Int = tdeeCalculator.bmrMifflinStJeorCalculator(
+          value.currentWeight,
+          value.height,
+          value.dob,
+          value.sex
+        )
+        val tdee: Int = tdeeCalculator.activityFactor(bmr, value.activityLevel)
         if (onSubmit) {
-          Future.successful(BadRequest(page7ShortSummaryView(form, value)))
+          Future.successful(
+            BadRequest(page7ShortSummaryView(form, value, bmr, tdee))
+          )
         } else {
-          Future.successful(Ok(page7ShortSummaryView(form, value)))
+          Future.successful(Ok(page7ShortSummaryView(form, value, bmr, tdee)))
         }
       case None =>
         errorHandler.handle(CustomTimeoutResponse, this.getClass.getName)
