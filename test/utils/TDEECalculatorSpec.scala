@@ -39,7 +39,7 @@ class TDEECalculatorSpec extends BaseSpec {
       "return 1588 calories for someone weighing 62 with a body fat percent of 9" in {
         calculator.bmrKatchMcArdleCalculator(62, 9) mustBe 1588
       }
-      "return 1588 calories for someone weighing 118 with a body fat percent of 8.5" in {
+      "return 2702 calories for someone weighing 118 with a body fat percent of 8.5" in {
         calculator.bmrKatchMcArdleCalculator(118, 8.5) mustBe 2702
       }
       "return 2048 calories for someone weighing 88 with a body fat percent of 11.7" in {
