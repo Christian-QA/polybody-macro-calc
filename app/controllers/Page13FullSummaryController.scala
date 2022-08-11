@@ -8,6 +8,7 @@ import models.MacroStat
 import play.api.i18n.{I18nSupport, Langs, MessagesApi}
 import play.api.mvc._
 import services.{CacheService, MacroStatService}
+import utils.TDEECalculator
 import views.html.{LandingPageView, Page13FullSummaryView}
 
 import java.time.LocalDate
@@ -19,6 +20,7 @@ class Page13FullSummaryController @Inject() (
     errorHandler: ErrorHandler,
     page13FullSummaryView: Page13FullSummaryView,
     landingPage: LandingPageView, //TODO - Change to error
+    tdeeCalculator: TDEECalculator,
     cc: ControllerComponents,
     mcc: MessagesApi,
     langs: Langs
@@ -30,8 +32,24 @@ class Page13FullSummaryController @Inject() (
     Action.async { implicit request: Request[AnyContent] =>
       cacheService.cacheToFullDto match {
         case Some(value) =>
+          val bmr: Int = if (value.bodyFat.isDefined) {
+            tdeeCalculator.bmrKatchMcArdleCalculator(
+              value.currentWeight,
+              value.bodyFat.get
+            )
+          } else {
+            tdeeCalculator.bmrMifflinStJeorCalculator(
+              value.currentWeight,
+              value.height,
+              value.dob,
+              value.sex
+            )
+          }
+          val tdee: Int =
+            tdeeCalculator.activityFactor(bmr, value.activityLevel)
+
           Future.successful(
-            Ok(page13FullSummaryView(FullSummaryForm.form(), value))
+            Ok(page13FullSummaryView(FullSummaryForm.form(), value, bmr, tdee))
           )
         case None =>
           errorHandler.handle(CustomTimeoutResponse, this.getClass.getName)
@@ -98,4 +116,5 @@ class Page13FullSummaryController @Inject() (
           }
         )
     }
+
 }

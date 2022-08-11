@@ -40,7 +40,7 @@ class TDEECalculator @Inject() () {
     }
 
     val bmr: Double =
-      10 * currentWeight + 6.25 * height - 5 * dobToAge + sexOffset
+      10 * currentWeight + 6.25 * height - 5 * dobToAge(dob) + sexOffset
     bmr.floor.toInt
   }
 
@@ -53,5 +53,4 @@ class TDEECalculator @Inject() () {
     }
     (bmr * activityLevelFactor).floor.toInt
   }
-
 }

@@ -4,7 +4,7 @@
 
 @this()
 
-@(form: Form[FullSummaryForm], macroCalcDto: MacroCalcDto)(implicit messages: Messages)
+@(form: Form[FullSummaryForm], macroCalcDto: MacroCalcDto, bmr: Int, tdee: Int)(implicit messages: Messages)
 
 @Template(messages("page13.full-summary.title")) {
 @defining(play.core.PlayVersion.current) { version =>

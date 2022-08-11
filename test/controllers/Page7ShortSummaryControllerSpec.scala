@@ -19,7 +19,7 @@ import play.api.test.Helpers.{
   status
 }
 import services.CacheService
-import utils.BaseSpec
+import utils.{BaseSpec, TDEECalculator}
 import views.html.Page7ShortSummaryView
 
 import java.time.LocalDate
@@ -37,6 +37,7 @@ class Page7ShortSummaryControllerSpec extends BaseSpec with BeforeAndAfterEach {
       cacheService,
       inject[ErrorHandler],
       page7ShortSummaryView,
+      inject[TDEECalculator],
       cc,
       messages,
       inject[Langs]
