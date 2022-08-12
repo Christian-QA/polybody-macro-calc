@@ -8,7 +8,7 @@ import helpers.{
   Male,
   MaleOrFemale,
   ModeratelyActive,
-  Other,
+  Intersex,
   Sedentary,
   VeryActive
 }
@@ -24,13 +24,6 @@ class TDEECalculator @Inject() () {
     val leanBodyMass: Double = (currentWeight * (100 - bodyFat)) / 100
     val bmr: Double = 370 + (21.6 * leanBodyMass)
 
-    println("2")
-    println("currentWeight: " + currentWeight)
-    println("bf: " + bodyFat)
-    println("leanBodyMass: " + leanBodyMass)
-    println("bmr: " + bmr)
-    println("2")
-
     bmr.floor.toInt
   }
 
@@ -41,17 +34,10 @@ class TDEECalculator @Inject() () {
       sex: MaleOrFemale
   ): Int = {
     val sexOffset: Int = sex match {
-      case Male   => 5
-      case Female => -161
-      case Other  => -78
+      case Male     => 5
+      case Female   => -161
+      case Intersex => -78
     }
-
-    println("1")
-    println("currentWeight: " + currentWeight)
-    println("height: " + height)
-    println("age: " + dobToAge(dob))
-    println("sexOffset: " + sexOffset)
-    println("1")
 
     val bmr: Double =
       10 * currentWeight + 6.25 * height - 5 * dobToAge(dob) + sexOffset

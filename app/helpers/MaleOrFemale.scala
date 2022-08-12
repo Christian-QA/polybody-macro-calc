@@ -28,9 +28,9 @@ object MaleOrFemale {
 
   def apply(value: String): MaleOrFemale =
     value match {
-      case "Male"   => Male
-      case "Female" => Female
-      case "Other"  => Other
+      case "Male"     => Male
+      case "Female"   => Female
+      case "Intersex" => Intersex
     }
 }
 
@@ -38,4 +38,4 @@ sealed trait MaleOrFemale
 
 case object Male extends MaleOrFemale
 case object Female extends MaleOrFemale
-case object Other extends MaleOrFemale
+case object Intersex extends MaleOrFemale

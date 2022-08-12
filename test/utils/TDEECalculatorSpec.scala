@@ -1,6 +1,6 @@
 package utils
 
-import helpers.Male
+import helpers._
 
 import java.time.LocalDate
 
@@ -153,7 +153,185 @@ class TDEECalculatorSpec extends BaseSpec {
           Male
         ) mustBe 1689
       }
+      "return 1327 calories for a 170cm 25 year old female weighing 55kg" in {
+        calculator.bmrMifflinStJeorCalculator(
+          55,
+          170,
+          LocalDate.now.minusYears(25),
+          Female
+        ) mustBe 1326
+      }
+      "return 1129 calories for a 140cm 31 year old female weighing 57kg" in {
+        calculator.bmrMifflinStJeorCalculator(
+          57,
+          140,
+          LocalDate.now.minusYears(31),
+          Female
+        ) mustBe 1129
+      }
+      "return 1173 calories for a 139cm 47 year old female weighing 70kg" in {
+        calculator.bmrMifflinStJeorCalculator(
+          70,
+          139,
+          LocalDate.now.minusYears(47),
+          Female
+        ) mustBe 1172
+      }
+      "return 1343 calories for a 155cm 23 year old female weighing 65kg" in {
+        calculator.bmrMifflinStJeorCalculator(
+          65,
+          155,
+          LocalDate.now.minusYears(23),
+          Female
+        ) mustBe 1342
+      }
+      "return 1039 calories for a 134.9cm 19 year old female weighing 45.2kg" in {
+        calculator.bmrMifflinStJeorCalculator(
+          45.2,
+          134.9,
+          LocalDate.now.minusYears(19),
+          Female
+        ) mustBe 1039
+      }
+      "return 1631 calories for a 190cm 31 year old female weighing 75.9kg" in {
+        calculator.bmrMifflinStJeorCalculator(
+          75.9,
+          190,
+          LocalDate.now.minusYears(31),
+          Female
+        ) mustBe 1630
+      }
+      "return 1184 calories for a 167.25cm 40 year old female weighing 50kg" in {
+        calculator.bmrMifflinStJeorCalculator(
+          50,
+          167.25,
+          LocalDate.now.minusYears(40),
+          Female
+        ) mustBe 1184
+      }
+      "return 1062 calories for a 122cm 28 year old female weighing 60kg" in {
+        calculator.bmrMifflinStJeorCalculator(
+          60,
+          122,
+          LocalDate.now.minusYears(28),
+          Female
+        ) mustBe 1061
+      }
+      "return 618 calories for a 115cm 48 year old female weighing 30kg" in {
+        calculator.bmrMifflinStJeorCalculator(
+          30,
+          115,
+          LocalDate.now.minusYears(48),
+          Female
+        ) mustBe 617
+      }
+      "return 1004 calories for a 144.5cm 70 year old female weighing 61.2kg" in {
+        calculator.bmrMifflinStJeorCalculator(
+          61.2,
+          144.5,
+          LocalDate.now.minusYears(70),
+          Female
+        ) mustBe 1004
+      }
+      "return 1313 calories for a 145cm 25 year old intersex individual weighing 61kg" in {
+        calculator.bmrMifflinStJeorCalculator(
+          61,
+          145,
+          LocalDate.now.minusYears(25),
+          Intersex
+        ) mustBe 1313
+      }
+      "return 1425 calories for a 155cm 23 year old intersex individual weighing 65kg" in {
+        calculator.bmrMifflinStJeorCalculator(
+          65,
+          155,
+          LocalDate.now.minusYears(23),
+          Intersex
+        ) mustBe 1425
+      }
+      "return 1122 calories for a 134.9cm 19 year old intersex individual weighing 45.2kg" in {
+        calculator.bmrMifflinStJeorCalculator(
+          45.2,
+          134.9,
+          LocalDate.now.minusYears(19),
+          Intersex
+        ) mustBe 1122
+      }
+      "return 1713 calories for a 190cm 31 year old intersex individual weighing 75.9kg" in {
+        calculator.bmrMifflinStJeorCalculator(
+          75.9,
+          190,
+          LocalDate.now.minusYears(31),
+          Intersex
+        ) mustBe 1713
+      }
+      "return 1267 calories for a 167.25cm 40 year old intersex individual weighing 50kg" in {
+        calculator.bmrMifflinStJeorCalculator(
+          50,
+          167.25,
+          LocalDate.now.minusYears(40),
+          Intersex
+        ) mustBe 1267
+      }
+      "return 1144 calories for a 122cm 28 year old intersex individual weighing 60kg" in {
+        calculator.bmrMifflinStJeorCalculator(
+          60,
+          122,
+          LocalDate.now.minusYears(28),
+          Intersex
+        ) mustBe 1144
+      }
+
+      "return 1884 calories for a 190cm 25 year old intersex individual weighing 90kg" in {
+        calculator.bmrMifflinStJeorCalculator(
+          90,
+          190,
+          LocalDate.now.minusYears(25),
+          Intersex
+        ) mustBe 1884
+      }
+      "return 1497 calories for a 160cm 19 year old intersex individual weighing 67kg" in {
+        calculator.bmrMifflinStJeorCalculator(
+          67,
+          160,
+          LocalDate.now.minusYears(19),
+          Intersex
+        ) mustBe 1497
+      }
+      "return 2102 calories for a 200cm 34 year old intersex individual weighing 110kg" in {
+        calculator.bmrMifflinStJeorCalculator(
+          110,
+          200,
+          LocalDate.now.minusYears(34),
+          Intersex
+        ) mustBe 2102
+      }
+      "return 1606 calories for a 177.43cm 38 year old intersex individual weighing 76.58kg" in {
+        calculator.bmrMifflinStJeorCalculator(
+          76.58,
+          177.43,
+          LocalDate.now.minusYears(38),
+          Intersex
+        ) mustBe 1606
+      }
+    }
+
+    "activityFactor" must {
+      List(
+        1000, 1200, 1400, 1600, 1800, 2000, 2200, 2400
+      ).foreach { bmr =>
+        List(
+          (Sedentary, 1.2),
+          (LightlyActive, 1.375),
+          (ModeratelyActive, 1.55),
+          (VeryActive, 1.75)
+        ).foreach {
+          case (activity, multiplier) =>
+            s"return ${bmr * multiplier} calories for someone with a bmr of $bmr who is ${activity.toString}" in {
+              calculator.activityFactor(bmr, activity) mustBe bmr * multiplier
+            }
+        }
+      }
     }
   }
-
 }

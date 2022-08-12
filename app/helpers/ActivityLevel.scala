@@ -38,7 +38,15 @@ object ActivityLevel {
 
 sealed trait ActivityLevel
 
-case object Sedentary extends ActivityLevel
-case object LightlyActive extends ActivityLevel
-case object ModeratelyActive extends ActivityLevel
-case object VeryActive extends ActivityLevel
+case object Sedentary extends ActivityLevel {
+  def inSentence: String = "sedentary"
+}
+case object LightlyActive extends ActivityLevel {
+  def inSentence: String = "lightly active"
+}
+case object ModeratelyActive extends ActivityLevel {
+  def inSentence: String = "moderately active"
+}
+case object VeryActive extends ActivityLevel {
+  def inSentence: String = "very active"
+}

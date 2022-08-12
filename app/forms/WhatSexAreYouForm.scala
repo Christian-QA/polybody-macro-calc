@@ -1,6 +1,6 @@
 package forms
 
-import helpers.{Female, Male, MaleOrFemale, Other}
+import helpers.{Female, Male, MaleOrFemale, Intersex}
 import play.api.data.Form
 import play.api.data.Forms.{mapping, text}
 import play.api.libs.json._
@@ -11,9 +11,9 @@ object WhatSexAreYouForm {
 
   implicit val formats: OFormat[WhatSexAreYouForm] = {
     implicit val whatSexAreYouReads: Reads[MaleOrFemale] = {
-      case JsString("Male")   => JsSuccess(Male)
-      case JsString("Female") => JsSuccess(Female)
-      case JsString("Other")  => JsSuccess(Other)
+      case JsString("Male")     => JsSuccess(Male)
+      case JsString("Female")   => JsSuccess(Female)
+      case JsString("Intersex") => JsSuccess(Intersex)
       case _ =>
         JsError(
           Seq(
@@ -24,9 +24,9 @@ object WhatSexAreYouForm {
         )
     }
     implicit val whatSexAreYouWrites: Writes[MaleOrFemale] = {
-      case Male   => JsString("Male")
-      case Female => JsString("Female")
-      case Other  => JsString("Other")
+      case Male     => JsString("Male")
+      case Female   => JsString("Female")
+      case Intersex => JsString("Intersex")
     }
     Json.format[WhatSexAreYouForm]
   }

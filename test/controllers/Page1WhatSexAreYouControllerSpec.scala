@@ -1,7 +1,7 @@
 package controllers
 
 import akka.Done
-import helpers.{Female, Male, Other}
+import helpers.{Female, Male, Intersex}
 import org.mockito.ArgumentMatchers.any
 import org.mockito.Mockito.{reset, times, verify, when}
 import org.scalatest.BeforeAndAfterEach
@@ -92,11 +92,11 @@ class Page1WhatSexAreYouControllerSpec
         )
         verify(cache, times(1)).set(any(), any(), any())
       }
-      "redirect to Page2AgeView with the sex set in the cache when Other is selected" in {
+      "redirect to Page2AgeView with the sex set in the cache when Intersex is selected" in {
         val result: Future[Result] =
           controller.whatSexAreYouOnSubmit()(
             FakeRequest().withFormUrlEncodedBody(
-              ("whatSexAreYou", Other.toString)
+              ("whatSexAreYou", Intersex.toString)
             )
           )
 
